@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CarouselCreator — Instagram Carousel Studio (Games &amp; Magic)</title>
+  <!-- Google Fonts for Games (Rubik, JetBrains Mono) & Magic (Caudex, Playfair Display SC, Montserrat fallback for Proxima Nova) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:ital,wght@0,500;0,700;0,800;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- ==================== TOP HEADER BAR ==================== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="brand-badge">
+          <span class="brand-icon">✦</span>
+          <div class="brand-titles">
+            <span class="brand-name">CarouselCreator</span>
+            <span class="brand-sub">1080×1350 Panoramic Studio</span>
+          </div>
+        </div>
+
+        <div class="topbar-divider"></div>
+
+        <!-- Preset Theme Selector -->
+        <div class="control-group">
+          <label for="themeSelect" class="control-label">Preset Theme</label>
+          <select id="themeSelect" class="select-input">
+            <optgroup label="🎮 Games Channel (gameDev)">
+              <option value="games-love">Games (Love)</option>
+              <option value="games-hate">Games (Hate)</option>
+              <option value="games-idea">Games (Idea)</option>
+            </optgroup>
+            <optgroup label="🪄 Magic Channel (@CELEBORNMAGIC)">
+              <option value="magic-theory">Magic Type A (Application)</option>
+              <option value="magic-application">Magic Type B (Theory)</option>
+              <option value="magic-idea">Magic Type C (Trick Ideas)</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Slide Count Selector -->
+        <div class="control-group">
+          <label for="slideCountInput" class="control-label">Slides</label>
+          <div class="stepper-control">
+            <button id="btnRemoveSlide" class="btn-icon" title="Remove content slide before End CTA slide">−</button>
+            <input id="slideCountInput" type="number" min="2" max="15" value="5" class="number-input" />
+            <button id="btnAddSlide" class="btn-icon" title="Insert new content slide (End CTA stays last)">+</button>
+          </div>
+        </div>
+
+        <button id="btnResetTemplate" class="btn-reset-danger btn-sm" title="Reset all slides to preset default layout">
+          ↺ Reset Layout
+        </button>
+      </div>
+
+      <!-- Center: Viewport Preview Mode Switcher & Page Numbers Toggle -->
+      <div class="topbar-center">
+        <div class="mode-switcher" role="tablist" aria-label="Viewport Preview Mode">
+          <button id="modeStripBtn" class="mode-btn active" data-mode="strip">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="6" height="16" rx="1"/><rect x="9" y="4" width="6" height="16" rx="1"/><rect x="16" y="4" width="6" height="16" rx="1"/></svg>
+            Side-by-Side Strip
+          </button>
+          <button id="modeSimBtn" class="mode-btn" data-mode="simulator">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="3"/><circle cx="12" cy="18" r="1"/><path d="M9 10l-2 2 2 2M15 10l2 2-2 2"/></svg>
+            Instagram Simulator
+          </button>
+        </div>
+
+        <button id="btnTogglePageNumbers" class="topbar-toggle-btn" title="Toggle Slide Page Numbers (Default: OFF)">
+          <span class="toggle-btn-badge">#</span>
+          <span>Page Numbers</span>
+        </button>
+      </div>
+
+      <!-- Right: Export & Project Actions -->
+      <div class="topbar-right">
+        <button id="btnSaveProject" class="btn-secondary btn-sm" title="Save Carousel Project (.json)">Save JSON</button>
+        <label class="btn-secondary btn-sm file-label" title="Load Carousel Project (.json)">
+          Load JSON
+          <input id="loadProjectInput" type="file" accept=".json" hidden />
+        </label>
+        <div class="topbar-divider"></div>
+        <button id="btnExportCurrent" class="btn-secondary btn-sm" title="Export active slide as 1080×1350 PNG">
+          Export Slide
+        </button>
+        <button id="btnExportAll" class="btn-primary btn-sm" title="Export all slides cut at 1080×1350 PNG">
+          ⬇ Export All PNGs
+        </button>
+      </div>
+    </header>
+
+    <!-- ==================== MAIN WORKSPACE ==================== -->
+    <div class="workspace">
+      <!-- LEFT SIDEBAR: Preset Elements, Constrained BG Image Upload & Layers -->
+      <aside class="sidebar-left">
+        <!-- Preset-Specific Elements -->
+        <div class="panel-section">
+          <div class="section-header-row">
+            <h3 class="panel-title">Preset Elements</h3>
+            <span id="presetBadgeLabel" class="badge-pill">Magic</span>
+          </div>
+          <p class="panel-hint">Elements tailored to the active preset. All elements on the canvas can be clicked and dragged across slides.</p>
+          <div id="presetElementsGrid" class="tool-grid">
+            <!-- Dynamically populated per preset (Magic vs Games) -->
+          </div>
+        </div>
+
+        <!-- Image Uploads: Constrained Background Image vs Foreground Image -->
+        <div class="panel-section">
+          <h3 class="panel-title">Image Uploads</h3>
+          <p class="panel-hint">
+            <strong>Background Image</strong> sits in front of the default canvas background but stays constrained behind all text &amp; design elements.
+          </p>
+          <div class="btn-col-stack">
+            <label class="btn-primary btn-sm file-label btn-block text-center">
+              🖼 Upload Background Image
+              <input id="bgElementInput" type="file" accept="image/*" multiple hidden />
+            </label>
+            <label class="btn-secondary btn-sm file-label btn-block text-center">
+              ＋ Upload Foreground Image Layer
+              <input id="freeImageInput" type="file" accept="image/*" multiple hidden />
+            </label>
+          </div>
+        </div>
+
+        <!-- Default Background Tuning (Brightness / Saturation / Opacity) -->
+        <div class="panel-section">
+          <div class="section-header-row">
+            <h3 class="panel-title">Default Background</h3>
+            <button id="btnResetBgTuning" class="btn-secondary btn-xs" title="Reset background sliders to preset default">Reset</button>
+          </div>
+          <div class="prop-row">
+            <label>Base Color</label>
+            <div class="color-picker-wrap">
+              <input id="bgBaseColorInput" type="color" class="color-input" />
+              <input id="bgBaseColorHex" type="text" class="text-input text-xs" />
+            </div>
+          </div>
+          <div class="slider-row">
+            <div class="slider-label-row">
+              <span>Brightness</span>
+              <span id="bgBrightnessVal" class="mono-val">100%</span>
+            </div>
+            <input id="bgBrightnessSlider" type="range" min="40" max="160" value="100" class="range-slider" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-label-row">
+              <span>Saturation</span>
+              <span id="bgSaturationVal" class="mono-val">100%</span>
+            </div>
+            <input id="bgSaturationSlider" type="range" min="0" max="200" value="100" class="range-slider" />
+          </div>
+          <div class="slider-row">
+            <div class="slider-label-row">
+              <span>BG Texture Opacity</span>
+              <span id="bgOpacityVal" class="mono-val">100%</span>
+            </div>
+            <input id="bgOpacitySlider" type="range" min="0" max="100" value="100" class="range-slider" />
+          </div>
+        </div>
+
+        <!-- Elements / Layer List (Filtered to Active Slide) -->
+        <div class="panel-section flex-grow-section">
+          <div class="section-header-row">
+            <h3 class="panel-title">Layers on Active Slide</h3>
+            <span id="layerCountBadge" class="badge-pill">0</span>
+          </div>
+          <div id="layersList" class="layers-list"></div>
+        </div>
+      </aside>
+
+      <!-- CENTER VIEWPORT -->
+      <main class="viewport-area">
+        <!-- Sub-toolbar inside viewport -->
+        <div class="viewport-toolbar">
+          <div class="viewport-toolbar-left">
+            <span class="active-slide-indicator">
+              Active Slide: <strong id="activeSlideLabel">1 / 5</strong>
+            </span>
+            <div id="stripOptionsGroup" class="inline-controls">
+              <label class="checkbox-label" title="Toggle spacing between slides in Strip view. Keep unchecked (0px) for continuous cross-slide positioning.">
+                <input type="checkbox" id="toggleSeamGaps" />
+                <span>Show Cut Gaps</span>
+              </label>
+              <label class="checkbox-label" title="Show visual reference guidelines. Note: Smart snapping to centers, margins, and other elements works at all times!">
+                <input type="checkbox" id="toggleGuides" checked />
+                <span>Show Guidelines</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Quick Floating Role Switcher when text is selected -->
+          <div id="quickTextBar" class="quick-text-bar hidden">
+            <span class="quick-label">Text Role:</span>
+            <button id="quickBtnHeadline" class="role-pill">Headline</button>
+            <button id="quickBtnSubtitle" class="role-pill">Subtitle</button>
+            <button id="quickBtnEditText" class="btn-secondary btn-xs" title="Or double-click text on canvas">✎ Edit Text</button>
+          </div>
+
+          <div class="viewport-toolbar-right">
+            <button id="btnZoomOut" class="btn-icon btn-xs" title="Zoom Out">−</button>
+            <span id="zoomReadout" class="zoom-readout">36%</span>
+            <button id="btnZoomIn" class="btn-icon btn-xs" title="Zoom In">+</button>
+            <button id="btnZoomFit" class="btn-secondary btn-xs" title="Fit to Viewport">Fit</button>
+            <button id="btnToggleInfo" class="btn-icon btn-xs" title="Shortcuts &amp; Controls Guide">ⓘ</button>
+          </div>
+        </div>
+
+        <!-- Floating Viewport Control Info Popover (Toggled by ⓘ button) -->
+        <div id="viewportInfoPopover" class="viewport-info-popover hidden">
+          <div class="popover-header">
+            <h4>Shortcuts &amp; Controls Guide</h4>
+            <button id="btnCloseInfo" class="btn-close-sm">✕</button>
+          </div>
+          <ul class="shortcut-list">
+            <li><span>Zoom In / Out</span> <kbd>Mouse Wheel</kbd></li>
+            <li><span>Pan Canvas</span> <kbd>Space + Left Drag</kbd> or <kbd>Alt + Middle Drag</kbd></li>
+            <li><span>Axis Lock (X / Y)</span> <kbd>Hold Shift + Drag</kbd></li>
+            <li><span>Snap Rotation (45°)</span> <kbd>Hold Shift + Rotate</kbd></li>
+            <li><span>Scale Text Size</span> <kbd>Drag Corner Handle</kbd></li>
+            <li><span>Edit Text Inline</span> <kbd>Double Click</kbd></li>
+            <li><span>Nudge 1px / 10px</span> <kbd>Arrows</kbd> / <kbd>Shift + Arrows</kbd></li>
+            <li><span>Duplicate</span> <kbd>Ctrl/Cmd + D</kbd></li>
+            <li><span>Delete Element</span> <kbd>Delete / Backspace</kbd></li>
+          </ul>
+        </div>
+
+        <!-- Global Persistent SVG Defs (Never display:none, shared across strip, simulator & export) -->
+        <svg id="globalSvgDefs" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;" aria-hidden="true">
+          <defs>
+            <!-- Grouped triple-stripe chevrons (Love preset default, 90px tile for seamless transitions & zero cutoff) -->
+            <pattern id="pat_global_chevrons" width="90" height="64" patternUnits="userSpaceOnUse">
+              <path d="M 10,-2 L 38,32 L 10,66" fill="none" stroke="#000000" stroke-width="8.5" stroke-linecap="square" stroke-linejoin="miter" opacity="0.92" />
+              <path d="M 28,-2 L 56,32 L 28,66" fill="none" stroke="#000000" stroke-width="8.5" stroke-linecap="square" stroke-linejoin="miter" opacity="0.92" />
+              <path d="M 46,-2 L 74,32 L 46,66" fill="none" stroke="#000000" stroke-width="8.5" stroke-linecap="square" stroke-linejoin="miter" opacity="0.92" />
+            </pattern>
+
+            <!-- 45deg hazard diagonal stripes (Hate preset default) -->
+            <pattern id="pat_global_stripes" width="32" height="32" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+              <rect width="16" height="32" fill="#000000" opacity="0.92" />
+              <rect x="16" width="16" height="32" fill="transparent" />
+            </pattern>
+
+            <!-- Even staggered polka dots (Idea preset default, 45px tile for seamless slide transitions & zero cutoff) -->
+            <pattern id="pat_global_dots" width="45" height="64" patternUnits="userSpaceOnUse">
+              <!-- Top edge (cy = 0) -->
+              <circle cx="0" cy="0" r="7.5" fill="#000000" opacity="0.92" />
+              <circle cx="45" cy="0" r="7.5" fill="#000000" opacity="0.92" />
+
+              <!-- Row 1 (cy = 21.33) -->
+              <circle cx="22.5" cy="21.33" r="7.5" fill="#000000" opacity="0.92" />
+
+              <!-- Row 2 (cy = 42.67) -->
+              <circle cx="0" cy="42.67" r="7.5" fill="#000000" opacity="0.92" />
+              <circle cx="45" cy="42.67" r="7.5" fill="#000000" opacity="0.92" />
+
+              <!-- Bottom edge (cy = 64) -->
+              <circle cx="22.5" cy="64" r="7.5" fill="#000000" opacity="0.92" />
+            </pattern>
+          </defs>
+        </svg>
+
+        <!-- 1) SIDE-BY-SIDE STRIP VIEWPORT -->
+        <div id="stripViewport" class="strip-viewport">
+          <div id="stripScrollContainer" class="strip-scroll-container">
+            <div id="stripStageWrapper" class="strip-stage-wrapper">
+              <!-- Slides and continuous overlay are mounted here dynamically -->
+              <div id="stripSlidesContainer" class="strip-slides-container"></div>
+              <!-- Dynamic Canva-Style Smart Snap Lines & Equal Spacing Badges -->
+              <div id="stripSmartGuidesLayer" class="strip-smart-guides-layer"></div>
+              <!-- Interactive selection & handles overlay across the entire strip -->
+              <div id="stripInteractionLayer" class="strip-interaction-layer"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2) INSTAGRAM CAROUSEL SIMULATOR VIEWPORT -->
+        <div id="simulatorViewport" class="simulator-viewport hidden">
+          <div class="ig-simulator-shell">
+            <!-- Instagram Post Header -->
+            <div class="ig-header">
+              <div class="ig-avatar" id="igAvatar">✦</div>
+              <div class="ig-user-meta">
+                <div class="ig-username" id="igUsername">celebornmagic</div>
+                <div class="ig-subtext" id="igSubtext">Creative Direction &amp; Consulting</div>
+              </div>
+              <div class="ig-header-dots">•••</div>
+            </div>
+
+            <!-- Instagram 4:5 Viewport Frame (1080x1350 scaled) -->
+            <div id="igFrameContainer" class="ig-frame-container">
+              <div id="igTrack" class="ig-track">
+                <!-- Clipped slides rendered here in real-time -->
+              </div>
+
+              <!-- Pill Counter Top-Right (e.g. 1/5) -->
+              <div id="igCounterPill" class="ig-counter-pill">1/5</div>
+
+              <!-- Left / Right Carousel Arrows -->
+              <button id="igPrevBtn" class="ig-nav-arrow ig-nav-prev" title="Previous Slide (Left Arrow)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button id="igNextBtn" class="ig-nav-arrow ig-nav-next" title="Next Slide (Right Arrow)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+
+            <!-- Instagram Post Footer & Dots -->
+            <div class="ig-footer">
+              <div class="ig-action-row">
+                <div class="ig-actions-left">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </div>
+                <div id="igDotsContainer" class="ig-dots-container"></div>
+                <div class="ig-actions-right">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </div>
+              </div>
+              <div class="ig-sim-hint">
+                Swipe / drag horizontally on the slide, use arrows, or click any element to select &amp; edit.
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Inspector Panel -->
+      <aside class="sidebar-right">
+        <!-- Empty Selection State: Theme & Preset Overview -->
+        <div id="inspectorEmptyState" class="inspector-panel">
+          <div class="panel-section">
+            <h3 class="panel-title">Preset &amp; Canvas Inspector</h3>
+            <p class="panel-hint">Every element on the slides is directly selectable and moveable on the canvas.</p>
+
+            <div class="prop-group">
+              <label class="prop-label">Active Preset Summary</label>
+              <div id="themeSummaryCard" class="theme-summary-card"></div>
+            </div>
+
+            <div class="prop-group">
+              <label class="prop-label">Global Channel Handle</label>
+              <input id="frameHandleInput" type="text" class="text-input" value="@CELEBORNMAGIC" />
+            </div>
+
+            <div class="prop-group">
+              <label class="prop-label">Series / Top Opening Topic</label>
+              <input id="frameSeriesInput" type="text" class="text-input" value="ART SERIES" />
+            </div>
+
+            <!-- SLIDE 1 DESIGN OPTIONS (When no element is selected on Slide 1) -->
+            <div id="inspSlideSectionEmpty" class="panel-section hidden mt-8" style="padding-top:12px;border-top:1px solid var(--border-color, #27272A);">
+              <h3 class="panel-title">Slide 1 Design Options</h3>
+              <label class="checkbox-label" title="Enable or disable the top trapezoid notch on Slide 1">
+                <input id="toggleSlide1NotchEmpty" type="checkbox" checked />
+                <span>Top Trapezoid Notch</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Element Selection Inspector -->
+        <div id="inspectorElementState" class="inspector-panel hidden">
+          <div class="panel-section">
+            <div class="section-header-row">
+              <h3 id="inspElementTypeTitle" class="panel-title">Element Inspector</h3>
+              <span id="inspSlideSpanBadge" class="badge-pill">Slide 1</span>
+            </div>
+
+            <!-- Opacity Slider & Layer Blend Mode -->
+            <div class="slider-row mt-8">
+              <div class="slider-label-row">
+                <span>Opacity</span>
+                <span id="inspOpacityVal" class="mono-val">100%</span>
+              </div>
+              <input id="inspOpacity" type="range" min="0" max="100" step="1" value="100" class="range-slider" />
+            </div>
+
+            <div class="prop-row mt-8">
+              <label>Layer Blend Mode</label>
+              <select id="inspBlendMode" class="select-input select-sm">
+                <option value="normal">Normal</option>
+                <option value="multiply">Multiply</option>
+                <option value="screen">Screen</option>
+                <option value="overlay">Overlay</option>
+                <option value="darken">Darken</option>
+                <option value="lighten">Lighten</option>
+                <option value="color-dodge">Color Dodge</option>
+                <option value="soft-light">Soft Light</option>
+                <option value="luminosity">Luminosity</option>
+              </select>
+            </div>
+
+            <!-- Move to Slide / Span Across Slides -->
+            <div class="prop-group mt-8">
+              <label class="prop-label">Slide Navigation</label>
+              <div class="btn-row">
+                <button id="btnMovePrevSlide" class="btn-secondary btn-xs flex-1">← Slide −1</button>
+                <button id="btnSpanSeam" class="btn-secondary btn-xs flex-1" title="Center element across the seam between current slide and next slide">⇔ Straddle Seam</button>
+                <button id="btnMoveNextSlide" class="btn-secondary btn-xs flex-1">Slide +1 →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAGIC EMBLEM SWITCHER SECTION (Only shown when clicking a Magic Emblem) -->
+          <div id="inspEmblemSection" class="panel-section hidden">
+            <h3 class="panel-title">Switch Magic Emblem</h3>
+            <p class="panel-hint">Switch the active emblem in-place or upload your own emblem image.</p>
+            <div id="emblemSwitcherGrid" class="emblem-switcher-grid">
+              <button class="emblem-option-btn" data-emblem="emblem_theory">
+                <img id="thumbEmblemTheory" alt="Theory Book" />
+                <span>Theory (Book)</span>
+              </button>
+              <button class="emblem-option-btn" data-emblem="emblem_application">
+                <img id="thumbEmblemApp" alt="Application Bulb" />
+                <span>Application (Bulb)</span>
+              </button>
+              <button class="emblem-option-btn" data-emblem="emblem_idea">
+                <img id="thumbEmblemIdea" alt="Idea Gold" />
+                <span>Idea (Gold)</span>
+              </button>
+              <button class="emblem-option-btn" data-emblem="emblem_idea_charcoal">
+                <img id="thumbEmblemCharcoal" alt="Idea Charcoal" />
+                <span>Idea (Charcoal)</span>
+              </button>
+            </div>
+            <label class="btn-secondary btn-sm file-label btn-block text-center mt-8">
+              Upload Custom Emblem Image
+              <input id="uploadCustomEmblemInput" type="file" accept="image/*" hidden />
+            </label>
+          </div>
+
+          <!-- TEXT SPECIFIC INSPECTOR -->
+          <div id="inspTextSection" class="panel-section hidden">
+            <h3 class="panel-title">Typography &amp; Styling</h3>
+
+            <!-- Text Content Box -->
+            <div class="prop-group">
+              <label class="prop-label">Text Content <small>(Use *word* for accent color)</small></label>
+              <textarea id="inspTextContent" rows="3" class="textarea-input"></textarea>
+            </div>
+
+            <div class="prop-row">
+              <label>Font Family</label>
+              <select id="inspFontFamily" class="select-input select-sm">
+                <!-- Dynamically populated based on active preset -->
+              </select>
+            </div>
+
+            <!-- Formatting Toggle Toolbar (Bold, Italic, Underline, Strike, All Caps) -->
+            <div class="type-format-toolbar">
+              <button id="btnTextBold" class="format-toggle-btn" title="Bold"><strong>B</strong></button>
+              <button id="btnTextItalic" class="format-toggle-btn" title="Italic"><em>I</em></button>
+              <button id="btnTextUnderline" class="format-toggle-btn" title="Underline"><u>U</u></button>
+              <button id="btnTextStrike" class="format-toggle-btn" title="Strikethrough"><s>S</s></button>
+              <button id="btnTextCaps" class="format-toggle-btn" title="ALL CAPS">TT</button>
+            </div>
+
+            <!-- Font Size & Spacing Controls -->
+            <div class="coord-grid mt-8">
+              <div class="coord-field">
+                <label>Font Size (px) <small>(or drag corner)</small></label>
+                <input id="inspFontSize" type="number" min="10" max="300" step="1" class="number-input" />
+              </div>
+              <div class="coord-field">
+                <label>Line Height</label>
+                <input id="inspLineHeight" type="number" min="0.7" max="2.5" step="0.05" class="number-input" value="1.15" />
+              </div>
+            </div>
+
+            <div class="prop-row mt-8">
+              <label>Letter Space (em)</label>
+              <input id="inspLetterSpacing" type="number" min="-0.1" max="0.5" step="0.01" class="number-input" value="0" />
+            </div>
+
+            <div class="prop-row mt-8">
+              <label>Alignment</label>
+              <div class="align-btn-row">
+                <button id="btnTextAlignLeft" class="btn-secondary btn-xs" data-align="left">Left</button>
+                <button id="btnTextAlignCenter" class="btn-secondary btn-xs" data-align="center">Center</button>
+                <button id="btnTextAlignRight" class="btn-secondary btn-xs" data-align="right">Right</button>
+              </div>
+            </div>
+
+            <!-- Editor-Style Color Icons (Text Color, Accent Color, Background Color) -->
+            <div class="prop-group mt-8">
+              <label class="prop-label">Color Swatches</label>
+              <div class="editor-color-toolbar">
+                <!-- Text Color -->
+                <label class="editor-color-btn" title="Text Color">
+                  <span class="editor-color-icon">A</span>
+                  <span id="textColorSwatchBar" class="editor-color-bar" style="background:#ffffff;"></span>
+                  <input id="inspTextColor" type="color" hidden />
+                </label>
+
+                <!-- Accent Color -->
+                <label class="editor-color-btn" title="Accent (*word*) Color">
+                  <span class="editor-color-icon">✦</span>
+                  <span id="accentColorSwatchBar" class="editor-color-bar" style="background:#d49b55;"></span>
+                  <input id="inspAccentColor" type="color" hidden />
+                </label>
+
+                <!-- Box Background Color -->
+                <label class="editor-color-btn" title="Highlight / Box Background">
+                  <span class="editor-color-icon">🎨</span>
+                  <span id="textBgColorSwatchBar" class="editor-color-bar" style="background:transparent;"></span>
+                  <input id="inspTextBgColor" type="color" hidden />
+                </label>
+
+                <label class="checkbox-label" title="Enable background fill on this text">
+                  <input id="inspTextHasBg" type="checkbox" />
+                  <span>Highlight Box</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="prop-row mt-8">
+              <label>Embossed Title Effect (Type B)</label>
+              <input id="inspTextEmbossed" type="checkbox" />
+            </div>
+          </div>
+
+          <!-- BORDER PATTERN SPECIFIC INSPECTOR -->
+          <div id="inspPatternSection" class="panel-section hidden">
+            <h3 class="panel-title">Border Pattern</h3>
+            <p class="panel-hint">Switch seamless pattern type for this border:</p>
+            <div class="pattern-option-grid">
+              <button class="pattern-option-btn" data-pattern="chevrons">
+                <span class="pattern-preview-icon">&gt;&gt;</span>
+                <span>Arrows (Double)</span>
+              </button>
+              <button class="pattern-option-btn" data-pattern="stripes">
+                <span class="pattern-preview-icon">///</span>
+                <span>Hazard Stripes</span>
+              </button>
+              <button class="pattern-option-btn" data-pattern="dots">
+                <span class="pattern-preview-icon">:::</span>
+                <span>Halftone Dots</span>
+              </button>
+              <button class="pattern-option-btn" data-pattern="none">
+                <span class="pattern-preview-icon">―</span>
+                <span>Solid Frame</span>
+              </button>
+            </div>
+            <div class="prop-row mt-8">
+              <label class="checkbox-label" title="Synchronize pattern across both top and bottom borders">
+                <input id="inspPatternSyncBoth" type="checkbox" checked />
+                <span>Apply to Both Borders</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- SLIDE 1 SPECIFIC DESIGN OPTIONS (Trapezoid Notch Toggle) -->
+          <div id="inspSlideSection" class="panel-section hidden">
+            <h3 class="panel-title">Slide 1 Design Options</h3>
+            <label class="checkbox-label" title="Enable or disable the top trapezoid notch on Slide 1">
+              <input id="toggleSlide1Notch" type="checkbox" checked />
+              <span>Top Trapezoid Notch</span>
+            </label>
+          </div>
+
+          <!-- SHAPE / NOTCH / ICON SPECIFIC INSPECTOR -->
+          <div id="inspShapeSection" class="panel-section hidden">
+            <h3 class="panel-title">Shape &amp; Vector Styling</h3>
+            <div class="prop-row">
+              <label>Fill / Primary Color</label>
+              <div class="color-picker-wrap">
+                <input id="inspShapeFill" type="color" class="color-input" />
+                <label class="checkbox-label"><input id="inspShapeNoFill" type="checkbox" /> None</label>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label>Stroke / Outline</label>
+              <div class="color-picker-wrap">
+                <input id="inspShapeStroke" type="color" class="color-input" />
+                <input id="inspShapeStrokeWidth" type="number" min="0" max="30" step="0.5" class="number-input" style="width:58px" />
+              </div>
+            </div>
+          </div>
+
+          <!-- IMAGE / BACKGROUND IMAGE SPECIFIC INSPECTOR -->
+          <div id="inspImageSection" class="panel-section hidden">
+            <h3 class="panel-title">Image &amp; Filter Properties</h3>
+            <div class="prop-row">
+              <label>Object Fit</label>
+              <select id="inspImgFit" class="select-input select-sm">
+                <option value="cover">Cover (Crop to Box)</option>
+                <option value="contain">Contain (Preserve Aspect)</option>
+                <option value="fill">Stretch to Box</option>
+              </select>
+            </div>
+            <div class="slider-row mt-8">
+              <div class="slider-label-row">
+                <span>Image Brightness</span>
+                <span id="inspImgBrightVal" class="mono-val">100%</span>
+              </div>
+              <input id="inspImgBrightness" type="range" min="20" max="180" value="100" class="range-slider" />
+            </div>
+            <div class="slider-row">
+              <div class="slider-label-row">
+                <span>Image Saturation</span>
+                <span id="inspImgSatVal" class="mono-val">100%</span>
+              </div>
+              <input id="inspImgSaturation" type="range" min="0" max="200" value="100" class="range-slider" />
+            </div>
+            <div class="prop-row mt-8">
+              <label>Constrain Behind Design</label>
+              <input id="inspImgIsBg" type="checkbox" />
+            </div>
+            <div class="prop-group mt-8">
+              <label class="btn-secondary btn-sm file-label btn-block text-center">
+                Replace Image File
+                <input id="replaceImgInput" type="file" accept="image/*" hidden />
+              </label>
+            </div>
+          </div>
+
+          <!-- Layer Order & Delete Actions -->
+          <div class="panel-section">
+            <h3 class="panel-title">Layer &amp; Actions</h3>
+            <div class="btn-row">
+              <button id="btnBringForward" class="btn-secondary btn-xs flex-1">↑ Bring Forward</button>
+              <button id="btnSendBackward" class="btn-secondary btn-xs flex-1">↓ Send Backward</button>
+            </div>
+            <div class="btn-row mt-8">
+              <button id="btnDuplicateEl" class="btn-secondary btn-sm flex-1">⧉ Duplicate</button>
+              <button id="btnDeleteEl" class="btn-danger btn-sm flex-1">🗑 Delete</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Pre-bundled base64 project assets -->
+  <script src="assets.js"></script>
+  <!-- Main Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
