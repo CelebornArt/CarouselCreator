@@ -352,6 +352,7 @@
     showGuides: true, // Visual guidelines toggle
     showPageNumbers: false, // Page numbers toggle (off by default)
     showSlide1Notch: true, // Slide 1 top trapezoid notch (Games presets)
+    layersFilterMode: 'slide', // 'slide' (active slide only) | 'all' (all slides)
     bgTuning: {
       colorOverride: null,
       brightness: 100, // 40..160
@@ -1493,6 +1494,7 @@
     loadProjectInput: document.getElementById('loadProjectInput'),
     btnExportCurrent: document.getElementById('btnExportCurrent'),
     btnExportAll: document.getElementById('btnExportAll'),
+    exportBaseNameInput: document.getElementById('exportBaseNameInput'),
 
     // Left Sidebar
     presetBadgeLabel: document.getElementById('presetBadgeLabel'),
@@ -1509,9 +1511,22 @@
     bgSaturationVal: document.getElementById('bgSaturationVal'),
     bgOpacitySlider: document.getElementById('bgOpacitySlider'),
     bgOpacityVal: document.getElementById('bgOpacityVal'),
+    dotResetBrightness: document.getElementById('dotResetBrightness'),
+    dotResetSaturation: document.getElementById('dotResetSaturation'),
+    dotResetOpacity: document.getElementById('dotResetOpacity'),
 
     layerCountBadge: document.getElementById('layerCountBadge'),
     layersList: document.getElementById('layersList'),
+    psLayersActiveSlideTag: document.getElementById('psLayersActiveSlideTag'),
+    btnLayersFilterSlide: document.getElementById('btnLayersFilterSlide'),
+    btnLayersFilterAll: document.getElementById('btnLayersFilterAll'),
+    psQuickBlendSelect: document.getElementById('psQuickBlendSelect'),
+    psQuickOpacityInput: document.getElementById('psQuickOpacityInput'),
+    psBtnBringForward: document.getElementById('psBtnBringForward'),
+    psBtnSendBackward: document.getElementById('psBtnSendBackward'),
+    psBtnToggleLock: document.getElementById('psBtnToggleLock'),
+    psBtnDuplicate: document.getElementById('psBtnDuplicate'),
+    psBtnDelete: document.getElementById('psBtnDelete'),
 
     // Viewport Toolbar
     activeSlideLabel: document.getElementById('activeSlideLabel'),
@@ -1549,6 +1564,145 @@
     igPrevBtn: document.getElementById('igPrevBtn'),
     igNextBtn: document.getElementById('igNextBtn'),
     igDotsContainer: document.getElementById('igDotsContainer'),
+
+    // Mode Switching & Preset Creator Topbar
+    btnSwitchStudio: document.getElementById('btnSwitchStudio'),
+    btnSwitchPresetCreator: document.getElementById('btnSwitchPresetCreator'),
+    btnNewPreset: document.getElementById('btnNewPreset'),
+    btnModifyPreset: document.getElementById('btnModifyPreset'),
+    optgroupCustomPresets: document.getElementById('optgroupCustomPresets'),
+    workspaceStudio: document.getElementById('workspaceStudio'),
+    workspacePresetCreator: document.getElementById('workspacePresetCreator'),
+
+    // Preset Creator Left Sidebar
+    creatorPresetDomainBadge: document.getElementById('creatorPresetDomainBadge'),
+    creatorPresetNameInput: document.getElementById('creatorPresetNameInput'),
+    creatorPresetArchetype: document.getElementById('creatorPresetArchetype'),
+    btnCreatorAddColor: document.getElementById('btnCreatorAddColor'),
+    creatorColorsList: document.getElementById('creatorColorsList'),
+    creatorPatternSelect: document.getElementById('creatorPatternSelect'),
+    btnCreatorResetGuides: document.getElementById('btnCreatorResetGuides'),
+    btnCreatorAddGuideH: document.getElementById('btnCreatorAddGuideH'),
+    btnCreatorAddGuideV: document.getElementById('btnCreatorAddGuideV'),
+    creatorGuidesList: document.getElementById('creatorGuidesList'),
+    btnCreatorSavePreset: document.getElementById('btnCreatorSavePreset'),
+    btnCreatorExportJson: document.getElementById('btnCreatorExportJson'),
+    creatorImportJsonInput: document.getElementById('creatorImportJsonInput'),
+    topbarCreatorActions: document.getElementById('topbarCreatorActions'),
+    btnTopDownloadPreset: document.getElementById('btnTopDownloadPreset'),
+    topUploadPresetInput: document.getElementById('topUploadPresetInput'),
+    btnTopSaveToStudio: document.getElementById('btnTopSaveToStudio'),
+    creatorToggleGaps: document.getElementById('creatorToggleGaps'),
+
+    // Preset Creator Viewport & Board
+    creatorToggleGuides: document.getElementById('creatorToggleGuides'),
+    btnCreatorZoomOut: document.getElementById('btnCreatorZoomOut'),
+    creatorZoomReadout: document.getElementById('creatorZoomReadout'),
+    btnCreatorZoomIn: document.getElementById('btnCreatorZoomIn'),
+    btnCreatorZoomFit: document.getElementById('btnCreatorZoomFit'),
+    creatorStripViewport: document.getElementById('creatorStripViewport'),
+    creatorScrollContainer: document.getElementById('creatorScrollContainer'),
+    creatorStageWrapper: document.getElementById('creatorStageWrapper'),
+    creatorMasterElementsGrid: document.getElementById('creatorMasterElementsGrid'),
+    btnCreatorAddNewDefaultEl: document.getElementById('btnCreatorAddNewDefaultEl'),
+    btnCreatorCleanUpCanvas: document.getElementById('btnCreatorCleanUpCanvas'),
+    creatorSlidesContainer: document.getElementById('creatorSlidesContainer'),
+    creatorSmartGuidesLayer: document.getElementById('creatorSmartGuidesLayer'),
+    creatorSnapGuidesLayer: document.getElementById('creatorSnapGuidesLayer'),
+    creatorInteractionLayer: document.getElementById('creatorInteractionLayer'),
+
+    // Preset Creator Left Sidebar Modifiers
+    creatorModifiersList: document.getElementById('creatorModifiersList'),
+    btnCreatorAddModifier: document.getElementById('btnCreatorAddModifier'),
+
+    // Preset Creator Inspector
+    creatorInspectorEmptyState: document.getElementById('creatorInspectorEmptyState'),
+    creatorInspectorElementState: document.getElementById('creatorInspectorElementState'),
+    creatorTitleFontSelect: document.getElementById('creatorTitleFontSelect'),
+    creatorBodyFontSelect: document.getElementById('creatorBodyFontSelect'),
+    creatorFontUploadInput: document.getElementById('creatorFontUploadInput'),
+    creatorInspElTitle: document.getElementById('creatorInspElTitle'),
+    creatorInspSlideBadge: document.getElementById('creatorInspSlideBadge'),
+    creatorInspElName: document.getElementById('creatorInspElName'),
+    creatorInspElText: document.getElementById('creatorInspElText'),
+    creatorInspElFont: document.getElementById('creatorInspElFont'),
+    creatorInspElFontSize: document.getElementById('creatorInspElFontSize'),
+    creatorInspElColorSlot: document.getElementById('creatorInspElColorSlot'),
+    creatorInspElColor: document.getElementById('creatorInspElColor'),
+    creatorInspElColorHex: document.getElementById('creatorInspElColorHex'),
+    creatorInspElOpacity: document.getElementById('creatorInspElOpacity'),
+    creatorInspElOpacityVal: document.getElementById('creatorInspElOpacityVal'),
+    creatorInspElHasBg: document.getElementById('creatorInspElHasBg'),
+    creatorInspElBgColorSlot: document.getElementById('creatorInspElBgColorSlot'),
+    creatorInspElBgColor: document.getElementById('creatorInspElBgColor'),
+    creatorInspElBgOpacity: document.getElementById('creatorInspElBgOpacity'),
+    creatorInspElBgOpacityVal: document.getElementById('creatorInspElBgOpacityVal'),
+    creatorInspElBorderWidth: document.getElementById('creatorInspElBorderWidth'),
+    creatorInspElBorderColorSlot: document.getElementById('creatorInspElBorderColorSlot'),
+    creatorInspElBorderColor: document.getElementById('creatorInspElBorderColor'),
+    creatorInspElBorderOpacity: document.getElementById('creatorInspElBorderOpacity'),
+    creatorInspElBorderOpacityVal: document.getElementById('creatorInspElBorderOpacityVal'),
+    creatorInspElEffect: document.getElementById('creatorInspElEffect'),
+    creatorInspEffectRow: document.getElementById('creatorInspEffectRow'),
+    creatorInspElEffectColorSlot: document.getElementById('creatorInspElEffectColorSlot'),
+    creatorInspElEffectColor: document.getElementById('creatorInspElEffectColor'),
+    creatorInspElEffectOpacity: document.getElementById('creatorInspElEffectOpacity'),
+    creatorInspElEffectOpacityVal: document.getElementById('creatorInspElEffectOpacityVal'),
+    creatorInspElAccent: document.getElementById('creatorInspElAccent'),
+    creatorInspElAccentHex: document.getElementById('creatorInspElAccentHex'),
+    creatorInspElIsMaster: document.getElementById('creatorInspElIsMaster'),
+    creatorInspElAutoCount: document.getElementById('creatorInspElAutoCount'),
+    creatorInspElAddToAllSlides: document.getElementById('creatorInspElAddToAllSlides'),
+    creatorInspLinkAcrossSlidesRow: document.getElementById('creatorInspLinkAcrossSlidesRow'),
+    creatorInspElLinkAcrossSlides: document.getElementById('creatorInspElLinkAcrossSlides'),
+    creatorInspAnchorGrid: document.getElementById('creatorInspAnchorGrid'),
+    btnCreatorDuplicateEl: document.getElementById('btnCreatorDuplicateEl'),
+    btnCreatorDeleteEl: document.getElementById('btnCreatorDeleteEl'),
+
+    // Master Default Element Modal Editor ("Mini Slide")
+    masterElementEditorModal: document.getElementById('masterElementEditorModal'),
+    masterModalTitle: document.getElementById('masterModalTitle'),
+    btnMasterModalClose: document.getElementById('btnMasterModalClose'),
+    btnMasterModalDone: document.getElementById('btnMasterModalDone'),
+    masterModalCanvas: document.getElementById('masterModalCanvas'),
+    masterModalPreviewBox: document.getElementById('masterModalPreviewBox'),
+    masterModalZoomReadout: document.getElementById('masterModalZoomReadout'),
+    btnMasterModalZoomReset: document.getElementById('btnMasterModalZoomReset'),
+    masterModalNameInput: document.getElementById('masterModalNameInput'),
+    masterModalTextInput: document.getElementById('masterModalTextInput'),
+    masterModalAutoCount: document.getElementById('masterModalAutoCount'),
+    masterModalFontFamily: document.getElementById('masterModalFontFamily'),
+    masterModalFontSize: document.getElementById('masterModalFontSize'),
+    masterModalColorSlot: document.getElementById('masterModalColorSlot'),
+    masterModalTextColor: document.getElementById('masterModalTextColor'),
+    masterModalTextColorHex: document.getElementById('masterModalTextColorHex'),
+    masterModalOpacity: document.getElementById('masterModalOpacity'),
+    masterModalOpacityVal: document.getElementById('masterModalOpacityVal'),
+    masterModalEffect: document.getElementById('masterModalEffect'),
+    masterModalEffectRow: document.getElementById('masterModalEffectRow'),
+    masterModalEffectColorSlot: document.getElementById('masterModalEffectColorSlot'),
+    masterModalEffectColor: document.getElementById('masterModalEffectColor'),
+    masterModalEffectOpacity: document.getElementById('masterModalEffectOpacity'),
+    masterModalEffectOpacityVal: document.getElementById('masterModalEffectOpacityVal'),
+    masterModalAccentColor: document.getElementById('masterModalAccentColor'),
+    masterModalAccentColorHex: document.getElementById('masterModalAccentColorHex'),
+    masterModalBoxW: document.getElementById('masterModalBoxW'),
+    masterModalBoxH: document.getElementById('masterModalBoxH'),
+    masterModalBgColor: document.getElementById('masterModalBgColor'),
+    masterModalBgColorSlot: document.getElementById('masterModalBgColorSlot'),
+    masterModalHasBg: document.getElementById('masterModalHasBg'),
+    masterModalBgOpacity: document.getElementById('masterModalBgOpacity'),
+    masterModalBgOpacityVal: document.getElementById('masterModalBgOpacityVal'),
+    masterModalBorderWidth: document.getElementById('masterModalBorderWidth'),
+    masterModalBorderColorSlot: document.getElementById('masterModalBorderColorSlot'),
+    masterModalBorderColor: document.getElementById('masterModalBorderColor'),
+    masterModalBorderOpacity: document.getElementById('masterModalBorderOpacity'),
+    masterModalBorderOpacityVal: document.getElementById('masterModalBorderOpacityVal'),
+    masterModalAnchorGrid: document.getElementById('masterModalAnchorGrid'),
+    btnMasterAddText: document.getElementById('btnMasterAddText'),
+    btnMasterAddShape: document.getElementById('btnMasterAddShape'),
+    masterModalImageUpload: document.getElementById('masterModalImageUpload'),
+    masterModalExtraLayersList: document.getElementById('masterModalExtraLayersList'),
 
     // Right Sidebar Inspector
     inspectorEmptyState: document.getElementById('inspectorEmptyState'),
@@ -1613,10 +1767,14 @@
 
     // Shape Inspector
     inspShapeSection: document.getElementById('inspShapeSection'),
+    shapeVectorControls: document.getElementById('shapeVectorControls'),
     inspShapeFill: document.getElementById('inspShapeFill'),
     inspShapeNoFill: document.getElementById('inspShapeNoFill'),
     inspShapeStroke: document.getElementById('inspShapeStroke'),
     inspShapeStrokeWidth: document.getElementById('inspShapeStrokeWidth'),
+    shapeImageCustomBox: document.getElementById('shapeImageCustomBox'),
+    uploadCustomShapeImageInput: document.getElementById('uploadCustomShapeImageInput'),
+    btnResetShapeDefault: document.getElementById('btnResetShapeDefault'),
 
     // Image Inspector
     inspImageSection: document.getElementById('inspImageSection'),
@@ -1963,6 +2121,9 @@
     }
 
     if (el.type === 'triangle') {
+      if (el.customSrc) {
+        return `<img src="${el.customSrc}" style="width:100%;height:100%;object-fit:${el.fit || 'contain'};pointer-events:none;display:block;" alt="" />`;
+      }
       const fill = el.noFill ? 'none' : (el.fill || 'none');
       const stroke = el.stroke || '#162D43';
       const sw = el.strokeWidth ?? 6;
@@ -1984,6 +2145,7 @@
     const sorted = [...bgElements, ...fgElements];
 
     return sorted.map(el => {
+      if (el.hidden) return '';
       const op = (el.opacity ?? 100) / 100;
       const rot = el.rotation || 0;
       const blend = el.blendMode || 'normal';
@@ -2196,7 +2358,7 @@
         </button>
         <button id="btnToolAddTri" class="tool-btn">
           <span class="tool-icon">△</span>
-          <span class="tool-label">Sketch Triangle</span>
+          <span class="tool-label">Placeholder Image</span>
         </button>
         <button id="btnToolAddUserBox" class="tool-btn">
           <span class="tool-icon">@</span>
@@ -2211,6 +2373,29 @@
           <span class="tool-label">Divider Line</span>
         </button>
       `;
+    }
+
+    // Append Custom Preset Elements if available for custom presets
+    const customElements = (theme.isCustom && (theme.customElements || (state.creatorState && state.creatorState.masterElements))) ||
+                           (Array.isArray(theme.customElements) ? theme.customElements : []);
+    if (customElements.length > 0) {
+      customElements.forEach(ce => {
+        const btn = document.createElement('button');
+        btn.className = 'tool-btn';
+        btn.innerHTML = `<span class="tool-icon">${ce.icon || '✦'}</span><span class="tool-label">${escapeHtml(ce.name || 'Custom Element')}</span>`;
+        btn.onclick = () => {
+          const sx = state.activeSlide * SLIDE_W;
+          const cloned = JSON.parse(JSON.stringify(ce));
+          cloned.id = genId('custom-el');
+          cloned.isMaster = false;
+          cloned.x = sx + 120;
+          cloned.y = 540;
+          state.elements.push(cloned);
+          state.selectedId = cloned.id;
+          renderAll();
+        };
+        dom.presetElementsGrid.appendChild(btn);
+      });
     }
 
     bindPresetElementDrawerButtons(theme);
@@ -2477,6 +2662,9 @@
     dom.themeSelect.value = state.themeId;
     dom.slideCountInput.value = state.numSlides;
     dom.activeSlideLabel.textContent = `${state.activeSlide + 1} / ${state.numSlides}`;
+    if (dom.psLayersActiveSlideTag) {
+      dom.psLayersActiveSlideTag.textContent = `Slide ${state.activeSlide + 1}`;
+    }
     dom.zoomReadout.textContent = `${Math.round(state.zoom * 100)}%`;
 
     // Background tuning
@@ -2507,57 +2695,167 @@
     }
   }
 
-  // Filter layer overview to ONLY elements on the currently active slide (or touching it)
+  // Photopea / Photoshop Style Layers Panel Renderer
   function renderLayersList() {
+    const isAll = state.layersFilterMode === 'all';
     const curSlide = state.activeSlide;
     const slideLeft = curSlide * SLIDE_W;
     const slideRight = (curSlide + 1) * SLIDE_W;
 
-    const visibleElements = state.elements.filter(el => {
+    // Filter elements based on active filter pill (Active slide vs All slides)
+    const elementsToDisplay = state.elements.filter(el => {
+      if (isAll) return true;
       return el.x + el.w > slideLeft && el.x < slideRight;
     });
 
-    dom.layerCountBadge.textContent = String(visibleElements.length);
-    const reversed = [...visibleElements].reverse();
+    dom.layerCountBadge.textContent = String(elementsToDisplay.length);
+    if (dom.btnLayersFilterSlide) dom.btnLayersFilterSlide.classList.toggle('active', !isAll);
+    if (dom.btnLayersFilterAll) dom.btnLayersFilterAll.classList.toggle('active', isAll);
+
+    // Sync Photoshop quickbar (blend mode & opacity) to currently selected layer
+    const sel = getSelectedElement();
+    if (dom.psQuickBlendSelect) {
+      dom.psQuickBlendSelect.value = sel?.blendMode || 'normal';
+      dom.psQuickBlendSelect.disabled = !sel;
+    }
+    if (dom.psQuickOpacityInput) {
+      dom.psQuickOpacityInput.value = sel ? Math.round(sel.opacity ?? 100) : 100;
+      dom.psQuickOpacityInput.disabled = !sel;
+    }
+    if (dom.psBtnToggleLock) {
+      dom.psBtnToggleLock.classList.toggle('active', Boolean(sel?.locked));
+    }
+
+    // In Photoshop / Photopea, top layers in the stack are rendered at the top of the list
+    const reversed = [...elementsToDisplay].reverse();
+
+    if (reversed.length === 0) {
+      dom.layersList.innerHTML = `
+        <div style="padding: 24px 12px; text-align: center; color: var(--text-muted); font-size: 11px;">
+          No layers on this slide
+        </div>
+      `;
+      return;
+    }
 
     dom.layersList.innerHTML = reversed.map(el => {
       const isSelected = el.id === state.selectedId;
+      const isHidden = Boolean(el.hidden);
+      const isLocked = Boolean(el.locked);
       const spanInfo = getSlideSpanInfo(el);
+
+      // Determine clean label, thumbnail preview, and type badge
       let label = el.name || el.type.toUpperCase();
-      let typeBadge = el.type.slice(0, 3).toUpperCase();
-      let badgeCls = '';
+      let sublabel = '';
+      let thumbHtml = '';
+      let thumbTypeClass = 'type-shape';
 
       if (el.layerGroup === 'background') {
-        typeBadge = 'BG';
-        badgeCls = 'bg-badge';
-        label = el.name || 'Background Image';
+        thumbTypeClass = 'type-bg';
+        label = el.name || 'Background Plane';
+        sublabel = `${el.w}×${el.h}`;
+        if (el.src) {
+          thumbHtml = `<img src="${el.src}" class="ps-layer-thumb-img" alt="" />`;
+        } else {
+          thumbHtml = `<span class="ps-layer-thumb-badge">BG</span>`;
+        }
+      } else if (el.type === 'image') {
+        thumbTypeClass = 'type-img';
+        label = el.name || 'Image Layer';
+        sublabel = `${Math.round(el.w)}×${Math.round(el.h)}`;
+        if (el.src) {
+          thumbHtml = `<img src="${el.src}" class="ps-layer-thumb-img" alt="" />`;
+        } else {
+          thumbHtml = `<span class="ps-layer-thumb-badge">IMG</span>`;
+        }
       } else if (el.type === 'text') {
-        typeBadge = el.role === 'headline' ? 'H1' : (el.role === 'subtitle' ? 'SUB' : 'TXT');
-        label = (el.text || 'Text').replace(/\n/g, ' ').slice(0, 24);
+        thumbTypeClass = 'type-txt';
+        const roleLabel = el.role === 'headline' ? 'Header' : (el.role === 'subtitle' ? 'Subtitle' : (el.role === 'handle' ? 'Handle' : 'Text'));
+        label = (el.text || 'Text Layer').replace(/\n/g, ' ').trim().slice(0, 26) || 'Empty Text';
+        sublabel = `<span class="ps-layer-role-pill">${roleLabel}</span> ${el.fontSize || 40}px`;
+        thumbHtml = `<span class="ps-layer-thumb-badge">T</span>`;
       } else if (el.type === 'emblem') {
-        typeBadge = 'EMB';
-        label = 'Magic Emblem';
+        thumbTypeClass = 'type-frame';
+        label = 'Corner Emblem';
+        sublabel = el.emblemVariant || 'Art-Deco';
+        const embSrc = el.customSrc || ASSETS[el.emblemVariant] || ASSETS.emblem_theory;
+        if (embSrc) {
+          thumbHtml = `<img src="${embSrc}" class="ps-layer-thumb-img" alt="" />`;
+        } else {
+          thumbHtml = `<span class="ps-layer-thumb-badge">EMB</span>`;
+        }
+      } else if (el.type === 'triangle') {
+        thumbTypeClass = 'type-shape';
+        label = el.customSrc ? 'Custom Topic Graphic' : 'Placeholder Image';
+        sublabel = el.customSrc ? 'Custom Alpha' : 'Vector Shape';
+        if (el.customSrc) {
+          thumbHtml = `<img src="${el.customSrc}" class="ps-layer-thumb-img" alt="" />`;
+        } else {
+          thumbHtml = `<svg width="15" height="15" viewBox="0 0 20 18" fill="none" stroke="#98C379" stroke-width="2"><polygon points="10,2 18,16 2,16"/></svg>`;
+        }
       } else if (el.type === 'games-notch') {
-        typeBadge = 'NOTCH';
+        thumbTypeClass = 'type-frame';
         label = `Top Notch (${el.topicText || 'EPISODE'})`;
+        sublabel = 'Slide 1 Trapezoid';
+        thumbHtml = `<span class="ps-layer-thumb-badge" style="color:#D19A66;">NOTCH</span>`;
       } else if (el.type === 'games-swipe-combo') {
-        typeBadge = 'SWIPE';
-        label = 'Bottom Swipe + Icon';
+        thumbTypeClass = 'type-frame';
+        label = 'Bottom Swipe + Hand';
+        sublabel = 'Navigation';
+        thumbHtml = `<span class="ps-layer-thumb-badge" style="color:#E5C07B;">SWIPE</span>`;
       } else if (el.type === 'games-username-box') {
-        typeBadge = 'USER';
-        label = el.handleText || 'Username Box';
+        thumbTypeClass = 'type-txt';
+        label = el.handleText || '@Username';
+        sublabel = 'Handle Box';
+        thumbHtml = `<span class="ps-layer-thumb-badge" style="color:#61AFEF;">USER</span>`;
       } else if (el.type === 'games-border-pattern') {
-        typeBadge = 'PAT';
+        thumbTypeClass = 'type-frame';
         label = el.name || (el.patternPosition === 'top' ? 'Top Border Pattern' : 'Bottom Border Pattern');
+        sublabel = el.patternType || 'Pattern';
+        thumbHtml = `<span class="ps-layer-thumb-badge" style="color:#ABB2BF;">PAT</span>`;
+      } else if (el.type === 'divider' || el.type === 'rect') {
+        thumbTypeClass = 'type-shape';
+        label = el.name || (el.type === 'divider' ? 'Divider Line' : 'Rectangle');
+        sublabel = `${Math.round(el.w)}×${Math.round(el.h)}`;
+        thumbHtml = `<span class="ps-layer-thumb-badge">REC</span>`;
+      } else {
+        thumbHtml = `<span class="ps-layer-thumb-badge">${el.type.slice(0, 3).toUpperCase()}</span>`;
       }
 
+      // Eye Visibility Icon (Photoshop style)
+      const eyeIconSvg = isHidden
+        ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+        : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+
+      // Lock Icon
+      const lockIconSvg = isLocked
+        ? `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
+        : ``;
+
       return `
-        <div class="layer-item ${isSelected ? 'active' : ''}" data-layer-id="${el.id}">
-          <div class="layer-item-left">
-            <span class="layer-type-badge ${badgeCls}">${typeBadge}</span>
-            <span class="layer-title">${escapeHtml(label)}</span>
+        <div class="layer-item ps-layer-row ${isSelected ? 'active' : ''} ${isHidden ? 'is-hidden' : ''} ${isLocked ? 'is-locked' : ''}"
+             data-layer-id="${el.id}"
+             draggable="true">
+          <!-- Eye Visibility Toggle -->
+          <button class="ps-layer-vis-btn ${isHidden ? 'is-hidden' : ''}" data-action="toggle-vis" title="${isHidden ? 'Show Layer' : 'Hide Layer'}">
+            ${eyeIconSvg}
+          </button>
+
+          <!-- Layer Thumbnail / Symbol -->
+          <div class="ps-layer-thumb ${thumbTypeClass}">
+            ${thumbHtml}
           </div>
-          <span class="layer-slide-tag">${spanInfo.text}</span>
+
+          <!-- Title and metadata -->
+          <div class="ps-layer-info">
+            <div class="ps-layer-name" title="${escapeHtml(el.name || label)}">${escapeHtml(label)}</div>
+            <div class="ps-layer-subtext">${sublabel}</div>
+          </div>
+
+          <!-- Right badges & lock -->
+          <div class="ps-layer-actions-right">
+            ${isLocked ? `<span class="ps-layer-lock-btn is-locked" data-action="toggle-lock" title="Unlock Layer">${lockIconSvg}</span>` : ''}
+          </div>
         </div>
       `;
     }).join('');
@@ -2567,13 +2865,20 @@
     const theme = getActiveTheme();
     const sel = getSelectedElement();
 
-    // Summary Card
-    dom.themeSummaryCard.innerHTML = `
-      <strong style="color:var(--accent-gold);display:block;margin-bottom:4px;">${escapeHtml(theme.name)}</strong>
-      <span>${escapeHtml(theme.description)}</span>
-    `;
+    // Summary Card (if present)
+    if (dom.themeSummaryCard) {
+      dom.themeSummaryCard.innerHTML = `
+        <strong style="color:var(--accent-gold);display:block;margin-bottom:4px;">${escapeHtml(theme.name)}</strong>
+        <span>${escapeHtml(theme.description)}</span>
+      `;
+    }
     dom.frameHandleInput.value = state.frameConfig.handle;
-    dom.frameSeriesInput.value = state.frameConfig.series;
+    const topicTagEl = state.elements.find(el => el.role === 'topic-tag');
+    if (topicTagEl && theme.domain === 'games') {
+      dom.frameSeriesInput.value = topicTagEl.text;
+    } else {
+      dom.frameSeriesInput.value = state.frameConfig.series;
+    }
 
     if (!sel) {
       dom.inspectorEmptyState.classList.remove('hidden');
@@ -2679,6 +2984,20 @@
       dom.inspShapeNoFill.checked = Boolean(sel.noFill);
       dom.inspShapeStroke.value = normalizeHex(sel.stroke, '#000000');
       dom.inspShapeStrokeWidth.value = sel.strokeWidth ?? 0;
+
+      // Allow replace/upload custom image on shapes (specifically triangle placeholder on game slides)
+      if (dom.shapeImageCustomBox) {
+        const canUploadImg = ['triangle', 'rect'].includes(sel.type);
+        dom.shapeImageCustomBox.classList.toggle('hidden', !canUploadImg);
+        if (canUploadImg && dom.btnResetShapeDefault) {
+          dom.btnResetShapeDefault.classList.toggle('hidden', !sel.customSrc);
+        }
+      }
+      if (dom.shapeVectorControls) {
+        // Dim vector controls if a custom image is active
+        dom.shapeVectorControls.style.opacity = sel.customSrc ? '0.35' : '1';
+        dom.shapeVectorControls.style.pointerEvents = sel.customSrc ? 'none' : 'auto';
+      }
     }
 
     // Image / Background Image Inspector
@@ -2917,21 +3236,23 @@
   }
 
   function setupStripInteractions() {
-    // Spacebar detection for canvas panning
+    // Spacebar detection for canvas panning (Studio & Preset Creator)
     window.addEventListener('keydown', (e) => {
       const tag = document.activeElement?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || state.editingTextId) return;
 
       if (e.code === 'Space' && !isSpacePressed) {
         isSpacePressed = true;
-        dom.stripScrollContainer.classList.add('space-ready');
+        if (dom.stripScrollContainer) dom.stripScrollContainer.classList.add('space-ready');
+        if (dom.creatorScrollContainer) dom.creatorScrollContainer.classList.add('space-ready');
       }
     });
 
     window.addEventListener('keyup', (e) => {
       if (e.code === 'Space') {
         isSpacePressed = false;
-        dom.stripScrollContainer.classList.remove('space-ready');
+        if (dom.stripScrollContainer) dom.stripScrollContainer.classList.remove('space-ready');
+        if (dom.creatorScrollContainer) dom.creatorScrollContainer.classList.remove('space-ready');
       }
     });
 
@@ -2941,6 +3262,7 @@
       if ((isSpacePressed && e.button === 0) || (e.altKey && e.button === 1) || e.button === 1) {
         e.preventDefault();
         panSession = {
+          container: dom.stripScrollContainer,
           startX: e.clientX,
           startY: e.clientY,
           scrollLeft: dom.stripScrollContainer.scrollLeft,
@@ -2984,7 +3306,7 @@
       });
 
       // Rotation Handle
-      if (rotHandle && selEl) {
+      if (rotHandle && selEl && !selEl.locked) {
         e.preventDefault();
         e.stopPropagation();
         dragSession = {
@@ -2999,7 +3321,7 @@
       }
 
       // Resize Handle
-      if (resizeHandle && selEl) {
+      if (resizeHandle && selEl && !selEl.locked) {
         e.preventDefault();
         e.stopPropagation();
         dragSession = {
@@ -3040,16 +3362,18 @@
         state.activeSlide = getSlideSpanInfo(targetEl).primary;
         renderAll();
 
-        dragSession = {
-          mode: 'move',
-          el: targetEl,
-          startX: pt.x,
-          startY: pt.y,
-          origX: targetEl.x,
-          origY: targetEl.y,
-          hasMoved: false,
-          preDragSnapshot: captureSessionSnapshot()
-        };
+        if (!targetEl.locked) {
+          dragSession = {
+            mode: 'move',
+            el: targetEl,
+            startX: pt.x,
+            startY: pt.y,
+            origX: targetEl.x,
+            origY: targetEl.y,
+            hasMoved: false,
+            preDragSnapshot: captureSessionSnapshot()
+          };
+        }
       } else {
         state.selectedId = null;
         renderAll();
@@ -3104,8 +3428,8 @@
     window.addEventListener('mousemove', (e) => {
       // Pan canvas
       if (panSession) {
-        dom.stripScrollContainer.scrollLeft = panSession.scrollLeft - (e.clientX - panSession.startX);
-        dom.stripScrollContainer.scrollTop = panSession.scrollTop - (e.clientY - panSession.startY);
+        panSession.container.scrollLeft = panSession.scrollLeft - (e.clientX - panSession.startX);
+        panSession.container.scrollTop = panSession.scrollTop - (e.clientY - panSession.startY);
         return;
       }
 
@@ -3221,8 +3545,8 @@
     // Mouseup: commit final state and sync inspector/layers once (eliminating transform lag)
     window.addEventListener('mouseup', () => {
       if (panSession) {
+        if (panSession.container) panSession.container.classList.remove('is-panning');
         panSession = null;
-        dom.stripScrollContainer.classList.remove('is-panning');
       }
       if (dragSession) {
         if (dragSession.hasMoved) {
@@ -3761,6 +4085,7 @@
     ];
 
     for (const el of sorted) {
+      if (el.hidden) continue;
       const localX = el.x - slideIndex * SLIDE_W;
       const localY = el.y;
       if (localX + el.w < 0 || localX > SLIDE_W) continue;
@@ -3969,19 +4294,26 @@
         ctx.translate(localX + el.w / 2, localY + el.h / 2);
         if (el.rotation) ctx.rotate((el.rotation * Math.PI) / 180);
         ctx.globalAlpha = (el.opacity ?? 100) / 100;
-        ctx.beginPath();
-        ctx.moveTo(0, -el.h / 2 + 4);
-        ctx.lineTo(el.w / 2 - 4, el.h / 2 - 4);
-        ctx.lineTo(-el.w / 2 + 4, el.h / 2 - 4);
-        ctx.closePath();
-        if (!el.noFill) {
-          ctx.fillStyle = el.fill || '#219652';
-          ctx.fill();
-        }
-        if (el.strokeWidth > 0) {
-          ctx.strokeStyle = el.stroke || '#162D43';
-          ctx.lineWidth = el.strokeWidth;
-          ctx.stroke();
+        if (el.customSrc) {
+          const customImg = await loadImageCached(el.customSrc);
+          if (customImg) {
+            drawImageFit(ctx, customImg, -el.w / 2, -el.h / 2, el.w, el.h, el.fit || 'contain');
+          }
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(0, -el.h / 2 + 4);
+          ctx.lineTo(el.w / 2 - 4, el.h / 2 - 4);
+          ctx.lineTo(-el.w / 2 + 4, el.h / 2 - 4);
+          ctx.closePath();
+          if (!el.noFill) {
+            ctx.fillStyle = el.fill || '#219652';
+            ctx.fill();
+          }
+          if (el.strokeWidth > 0) {
+            ctx.strokeStyle = el.stroke || '#162D43';
+            ctx.lineWidth = el.strokeWidth;
+            ctx.stroke();
+          }
         }
         ctx.restore();
       }
@@ -3990,22 +4322,170 @@
     return canvas;
   }
 
+  // Pure-JS in-browser ZIP generator (Store/Uncompressed 0-compression, 100% native client-side zero-dependency)
+  function createZipArchiveBlob(files) {
+    const crcTable = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) {
+      let c = n;
+      for (let k = 0; k < 8; k++) {
+        c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
+      }
+      crcTable[n] = c;
+    }
+    function calcCrc32(bytes) {
+      let c = 0 ^ (-1);
+      for (let i = 0; i < bytes.length; i++) {
+        c = (c >>> 8) ^ crcTable[(c ^ bytes[i]) & 0xFF];
+      }
+      return (c ^ (-1)) >>> 0;
+    }
+
+    const fileEntries = [];
+    let curOffset = 0;
+
+    for (const f of files) {
+      const data = f.data; // Uint8Array
+      const nameBytes = new TextEncoder().encode(f.name);
+
+      const localHeader = new Uint8Array(30);
+      const dv = new DataView(localHeader.buffer);
+      dv.setUint32(0, 0x04034b50, true); // Local file header signature
+      dv.setUint16(4, 20, true);         // Version needed to extract (2.0)
+      dv.setUint16(6, 0, true);          // General purpose bit flag
+      dv.setUint16(8, 0, true);          // Compression method: 0 (stored)
+      dv.setUint16(10, 0, true);         // Last mod file time
+      dv.setUint16(12, 0, true);         // Last mod file date
+
+      const crc = calcCrc32(data);
+      dv.setUint32(14, crc, true);
+      dv.setUint32(18, data.length, true); // Compressed size
+      dv.setUint32(22, data.length, true); // Uncompressed size
+      dv.setUint16(26, nameBytes.length, true);
+      dv.setUint16(28, 0, true); // Extra field length
+
+      fileEntries.push({
+        localHeader,
+        nameBytes,
+        data,
+        crc,
+        offset: curOffset
+      });
+
+      curOffset += localHeader.length + nameBytes.length + data.length;
+    }
+
+    const cdStartOffset = curOffset;
+    const cdChunks = [];
+    let cdSize = 0;
+
+    for (const entry of fileEntries) {
+      const cdHeader = new Uint8Array(46);
+      const dv = new DataView(cdHeader.buffer);
+      dv.setUint32(0, 0x02014b50, true); // Central directory header signature
+      dv.setUint16(4, 20, true);         // Version made by
+      dv.setUint16(6, 20, true);         // Version needed to extract
+      dv.setUint16(8, 0, true);          // Bit flag
+      dv.setUint16(10, 0, true);         // Compression method
+      dv.setUint16(12, 0, true);         // Mod time
+      dv.setUint16(14, 0, true);         // Mod date
+      dv.setUint32(16, entry.crc, true);
+      dv.setUint32(20, entry.data.length, true); // Compressed size
+      dv.setUint32(24, entry.data.length, true); // Uncompressed size
+      dv.setUint16(28, entry.nameBytes.length, true);
+      dv.setUint16(30, 0, true); // Extra field len
+      dv.setUint16(32, 0, true); // Comment len
+      dv.setUint16(34, 0, true); // Disk start
+      dv.setUint16(36, 0, true); // Internal attrs
+      dv.setUint32(38, 0, true); // External attrs
+      dv.setUint32(42, entry.offset, true); // Relative offset of local header
+
+      cdChunks.push(cdHeader, entry.nameBytes);
+      cdSize += cdHeader.length + entry.nameBytes.length;
+    }
+
+    const eocd = new Uint8Array(22);
+    const dvEocd = new DataView(eocd.buffer);
+    dvEocd.setUint32(0, 0x06054b50, true); // End of central directory signature
+    dvEocd.setUint16(4, 0, true);          // Disk number
+    dvEocd.setUint16(6, 0, true);          // Start disk
+    dvEocd.setUint16(8, files.length, true);  // Number of central directory records on this disk
+    dvEocd.setUint16(10, files.length, true); // Total central directory records
+    dvEocd.setUint32(12, cdSize, true);        // Size of central directory
+    dvEocd.setUint32(16, cdStartOffset, true); // Offset of start of central directory
+    dvEocd.setUint16(20, 0, true);             // Comment length
+
+    const finalBlobParts = [];
+    for (const e of fileEntries) {
+      finalBlobParts.push(e.localHeader, e.nameBytes, e.data);
+    }
+    finalBlobParts.push(...cdChunks, eocd);
+
+    return new Blob(finalBlobParts, { type: 'application/zip' });
+  }
+
+  function getCleanExportBaseName() {
+    let name = dom.exportBaseNameInput?.value?.trim() || '';
+    if (!name) name = `carousel_${state.themeId}`;
+    // Replace spaces and invalid filename characters
+    return name.replace(/[^\w.-]/g, '_');
+  }
+
   async function exportSlidePNG(slideIndex) {
+    const baseName = getCleanExportBaseName();
+    const padNum = String(slideIndex + 1).padStart(2, '0');
     const canvas = await renderSlideToCanvas(slideIndex);
     const dataUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
-    const padNum = String(slideIndex + 1).padStart(2, '0');
     a.href = dataUrl;
-    a.download = `carousel_${state.themeId}_slide_${padNum}.png`;
+    a.download = `${baseName}_${padNum}.png`;
     document.body.appendChild(a);
     a.click();
     a.remove();
   }
 
   async function exportAllSlidesPNG() {
-    for (let i = 0; i < state.numSlides; i++) {
-      await exportSlidePNG(i);
-      await new Promise(r => setTimeout(r, 180));
+    const baseName = getCleanExportBaseName();
+    const originalText = dom.btnExportAll.textContent;
+    dom.btnExportAll.textContent = '⏳ Rendering...';
+    dom.btnExportAll.disabled = true;
+
+    try {
+      const filesForZip = [];
+
+      for (let i = 0; i < state.numSlides; i++) {
+        const padNum = String(i + 1).padStart(2, '0');
+        const filename = `${baseName}_${padNum}.png`;
+
+        dom.btnExportAll.textContent = `⏳ Rendering ${i + 1}/${state.numSlides}...`;
+        const canvas = await renderSlideToCanvas(i);
+
+        // Convert canvas to binary blob
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        const arrayBuf = await blob.arrayBuffer();
+        filesForZip.push({
+          name: filename,
+          data: new Uint8Array(arrayBuf)
+        });
+      }
+
+      dom.btnExportAll.textContent = '⏳ Zipping...';
+      const zipBlob = createZipArchiveBlob(filesForZip);
+      const zipUrl = URL.createObjectURL(zipBlob);
+
+      const a = document.createElement('a');
+      a.href = zipUrl;
+      a.download = `${baseName}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(() => URL.revokeObjectURL(zipUrl), 2000);
+    } catch (err) {
+      console.error('Export ZIP error:', err);
+      alert('Error creating ZIP export: ' + err.message);
+    } finally {
+      dom.btnExportAll.textContent = originalText;
+      dom.btnExportAll.disabled = false;
     }
   }
 
@@ -4042,6 +4522,11 @@
   }
 
   function applyThemeSelection(newThemeId, resetLayout = false) {
+    if (creatorState.active) {
+      // Studio is locked while in Preset Creator
+      dom.themeSelect.value = state.themeId;
+      return;
+    }
     pushHistorySnapshot();
     const prevTheme = getActiveTheme();
     state.themeId = newThemeId;
@@ -4269,6 +4754,36 @@
       dom.bgOpacityVal.textContent = `${e.target.value}%`;
       renderAll();
     });
+
+    // Slider Default Reset Dots (Click to reset individual slider to default)
+    if (dom.dotResetBrightness) {
+      dom.dotResetBrightness.addEventListener('click', (e) => {
+        e.stopPropagation();
+        state.bgTuning.brightness = 100;
+        dom.bgBrightnessSlider.value = 100;
+        dom.bgBrightnessVal.textContent = '100%';
+        renderAll();
+      });
+    }
+    if (dom.dotResetSaturation) {
+      dom.dotResetSaturation.addEventListener('click', (e) => {
+        e.stopPropagation();
+        state.bgTuning.saturation = 100;
+        dom.bgSaturationSlider.value = 100;
+        dom.bgSaturationVal.textContent = '100%';
+        renderAll();
+      });
+    }
+    if (dom.dotResetOpacity) {
+      dom.dotResetOpacity.addEventListener('click', (e) => {
+        e.stopPropagation();
+        state.bgTuning.textureOpacity = 100;
+        dom.bgOpacitySlider.value = 100;
+        dom.bgOpacityVal.textContent = '100%';
+        renderAll();
+      });
+    }
+
     dom.btnResetBgTuning.addEventListener('click', () => {
       state.bgTuning = { colorOverride: null, brightness: 100, saturation: 100, textureOpacity: 100 };
       renderAll();
@@ -4342,14 +4857,189 @@
     dom.quickBtnSubtitle.addEventListener('click', () => applyTextRole(getSelectedElement(), 'subtitle'));
     dom.quickBtnEditText.addEventListener('click', () => startInlineTextEdit(getSelectedElement()));
 
-    // Layers List Selection
+    // Photopea / Photoshop Style Layers Panel Event Listeners
+    if (dom.btnLayersFilterSlide) {
+      dom.btnLayersFilterSlide.addEventListener('click', () => {
+        state.layersFilterMode = 'slide';
+        renderLayersList();
+      });
+    }
+    if (dom.btnLayersFilterAll) {
+      dom.btnLayersFilterAll.addEventListener('click', () => {
+        state.layersFilterMode = 'all';
+        renderLayersList();
+      });
+    }
+
+    if (dom.psQuickBlendSelect) {
+      dom.psQuickBlendSelect.addEventListener('change', (e) => {
+        const el = getSelectedElement();
+        if (!el) return;
+        pushHistorySnapshot();
+        el.blendMode = e.target.value;
+        if (dom.inspBlendMode) dom.inspBlendMode.value = el.blendMode;
+        renderAll();
+      });
+    }
+
+    if (dom.psQuickOpacityInput) {
+      dom.psQuickOpacityInput.addEventListener('input', (e) => {
+        const el = getSelectedElement();
+        if (!el) return;
+        const val = Math.max(0, Math.min(100, Number(e.target.value) || 0));
+        el.opacity = val;
+        if (dom.inspOpacity) dom.inspOpacity.value = val;
+        if (dom.inspOpacityVal) dom.inspOpacityVal.textContent = `${val}%`;
+        renderAll();
+      });
+    }
+
+    if (dom.psBtnBringForward) {
+      dom.psBtnBringForward.addEventListener('click', () => {
+        if (!state.selectedId) return;
+        const idx = state.elements.findIndex(e => e.id === state.selectedId);
+        if (idx >= 0 && idx < state.elements.length - 1) {
+          pushHistorySnapshot();
+          const [item] = state.elements.splice(idx, 1);
+          state.elements.splice(idx + 1, 0, item);
+          renderAll();
+        }
+      });
+    }
+
+    if (dom.psBtnSendBackward) {
+      dom.psBtnSendBackward.addEventListener('click', () => {
+        if (!state.selectedId) return;
+        const idx = state.elements.findIndex(e => e.id === state.selectedId);
+        if (idx > 0) {
+          pushHistorySnapshot();
+          const [item] = state.elements.splice(idx, 1);
+          state.elements.splice(idx - 1, 0, item);
+          renderAll();
+        }
+      });
+    }
+
+    if (dom.psBtnToggleLock) {
+      dom.psBtnToggleLock.addEventListener('click', () => {
+        const el = getSelectedElement();
+        if (!el) return;
+        pushHistorySnapshot();
+        el.locked = !el.locked;
+        renderAll();
+      });
+    }
+
+    if (dom.psBtnDuplicate) {
+      dom.psBtnDuplicate.addEventListener('click', duplicateSelectedElement);
+    }
+
+    if (dom.psBtnDelete) {
+      dom.psBtnDelete.addEventListener('click', deleteSelectedElement);
+    }
+
+    // Layers List Interactions (Click, Visibility Toggle, Lock Toggle, and Drag-and-Drop Reordering)
+    let layerDragSrcId = null;
+
     dom.layersList.addEventListener('click', (e) => {
       const item = e.target.closest('.layer-item');
       if (!item) return;
-      state.selectedId = item.dataset.layerId;
-      const el = getSelectedElement();
-      if (el) state.activeSlide = getSlideSpanInfo(el).primary;
+      const targetId = item.dataset.layerId;
+      const el = state.elements.find(x => x.id === targetId);
+      if (!el) return;
+
+      const visBtn = e.target.closest('[data-action="toggle-vis"]');
+      if (visBtn) {
+        e.stopPropagation();
+        pushHistorySnapshot();
+        el.hidden = !el.hidden;
+        renderAll();
+        return;
+      }
+
+      const lockBtn = e.target.closest('[data-action="toggle-lock"]');
+      if (lockBtn) {
+        e.stopPropagation();
+        pushHistorySnapshot();
+        el.locked = !el.locked;
+        renderAll();
+        return;
+      }
+
+      state.selectedId = targetId;
+      state.activeSlide = getSlideSpanInfo(el).primary;
       renderAll();
+    });
+
+    dom.layersList.addEventListener('dragstart', (e) => {
+      const item = e.target.closest('.layer-item');
+      if (!item) return;
+      layerDragSrcId = item.dataset.layerId;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', layerDragSrcId);
+      item.style.opacity = '0.5';
+    });
+
+    dom.layersList.addEventListener('dragend', (e) => {
+      const item = e.target.closest('.layer-item');
+      if (item) item.style.opacity = '1';
+      document.querySelectorAll('.layer-item').forEach(el => {
+        el.classList.remove('drag-over-top', 'drag-over-bottom');
+      });
+    });
+
+    dom.layersList.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      const targetItem = e.target.closest('.layer-item');
+      if (!targetItem || targetItem.dataset.layerId === layerDragSrcId) return;
+
+      const rect = targetItem.getBoundingClientRect();
+      const relY = e.clientY - rect.top;
+      const isTop = relY < rect.height / 2;
+
+      targetItem.classList.toggle('drag-over-top', isTop);
+      targetItem.classList.toggle('drag-over-bottom', !isTop);
+    });
+
+    dom.layersList.addEventListener('dragleave', (e) => {
+      const targetItem = e.target.closest('.layer-item');
+      if (targetItem) {
+        targetItem.classList.remove('drag-over-top', 'drag-over-bottom');
+      }
+    });
+
+    dom.layersList.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const targetItem = e.target.closest('.layer-item');
+      if (!targetItem || !layerDragSrcId || targetItem.dataset.layerId === layerDragSrcId) return;
+
+      const targetId = targetItem.dataset.layerId;
+      const rect = targetItem.getBoundingClientRect();
+      const isInsertBefore = (e.clientY - rect.top) < rect.height / 2;
+
+      // Note: In the DOM layersList, items are rendered in reversed stack order (top layer at index 0)
+      const srcIdx = state.elements.findIndex(x => x.id === layerDragSrcId);
+      const tgtIdx = state.elements.findIndex(x => x.id === targetId);
+
+      if (srcIdx >= 0 && tgtIdx >= 0) {
+        pushHistorySnapshot();
+        const [movedItem] = state.elements.splice(srcIdx, 1);
+        let newIdx = state.elements.findIndex(x => x.id === targetId);
+
+        // Since list is reversed:
+        // Dropping on the top half of target item means placing it higher in stack (after target in elements array)
+        if (isInsertBefore) {
+          state.elements.splice(newIdx + 1, 0, movedItem);
+        } else {
+          state.elements.splice(newIdx, 0, movedItem);
+        }
+        renderAll();
+      }
+
+      layerDragSrcId = null;
+      document.querySelectorAll('.layer-item').forEach(el => {
+        el.classList.remove('drag-over-top', 'drag-over-bottom');
+      });
     });
 
     // Frame Handles in Inspector
@@ -4366,6 +5056,7 @@
       state.elements.forEach(el => {
         if (el.role === 'series') el.text = `| ${e.target.value}`;
         if (el.type === 'games-notch') el.topicText = e.target.value;
+        if (el.role === 'topic-tag') el.text = e.target.value.toUpperCase();
       });
       renderAll();
     });
@@ -4541,6 +5232,34 @@
       if (el) { el.strokeWidth = Number(e.target.value) || 0; renderAll(); }
     });
 
+    // Custom Shape Graphic Upload / Reset (Game Slide Triangle placeholder)
+    if (dom.uploadCustomShapeImageInput) {
+      dom.uploadCustomShapeImageInput.addEventListener('change', (e) => {
+        const file = e.target.files?.[0];
+        const el = getSelectedElement();
+        if (!file || !el || !['triangle', 'rect'].includes(el.type)) return;
+        pushHistorySnapshot();
+        const reader = new FileReader();
+        reader.onload = () => {
+          el.customSrc = reader.result;
+          el.fit = el.fit || 'contain';
+          renderAll();
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+      });
+    }
+
+    if (dom.btnResetShapeDefault) {
+      dom.btnResetShapeDefault.addEventListener('click', () => {
+        const el = getSelectedElement();
+        if (!el || !el.customSrc) return;
+        pushHistorySnapshot();
+        el.customSrc = null;
+        renderAll();
+      });
+    }
+
     // Border Pattern Option Buttons & Sync
     if (dom.inspPatternSection) {
       const pBtns = dom.inspPatternSection.querySelectorAll('.pattern-option-btn');
@@ -4638,7 +5357,38 @@
       const tag = document.activeElement?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || state.editingTextId) return;
 
-      // Undo / Redo
+      // In Preset Creator Mode
+      if (creatorState.active) {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+          e.preventDefault();
+          if (e.shiftKey) redoCreator();
+          else undoCreator();
+          return;
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') {
+          e.preventDefault();
+          redoCreator();
+          return;
+        }
+        if (e.key === 'Delete' || e.key === 'Backspace') {
+          e.preventDefault();
+          deleteCreatorSelected();
+          return;
+        }
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+          e.preventDefault();
+          nudgeCreatorSelected(e.key, e.shiftKey ? 10 : 1);
+          return;
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
+          e.preventDefault();
+          duplicateCreatorSelected();
+          return;
+        }
+        return;
+      }
+
+      // In Studio Mode: Undo / Redo
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
         e.preventDefault();
         if (e.shiftKey) {
@@ -4709,8 +5459,4795 @@
     dom.btnExportAll.addEventListener('click', () => exportAllSlidesPNG());
   }
 
+// ==================== PRESET CREATOR MODULE ====================
+
+  const STORAGE_KEY_CUSTOM_PRESETS = 'carousel_custom_presets_v1';
+
+  // Load custom presets from localStorage
+  function loadCustomPresetsFromStorage() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_CUSTOM_PRESETS);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (typeof parsed === 'object' && parsed !== null) {
+          Object.assign(THEMES, parsed);
+          Object.keys(THEMES).forEach(k => {
+            if (THEMES[k].customElements && Array.isArray(THEMES[k].customElements)) {
+              THEMES[k].customElements.forEach(normalizeMasterElement);
+            }
+          });
+          syncCustomPresetsSelect();
+        }
+      }
+      if (typeof creatorState !== 'undefined') {
+        if (Array.isArray(creatorState.masterElements)) {
+          creatorState.masterElements.forEach(normalizeMasterElement);
+        }
+        if (Array.isArray(creatorState.elements)) {
+          creatorState.elements.forEach(normalizeMasterElement);
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to load custom presets from storage', e);
+    }
+  }
+
+  function saveCustomPresetsToStorage() {
+    try {
+      const customOnly = {};
+      Object.keys(THEMES).forEach(k => {
+        if (THEMES[k].isCustom) customOnly[k] = THEMES[k];
+      });
+      localStorage.setItem(STORAGE_KEY_CUSTOM_PRESETS, JSON.stringify(customOnly));
+      syncCustomPresetsSelect();
+    } catch (e) {
+      console.warn('Failed to save custom presets to storage', e);
+    }
+  }
+
+  function syncCustomPresetsSelect() {
+    if (!dom.optgroupCustomPresets) return;
+    const customKeys = Object.keys(THEMES).filter(k => THEMES[k].isCustom);
+    if (customKeys.length === 0) {
+      dom.optgroupCustomPresets.classList.add('hidden');
+      dom.optgroupCustomPresets.innerHTML = '';
+    } else {
+      dom.optgroupCustomPresets.classList.remove('hidden');
+      dom.optgroupCustomPresets.innerHTML = customKeys.map(k => `
+        <option value="${k}">${escapeHtml(THEMES[k].name)}</option>
+      `).join('');
+    }
+  }
+
+  function normalizeMasterElement(el) {
+    if (!el) return;
+    if (el.opacity === undefined) el.opacity = 1;
+    if (el.bgOpacity === undefined) el.bgOpacity = 1;
+    if (el.borderWidth === undefined) el.borderWidth = 0;
+    if (el.borderOpacity === undefined) el.borderOpacity = 1;
+    if (!el.w) el.w = 320;
+    if (!el.h) el.h = 60;
+    if (!el.anchor) el.anchor = 'nw';
+
+    if (!Array.isArray(el.layers)) {
+      el.layers = [];
+      // Migrate extraLayers if present
+      if (Array.isArray(el.extraLayers)) {
+        el.extraLayers.forEach((l, idx) => {
+          el.layers.push({
+            id: l.id || `layer-extra-${idx}-${Math.random().toString(36).substr(2, 4)}`,
+            type: l.type || 'shape',
+            shapeType: l.shapeType || 'rectangle',
+            name: l.name || `Layer ${idx + 1}`,
+            x: l.x || 0,
+            y: l.y || 0,
+            w: l.w || 40,
+            h: l.h || 20,
+            colorSlot: l.colorSlot || '',
+            color: l.color || l.bg || '#219652',
+            bg: l.bg || l.color || '#219652',
+            opacity: l.opacity !== undefined ? l.opacity : 1,
+            radius: l.radius || 0,
+            borderWidth: l.borderWidth || 0,
+            borderColorSlot: l.borderColorSlot || '',
+            borderColor: l.borderColor || '#000000',
+            borderOpacity: l.borderOpacity !== undefined ? l.borderOpacity : 1,
+            text: l.text || '',
+            fontFamily: l.fontFamily || 'Rubik',
+            fontSize: l.fontSize || 32,
+            isBold: !!l.isBold,
+            uppercase: !!l.uppercase,
+            textEffect: l.textEffect || 'none',
+            effectColorSlot: l.effectColorSlot || '',
+            effectColor: l.effectColor || '#ffffff',
+            effectOpacity: l.effectOpacity !== undefined ? l.effectOpacity : 0.8,
+            align: l.align || 'left',
+            autoCount: !!l.autoCount,
+            src: l.src || ''
+          });
+        });
+      }
+      // Migrate legacy text field if present
+      if (el.text !== undefined && el.text !== null && el.text !== '') {
+        const hasTextLayer = el.layers.some(l => l.type === 'text');
+        if (!hasTextLayer) {
+          el.layers.push({
+            id: 'layer-text-' + Math.random().toString(36).substr(2, 5),
+            type: 'text',
+            name: el.role === 'headline' ? 'Title Text' : (el.role === 'subtitle' ? 'Normal Text' : (el.role === 'counter' ? 'Slide Counter' : (el.role === 'swipe' ? 'Swipe Indicator' : (el.role === 'handle' ? 'Handle Text' : 'Text')))),
+            x: el.textX !== undefined ? el.textX : (el.role === 'handle' ? 20 : 0),
+            y: el.textY !== undefined ? el.textY : (el.role === 'handle' ? 4 : 0),
+            w: el.textW !== undefined ? el.textW : (el.role === 'handle' ? Math.max(100, el.w - 30) : el.w),
+            h: el.textH !== undefined ? el.textH : (el.role === 'handle' ? Math.max(20, el.h - 8) : el.h),
+            text: el.text || '',
+            fontFamily: el.fontFamily || 'Rubik',
+            fontSize: el.fontSize || 32,
+            isBold: !!l?.isBold,
+            uppercase: !!l?.uppercase,
+            colorSlot: el.colorSlot || '',
+            color: el.color || '#162D43',
+            opacity: el.opacity !== undefined ? el.opacity : 1,
+            accentColor: el.accentColor || '#219652',
+            textEffect: el.textEffect || 'none',
+            effectColorSlot: el.effectColorSlot || '',
+            effectColor: el.effectColor || '#ffffff',
+            effectOpacity: el.effectOpacity !== undefined ? el.effectOpacity : 0.8,
+            align: el.align || (el.role === 'handle' ? 'left' : (el.anchor === 'nw' ? 'left' : 'center')),
+            autoCount: !!el.autoCount
+          });
+        }
+      }
+    }
+
+    el.extraLayers = el.layers;
+    const primText = el.layers.find(l => l.type === 'text');
+    if (primText) {
+      if (!el.text) el.text = primText.text;
+      if (!el.fontFamily) el.fontFamily = primText.fontFamily;
+      if (!el.fontSize) el.fontSize = primText.fontSize;
+      if (el.autoCount === undefined) el.autoCount = primText.autoCount;
+    }
+
+    // Strict containment: ensure every layer is clamped inside master element boundary [0, el.w] and [0, el.h]
+    if (Array.isArray(el.layers)) {
+      el.layers.forEach(lay => {
+        if (!lay.w || lay.w < 4) lay.w = 40;
+        if (!lay.h || lay.h < 4) lay.h = 20;
+        if (lay.w > el.w) lay.w = el.w;
+        if (lay.h > el.h) lay.h = el.h;
+        if ((lay.x || 0) < 0) lay.x = 0;
+        if ((lay.y || 0) < 0) lay.y = 0;
+        if (((lay.x || 0) + lay.w) > el.w) {
+          lay.x = Math.max(0, el.w - lay.w);
+        }
+        if (((lay.y || 0) + lay.h) > el.h) {
+          lay.y = Math.max(0, el.h - lay.h);
+        }
+      });
+    }
+  }
+
+  function getDefaultMasterElements() {
+    return [
+      {
+        id: 'master-handle',
+        isMaster: true,
+        type: 'compound',
+        layerGroup: 'foreground',
+        role: 'handle',
+        name: 'Channel Handle',
+        icon: '@',
+        text: '@channelName',
+        fontFamily: 'Rubik',
+        fontSize: 32,
+        isBold: true,
+        colorSlot: 'col-primary',
+        color: '#162D43',
+        opacity: 1,
+        accentColor: '#219652',
+        hasBg: false,
+        bgColorSlot: '',
+        bgColor: '#ffffff',
+        bgOpacity: 1,
+        borderWidth: 0,
+        borderColorSlot: '',
+        borderColor: '#000000',
+        borderOpacity: 1,
+        textEffect: 'none',
+        effectColorSlot: '',
+        effectColor: '#ffffff',
+        effectOpacity: 0.8,
+        anchor: 'nw',
+        x: 140,
+        y: 85,
+        w: 280,
+        h: 48,
+        rotation: 0,
+        layers: [
+          {
+            id: 'layer-handle-bar',
+            type: 'shape',
+            shapeType: 'divider',
+            name: 'Divider Line',
+            x: 0,
+            y: 4,
+            w: 5,
+            h: 40,
+            colorSlot: 'col-secondary',
+            color: '#219652',
+            bg: '#219652',
+            opacity: 1,
+            radius: 2,
+            borderWidth: 0,
+            borderColorSlot: '',
+            borderColor: '#000000',
+            borderOpacity: 1
+          },
+          {
+            id: 'layer-handle-text',
+            type: 'text',
+            name: 'Handle Text',
+            x: 20,
+            y: 4,
+            w: 240,
+            h: 40,
+            text: '@channelName',
+            fontFamily: 'Rubik',
+            fontSize: 32,
+            isBold: true,
+            uppercase: false,
+            colorSlot: 'col-primary',
+            color: '#162D43',
+            opacity: 1,
+            accentColor: '#219652',
+            textEffect: 'none',
+            effectColorSlot: '',
+            effectColor: '#ffffff',
+            effectOpacity: 0.8,
+            align: 'left',
+            autoCount: false
+          }
+        ]
+      },
+      {
+        id: 'master-title',
+        isMaster: true,
+        type: 'compound',
+        layerGroup: 'foreground',
+        role: 'headline',
+        name: 'Title',
+        icon: 'H',
+        text: 'TITLE TEXT',
+        fontFamily: 'JetBrains Mono',
+        fontSize: 72,
+        isBold: true,
+        uppercase: true,
+        colorSlot: 'col-primary',
+        color: '#162D43',
+        opacity: 1,
+        accentColor: '#219652',
+        hasBg: false,
+        bgColorSlot: '',
+        bgColor: '#ffffff',
+        bgOpacity: 1,
+        borderWidth: 0,
+        borderColorSlot: '',
+        borderColor: '#000000',
+        borderOpacity: 1,
+        textEffect: 'none',
+        effectColorSlot: '',
+        effectColor: '#ffffff',
+        effectOpacity: 0.8,
+        anchor: 'c',
+        x: 520,
+        y: 70,
+        w: 480,
+        h: 84,
+        rotation: 0,
+        layers: [
+          {
+            id: 'layer-title-text',
+            type: 'text',
+            name: 'Title Text',
+            x: 0,
+            y: 0,
+            w: 480,
+            h: 84,
+            text: 'TITLE TEXT',
+            fontFamily: 'JetBrains Mono',
+            fontSize: 72,
+            isBold: true,
+            uppercase: true,
+            colorSlot: 'col-primary',
+            color: '#162D43',
+            opacity: 1,
+            accentColor: '#219652',
+            textEffect: 'none',
+            effectColorSlot: '',
+            effectColor: '#ffffff',
+            effectOpacity: 0.8,
+            align: 'center',
+            autoCount: false
+          }
+        ]
+      },
+      {
+        id: 'master-text',
+        isMaster: true,
+        type: 'compound',
+        layerGroup: 'foreground',
+        role: 'subtitle',
+        name: 'Normal Text',
+        icon: 'T',
+        text: 'Clean descriptive text explaining the core message with an *accent phrase*.',
+        fontFamily: 'Rubik',
+        fontSize: 34,
+        isBold: false,
+        colorSlot: 'col-primary',
+        color: '#162D43',
+        opacity: 1,
+        accentColor: '#219652',
+        hasBg: false,
+        bgColorSlot: '',
+        bgColor: '#ffffff',
+        bgOpacity: 1,
+        borderWidth: 0,
+        borderColorSlot: '',
+        borderColor: '#000000',
+        borderOpacity: 1,
+        textEffect: 'none',
+        effectColorSlot: '',
+        effectColor: '#ffffff',
+        effectOpacity: 0.8,
+        anchor: 'nw',
+        x: 1080,
+        y: 70,
+        w: 640,
+        h: 84,
+        rotation: 0,
+        layers: [
+          {
+            id: 'layer-body-text',
+            type: 'text',
+            name: 'Normal Text',
+            x: 0,
+            y: 0,
+            w: 640,
+            h: 84,
+            text: 'Clean descriptive text explaining the core message with an *accent phrase*.',
+            fontFamily: 'Rubik',
+            fontSize: 34,
+            isBold: false,
+            uppercase: false,
+            colorSlot: 'col-primary',
+            color: '#162D43',
+            opacity: 1,
+            accentColor: '#219652',
+            textEffect: 'none',
+            effectColorSlot: '',
+            effectColor: '#ffffff',
+            effectOpacity: 0.8,
+            align: 'left',
+            autoCount: false
+          }
+        ]
+      },
+      {
+        id: 'master-counter',
+        isMaster: true,
+        type: 'compound',
+        layerGroup: 'foreground',
+        role: 'counter',
+        name: 'Slide Counter',
+        icon: '#',
+        text: '-00-',
+        autoCount: true,
+        fontFamily: 'JetBrains Mono',
+        fontSize: 32,
+        isBold: true,
+        colorSlot: 'col-primary',
+        color: '#162D43',
+        opacity: 1,
+        accentColor: '#219652',
+        hasBg: false,
+        bgColorSlot: '',
+        bgColor: '#ffffff',
+        bgOpacity: 1,
+        borderWidth: 0,
+        borderColorSlot: '',
+        borderColor: '#000000',
+        borderOpacity: 1,
+        textEffect: 'none',
+        effectColorSlot: '',
+        effectColor: '#ffffff',
+        effectOpacity: 0.8,
+        anchor: 'c',
+        x: 1800,
+        y: 85,
+        w: 120,
+        h: 48,
+        rotation: 0,
+        layers: [
+          {
+            id: 'layer-counter-text',
+            type: 'text',
+            name: 'Slide Counter',
+            x: 0,
+            y: 0,
+            w: 120,
+            h: 48,
+            text: '-00-',
+            autoCount: true,
+            fontFamily: 'JetBrains Mono',
+            fontSize: 32,
+            isBold: true,
+            uppercase: false,
+            colorSlot: 'col-primary',
+            color: '#162D43',
+            opacity: 1,
+            accentColor: '#219652',
+            textEffect: 'none',
+            effectColorSlot: '',
+            effectColor: '#ffffff',
+            effectOpacity: 0.8,
+            align: 'center'
+          }
+        ]
+      },
+      {
+        id: 'master-swipe',
+        isMaster: true,
+        type: 'compound',
+        layerGroup: 'foreground',
+        role: 'swipe',
+        name: 'Swipe Indicator',
+        icon: '→',
+        text: 'Swipe →',
+        fontFamily: 'Rubik',
+        fontSize: 30,
+        isBold: true,
+        colorSlot: 'col-primary',
+        color: '#162D43',
+        opacity: 1,
+        accentColor: '#219652',
+        hasBg: false,
+        bgColorSlot: '',
+        bgColor: '#ffffff',
+        bgOpacity: 1,
+        borderWidth: 0,
+        borderColorSlot: '',
+        borderColor: '#000000',
+        borderOpacity: 1,
+        textEffect: 'none',
+        effectColorSlot: '',
+        effectColor: '#ffffff',
+        effectOpacity: 0.8,
+        anchor: 'c',
+        x: 2000,
+        y: 85,
+        w: 140,
+        h: 48,
+        rotation: 0,
+        layers: [
+          {
+            id: 'layer-swipe-text',
+            type: 'text',
+            name: 'Swipe Indicator',
+            x: 0,
+            y: 0,
+            w: 140,
+            h: 48,
+            text: 'Swipe →',
+            autoCount: false,
+            fontFamily: 'Rubik',
+            fontSize: 30,
+            isBold: true,
+            uppercase: false,
+            colorSlot: 'col-primary',
+            color: '#162D43',
+            opacity: 1,
+            accentColor: '#219652',
+            textEffect: 'none',
+            effectColorSlot: '',
+            effectColor: '#ffffff',
+            effectOpacity: 0.8,
+            align: 'center'
+          }
+        ]
+      }
+    ];
+  }
+
+  // Preset Creator Dimensions
+  const CREATOR_STAGING_H = 320;
+  const CREATOR_STAGING_MARGIN = 36;
+  const CREATOR_SLIDES_TOP = CREATOR_STAGING_H + CREATOR_STAGING_MARGIN; // 356
+  const CREATOR_CANVAS_H = CREATOR_SLIDES_TOP + SLIDE_H; // 1706
+
+  // Color and Styling Resolution Helpers
+  function resolveColorWithAlpha(hex, alpha = 1) {
+    if (!hex) hex = '#000000';
+    const clean = hex.replace('#', '');
+    let r = 0, g = 0, b = 0;
+    if (clean.length === 3) {
+      r = parseInt(clean[0] + clean[0], 16);
+      g = parseInt(clean[1] + clean[1], 16);
+      b = parseInt(clean[2] + clean[2], 16);
+    } else if (clean.length >= 6) {
+      r = parseInt(clean.substring(0, 2), 16);
+      g = parseInt(clean.substring(2, 4), 16);
+      b = parseInt(clean.substring(4, 6), 16);
+    }
+    const a = Math.max(0, Math.min(1, Number(alpha)));
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+  }
+
+  function resolveSlotColor(slotId, customHex, fallbackHex = '#162D43') {
+    if (slotId) {
+      const found = (creatorState.colors || []).find(c => c.id === slotId);
+      if (found) return found.hex;
+    }
+    return customHex || fallbackHex;
+  }
+
+  function populateColorSlotDropdown(selectEl, selectedSlot) {
+    if (!selectEl) return;
+    selectEl.innerHTML = `
+      <option value="">-- Custom Color --</option>
+      ${(creatorState.colors || []).map(c => `
+        <option value="${c.id}" ${selectedSlot === c.id ? 'selected' : ''}>${escapeHtml(c.name)} (${c.hex})</option>
+      `).join('')}
+    `;
+  }
+
+  function resolveTextEffectShadow(effectType, effectColor, effectAlpha) {
+    if (effectType === 'emboss') {
+      const col = resolveColorWithAlpha(effectColor || '#EBB26E', effectAlpha !== undefined ? effectAlpha : 0.88);
+      return `1px 2px 0px ${col}, -1px -1px 1px rgba(0, 0, 0, 0.65)`;
+    } else if (effectType === 'glow') {
+      const col = resolveColorWithAlpha(effectColor || '#ffffff', effectAlpha !== undefined ? effectAlpha : 0.8);
+      const colOuter = resolveColorWithAlpha(effectColor || '#ffffff', (effectAlpha !== undefined ? effectAlpha : 0.8) * 0.5);
+      return `0 0 10px ${col}, 0 0 24px ${colOuter}`;
+    }
+    return 'none';
+  }
+
+  // Preset Creator State
+  const creatorState = {
+    active: false,
+    presetId: 'custom-preset-1',
+    name: 'My Custom Preset',
+    archetype: 'games', // 'games' or 'magic'
+    patternType: 'chevrons',
+    titleFont: 'JetBrains Mono',
+    bodyFont: 'Rubik',
+    zoom: 0.28,
+    selectedId: null,
+    selectedGuideId: null,
+    showSeamGaps: false,
+    // Global Preset Colors: Background, Primary, Secondary by default
+    colors: [
+      { id: 'col-bg', name: 'Background', hex: '#F7F3EA' },
+      { id: 'col-primary', name: 'Primary', hex: '#162D43' },
+      { id: 'col-secondary', name: 'Secondary', hex: '#219652' }
+    ],
+    // Global Text Modifiers / Accents: syntax triggers on text
+    modifiers: [
+      { id: 'mod-1', symbol: '*', name: 'Accent Highlight', hex: '#219652' }
+    ],
+    // Custom uploaded fonts: Array of { name, url }
+    customFonts: [],
+    // Master Default Elements (Free-floating canvas elements placed above slides by default)
+    masterElements: getDefaultMasterElements(),
+    // Elements on the 3 slides
+    elements: [],
+    // Custom guidelines
+    guidelines: [
+      { id: 'g1', type: 'h', coord: 66, label: 'Top Margin' },
+      { id: 'g2', type: 'h', coord: 675, label: 'Vertical Center', isFixedCenter: true },
+      { id: 'g3', type: 'h', coord: 1286, label: 'Bottom Margin' },
+      { id: 'g4', type: 'v', coord: 96, label: 'Left Margin' },
+      { id: 'g5', type: 'v', coord: 540, label: 'Horizontal Center', isFixedCenter: true },
+      { id: 'g6', type: 'v', coord: 984, label: 'Right Margin' }
+    ]
+  };
+
+  state.creatorState = creatorState;
+
+  // Preset Creator Undo/Redo & History Engine
+  const creatorHistory = [];
+  let creatorHistoryIndex = -1;
+  const MAX_CREATOR_HISTORY = 40;
+
+  function pushCreatorHistorySnapshot() {
+    if (creatorHistoryIndex < creatorHistory.length - 1) {
+      creatorHistory.splice(creatorHistoryIndex + 1);
+    }
+    const snap = JSON.stringify({
+      elements: creatorState.elements,
+      masterElements: creatorState.masterElements,
+      guidelines: creatorState.guidelines,
+      colors: creatorState.colors,
+      modifiers: creatorState.modifiers,
+      showSeamGaps: creatorState.showSeamGaps,
+      selectedId: creatorState.selectedId,
+      selectedGuideId: creatorState.selectedGuideId
+    });
+    creatorHistory.push(snap);
+    if (creatorHistory.length > MAX_CREATOR_HISTORY) {
+      creatorHistory.shift();
+    } else {
+      creatorHistoryIndex++;
+    }
+  }
+
+  function undoCreator() {
+    if (creatorHistoryIndex > 0) {
+      creatorHistoryIndex--;
+      applyCreatorHistorySnapshot(creatorHistory[creatorHistoryIndex]);
+    }
+  }
+
+  function redoCreator() {
+    if (creatorHistoryIndex < creatorHistory.length - 1) {
+      creatorHistoryIndex++;
+      applyCreatorHistorySnapshot(creatorHistory[creatorHistoryIndex]);
+    }
+  }
+
+  function applyCreatorHistorySnapshot(snapStr) {
+    try {
+      const snap = JSON.parse(snapStr);
+      creatorState.elements = snap.elements || [];
+      creatorState.masterElements = snap.masterElements || [];
+      creatorState.guidelines = snap.guidelines || [];
+      if (snap.colors) creatorState.colors = snap.colors;
+      if (snap.modifiers) creatorState.modifiers = snap.modifiers;
+      if (snap.showSeamGaps !== undefined) creatorState.showSeamGaps = snap.showSeamGaps;
+      creatorState.selectedId = snap.selectedId || null;
+      creatorState.selectedGuideId = snap.selectedGuideId || null;
+      renderPresetCreatorAll();
+    } catch (e) {}
+  }
+
+  function deleteCreatorSelected() {
+    if (creatorState.selectedGuideId) {
+      const g = creatorState.guidelines.find(x => x.id === creatorState.selectedGuideId);
+      if (g && (g.isFixedCenter || (g.type === 'h' && g.coord === 675) || (g.type === 'v' && g.coord === 540))) {
+        return;
+      }
+      pushCreatorHistorySnapshot();
+      creatorState.guidelines = creatorState.guidelines.filter(g => g.id !== creatorState.selectedGuideId);
+      creatorState.selectedGuideId = null;
+      renderPresetCreatorAll();
+      return;
+    }
+    if (creatorState.selectedId) {
+      pushCreatorHistorySnapshot();
+      const elIdx = creatorState.elements.findIndex(x => x.id === creatorState.selectedId);
+      if (elIdx >= 0) {
+        creatorState.elements.splice(elIdx, 1);
+        creatorState.selectedId = null;
+        renderPresetCreatorAll();
+        return;
+      }
+      const mIdx = creatorState.masterElements.findIndex(x => x.id === creatorState.selectedId);
+      if (mIdx >= 0) {
+        const m = creatorState.masterElements[mIdx];
+        if (!['master-handle', 'master-title', 'master-text'].includes(m.id)) {
+          creatorState.masterElements.splice(mIdx, 1);
+          creatorState.selectedId = null;
+          renderPresetCreatorAll();
+        }
+      }
+    }
+  }
+
+  function nudgeCreatorSelected(key, step) {
+    if (creatorState.selectedGuideId) {
+      const g = creatorState.guidelines.find(x => x.id === creatorState.selectedGuideId);
+      if (g && (g.isFixedCenter || (g.type === 'h' && g.coord === 675) || (g.type === 'v' && g.coord === 540))) {
+        return;
+      }
+      if (g) {
+        pushCreatorHistorySnapshot();
+        if (key === 'ArrowUp' || key === 'ArrowLeft') g.coord = Math.max(0, g.coord - step);
+        if (key === 'ArrowDown' || key === 'ArrowRight') g.coord += step;
+        renderPresetCreatorAll();
+      }
+      return;
+    }
+    const el = creatorState.masterElements.find(x => x.id === creatorState.selectedId) ||
+               creatorState.elements.find(x => x.id === creatorState.selectedId);
+    if (el) {
+      pushCreatorHistorySnapshot();
+      if (key === 'ArrowLeft') el.x -= step;
+      else if (key === 'ArrowRight') el.x += step;
+      else if (key === 'ArrowUp') el.y -= step;
+      else if (key === 'ArrowDown') el.y += step;
+      if (el.linkAcrossSlides) syncLinkedSlideElements(el);
+      renderPresetCreatorAll();
+    }
+  }
+
+  function duplicateCreatorSelected() {
+    const el = creatorState.masterElements.find(x => x.id === creatorState.selectedId) ||
+               creatorState.elements.find(x => x.id === creatorState.selectedId);
+    if (!el) return;
+    pushCreatorHistorySnapshot();
+    const copy = JSON.parse(JSON.stringify(el));
+    copy.id = genId('c-el');
+    if (el.isMaster) {
+      copy.name = `${el.name} (Copy)`;
+      copy.x += 40;
+      copy.y += 40;
+      creatorState.masterElements.push(copy);
+    } else {
+      copy.x += 40;
+      copy.y += 40;
+      creatorState.elements.push(copy);
+    }
+    creatorState.selectedId = copy.id;
+    renderPresetCreatorAll();
+  }
+
+  // Option A: Automatically sync master element transformations & styles to existing slide instances
+  function syncMasterElementToInstances(masterEl) {
+    if (!masterEl || !masterEl.isMaster) return;
+    normalizeMasterElement(masterEl);
+    creatorState.elements.forEach(inst => {
+      if (inst.masterId === masterEl.id) {
+        const oldW = inst.w || 320;
+        const oldH = inst.h || 60;
+        inst.layers = JSON.parse(JSON.stringify(masterEl.layers || []));
+        inst.extraLayers = JSON.parse(JSON.stringify(masterEl.layers || []));
+        inst.name = masterEl.name;
+        inst.fontFamily = masterEl.fontFamily;
+        inst.fontSize = masterEl.fontSize;
+        inst.isBold = masterEl.isBold;
+        inst.uppercase = masterEl.uppercase;
+        inst.colorSlot = masterEl.colorSlot;
+        inst.color = masterEl.color;
+        inst.opacity = masterEl.opacity !== undefined ? masterEl.opacity : 1;
+        inst.accentColor = masterEl.accentColor;
+        inst.hasBg = masterEl.hasBg;
+        inst.bgColorSlot = masterEl.bgColorSlot;
+        inst.bgColor = masterEl.bgColor;
+        inst.bgOpacity = masterEl.bgOpacity !== undefined ? masterEl.bgOpacity : 1;
+        inst.borderWidth = masterEl.borderWidth;
+        inst.borderColorSlot = masterEl.borderColorSlot;
+        inst.borderColor = masterEl.borderColor;
+        inst.borderOpacity = masterEl.borderOpacity !== undefined ? masterEl.borderOpacity : 1;
+        inst.textEffect = masterEl.textEffect;
+        inst.effectColorSlot = masterEl.effectColorSlot;
+        inst.effectColor = masterEl.effectColor;
+        inst.effectOpacity = masterEl.effectOpacity !== undefined ? masterEl.effectOpacity : 0.8;
+        inst.textX = 0;
+        inst.textY = 0;
+        inst.textW = masterEl.w;
+        inst.textH = masterEl.h;
+        inst.anchor = masterEl.anchor;
+        inst.w = masterEl.w;
+        inst.h = masterEl.h;
+      }
+    });
+  }
+
+  // Synchronize element across slides when 'link across slides' is checked
+  // User requirement: "if link is active please do replace current values not add on top of them (to prevent previous singular adjustments breaking the link)"
+  function syncLinkedSlideElements(sourceEl) {
+    if (!sourceEl || !sourceEl.linkAcrossSlides) return;
+    const groupId = sourceEl.linkGroupId || sourceEl.masterId || sourceEl.id;
+    const currentSlide = Math.floor(sourceEl.x / SLIDE_W);
+    const localX = sourceEl.x - currentSlide * SLIDE_W;
+
+    creatorState.elements.forEach(other => {
+      if (other.id !== sourceEl.id) {
+        const otherGroup = other.linkGroupId || other.masterId || other.id;
+        if (otherGroup === groupId || (other.role && other.role === sourceEl.role && other.addedToAllSlides)) {
+          const otherSlide = Math.floor(other.x / SLIDE_W);
+          other.x = otherSlide * SLIDE_W + localX;
+          other.y = sourceEl.y;
+          other.w = sourceEl.w;
+          other.h = sourceEl.h;
+          other.rotation = sourceEl.rotation || 0;
+          other.opacity = sourceEl.opacity;
+          other.fontSize = sourceEl.fontSize;
+          other.linkAcrossSlides = true;
+          other.linkGroupId = groupId;
+        }
+      }
+    });
+  }
+
+  function initCreatorElements() {
+    // Default preset starts with clean white slides, no texts whatsoever
+    creatorState.elements = [];
+  }
+
+  function setAppWorkspaceMode(mode) {
+    if (mode === 'creator') {
+      creatorState.active = true;
+      document.body.classList.add('mode-creator');
+      if (dom.topbar) dom.topbar.classList.add('is-mode-creator');
+      dom.btnSwitchStudio.classList.remove('active');
+      dom.btnSwitchPresetCreator.classList.add('active');
+      dom.workspaceStudio.classList.add('hidden');
+      dom.workspacePresetCreator.classList.remove('hidden');
+      renderPresetCreatorAll();
+      setTimeout(fitCreatorZoom, 60);
+    } else {
+      creatorState.active = false;
+      document.body.classList.remove('mode-creator');
+      if (dom.topbar) dom.topbar.classList.remove('is-mode-creator');
+      dom.btnSwitchStudio.classList.add('active');
+      dom.btnSwitchPresetCreator.classList.remove('active');
+      dom.workspaceStudio.classList.remove('hidden');
+      dom.workspacePresetCreator.classList.add('hidden');
+      renderAll();
+      setTimeout(fitZoomToViewport, 60);
+    }
+  }
+
+  function openPresetInCreator(presetId) {
+    const p = THEMES[presetId];
+    if (!p) return;
+    creatorState.presetId = p.id;
+    creatorState.name = p.name;
+    creatorState.archetype = p.domain === 'magic' ? 'magic' : 'games';
+    creatorState.patternType = p.patternType || 'chevrons';
+    creatorState.titleFont = (p.headlineDefaults && p.headlineDefaults.fontFamily) || 'JetBrains Mono';
+    creatorState.bodyFont = (p.subtitleDefaults && p.subtitleDefaults.fontFamily) || 'Rubik';
+
+    // Build palette colors from theme if not already customized
+    if (Array.isArray(p.paletteColors) && p.paletteColors.length > 0) {
+      creatorState.colors = JSON.parse(JSON.stringify(p.paletteColors));
+    } else {
+      creatorState.colors = [
+        { id: 'col-bg', name: 'Background', hex: p.innerBgColor || '#F7F3EA' },
+        { id: 'col-primary', name: 'Primary Text', hex: p.textColor || '#162D43' },
+        { id: 'col-secondary', name: 'Secondary / Accent', hex: p.accentColor || '#219652' },
+        { id: 'col-frame', name: 'Outer Frame', hex: p.outerColor || '#219652' }
+      ];
+    }
+
+    if (Array.isArray(p.modifiers) && p.modifiers.length > 0) {
+      creatorState.modifiers = JSON.parse(JSON.stringify(p.modifiers));
+    } else {
+      creatorState.modifiers = [
+        { id: 'mod-1', symbol: '*', name: 'Accent Highlight', hex: p.accentColor || '#219652' }
+      ];
+    }
+
+    if (Array.isArray(p.customGuidelines) && p.customGuidelines.length > 0) {
+      creatorState.guidelines = JSON.parse(JSON.stringify(p.customGuidelines));
+    }
+
+    // Update form controls
+    if (dom.creatorPresetNameInput) dom.creatorPresetNameInput.value = creatorState.name;
+    if (dom.creatorPresetArchetype) dom.creatorPresetArchetype.value = creatorState.archetype;
+    if (dom.creatorPatternSelect) dom.creatorPatternSelect.value = creatorState.patternType;
+    if (dom.creatorTitleFontSelect) dom.creatorTitleFontSelect.value = creatorState.titleFont;
+    if (dom.creatorBodyFontSelect) dom.creatorBodyFontSelect.value = creatorState.bodyFont;
+
+    // Load master elements if defined
+    if (Array.isArray(p.customElements) && p.customElements.length > 0) {
+      creatorState.masterElements = JSON.parse(JSON.stringify(p.customElements));
+    } else {
+      // Configure default master channel handle with preset's frameHandle
+      const handleEl = creatorState.masterElements.find(x => x.id === 'master-handle');
+      if (handleEl && p.frameHandle) {
+        handleEl.text = `| ${p.frameHandle}`;
+      }
+    }
+
+    initCreatorElements();
+    setAppWorkspaceMode('creator');
+  }
+
+  function createNewPreset() {
+    const newId = 'custom-' + Date.now();
+    creatorState.presetId = newId;
+    creatorState.name = 'New Preset ' + (Object.keys(THEMES).filter(k => THEMES[k].isCustom).length + 1);
+    creatorState.archetype = 'games';
+    creatorState.patternType = 'clean';
+    creatorState.titleFont = 'JetBrains Mono';
+    creatorState.bodyFont = 'Rubik';
+    creatorState.colors = [
+      { id: 'col-bg', name: 'Background', hex: '#ffffff' },
+      { id: 'col-primary', name: 'Primary Text', hex: '#111111' },
+      { id: 'col-secondary', name: 'Secondary / Accent', hex: '#666666' },
+      { id: 'col-frame', name: 'Outer Frame', hex: '#ffffff' }
+    ];
+    creatorState.modifiers = [
+      { id: 'mod-1', symbol: '*', name: 'Accent Highlight', hex: '#666666' }
+    ];
+
+    if (dom.creatorPresetNameInput) dom.creatorPresetNameInput.value = creatorState.name;
+    if (dom.creatorPresetArchetype) dom.creatorPresetArchetype.value = creatorState.archetype;
+    if (dom.creatorPatternSelect) dom.creatorPatternSelect.value = creatorState.patternType;
+
+    // Default preset is purely white with NO texts on slides whatsoever, just Master Elements at the top
+    creatorState.elements = [];
+    creatorState.selectedId = null;
+    creatorState.selectedGuideId = null;
+    setAppWorkspaceMode('creator');
+  }
+
+  function saveCurrentCreatorPreset() {
+    const id = creatorState.presetId || ('custom-' + Date.now());
+    const isMagic = creatorState.archetype === 'magic';
+
+    const primaryCol = creatorState.colors.find(c => c.id === 'col-primary')?.hex || '#162D43';
+    const secondaryCol = creatorState.colors.find(c => c.id === 'col-secondary')?.hex || '#219652';
+    const bgCol = creatorState.colors.find(c => c.id === 'col-bg')?.hex || '#F7F3EA';
+    const frameCol = creatorState.colors.find(c => c.id === 'col-frame')?.hex || secondaryCol;
+
+    const handleEl = creatorState.masterElements.find(x => x.role === 'handle');
+    const detectedHandle = handleEl ? handleEl.text.replace(/^\|\s*/, '') : '@mychannel';
+
+    const presetObj = {
+      id: id,
+      isCustom: true,
+      name: creatorState.name || 'Custom Preset',
+      domain: isMagic ? 'magic' : 'gameDev',
+      igHandle: detectedHandle.replace(/^@/, ''),
+      igSub: isMagic ? 'Editorial & Visual Theory' : 'Game Design Analysis & Systems',
+      frameHandle: detectedHandle,
+      outerColor: frameCol,
+      innerBgColor: bgCol,
+      textColor: primaryCol,
+      accentColor: secondaryCol,
+      patternType: creatorState.patternType,
+      paletteColors: JSON.parse(JSON.stringify(creatorState.colors)),
+      modifiers: JSON.parse(JSON.stringify(creatorState.modifiers || [])),
+      customGuidelines: JSON.parse(JSON.stringify(creatorState.guidelines)),
+      customElements: JSON.parse(JSON.stringify(creatorState.masterElements)),
+      headlineDefaults: {
+        fontFamily: creatorState.titleFont,
+        fontSize: 130,
+        isBold: true,
+        color: primaryCol,
+        accentColor: secondaryCol,
+        uppercase: true,
+        align: 'center'
+      },
+      subtitleDefaults: {
+        fontFamily: creatorState.bodyFont,
+        fontSize: 44,
+        isBold: true,
+        color: primaryCol,
+        accentColor: secondaryCol,
+        align: 'left'
+      },
+      description: `Custom ${creatorState.name} preset.`
+    };
+
+    THEMES[id] = presetObj;
+    saveCustomPresetsToStorage();
+    state.themeId = id;
+    dom.themeSelect.value = id;
+    populatePresetElementsDrawer(presetObj);
+    alert(`Preset "${presetObj.name}" saved successfully!`);
+    setAppWorkspaceMode('studio');
+  }
+
+  function exportCreatorPresetJson() {
+    const p = {
+      presetId: creatorState.presetId,
+      name: creatorState.name,
+      archetype: creatorState.archetype,
+      patternType: creatorState.patternType,
+      titleFont: creatorState.titleFont,
+      bodyFont: creatorState.bodyFont,
+      colors: creatorState.colors,
+      modifiers: creatorState.modifiers,
+      masterElements: creatorState.masterElements,
+      guidelines: creatorState.guidelines,
+      elements: creatorState.elements
+    };
+    const payload = JSON.stringify(p, null, 2);
+    const blob = new Blob([payload], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `preset_${(creatorState.name || 'custom').toLowerCase().replace(/\s+/g, '_')}.json`;
+    a.click();
+  }
+
+  function importCreatorPresetJson(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const d = JSON.parse(reader.result);
+        if (d.name) creatorState.name = d.name;
+        if (d.archetype) creatorState.archetype = d.archetype;
+        if (d.patternType) creatorState.patternType = d.patternType;
+        if (d.titleFont) creatorState.titleFont = d.titleFont;
+        if (d.bodyFont) creatorState.bodyFont = d.bodyFont;
+        if (Array.isArray(d.colors)) creatorState.colors = d.colors;
+        if (Array.isArray(d.modifiers)) creatorState.modifiers = d.modifiers;
+        if (Array.isArray(d.masterElements)) creatorState.masterElements = d.masterElements;
+        if (Array.isArray(d.guidelines)) creatorState.guidelines = d.guidelines;
+        if (Array.isArray(d.elements)) creatorState.elements = d.elements;
+
+        // Sync inputs
+        if (dom.creatorPresetNameInput) dom.creatorPresetNameInput.value = creatorState.name;
+        if (dom.creatorPresetArchetype) dom.creatorPresetArchetype.value = creatorState.archetype;
+        if (dom.creatorPatternSelect) dom.creatorPatternSelect.value = creatorState.patternType;
+        if (dom.creatorTitleFontSelect) dom.creatorTitleFontSelect.value = creatorState.titleFont;
+        if (dom.creatorBodyFontSelect) dom.creatorBodyFontSelect.value = creatorState.bodyFont;
+
+        renderPresetCreatorAll();
+        alert('Preset uploaded successfully!');
+      } catch (e) {
+        alert('Invalid preset JSON file.');
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // Format rich text helper supporting custom syntax triggers from creatorState.modifiers
+  function formatCreatorRichTextHtml(text, slideIndex = null, autoCount = false) {
+    let out = text || '';
+
+    // If autoCount is true or text includes -00-, substitute with slide count
+    // User requirement: "numbers to be counted per slide (e.g. -00- turns a number into count, starting on the first default slide (slide 2))"
+    if (slideIndex !== null && (autoCount || out.includes('-00-'))) {
+      if (slideIndex === 0) {
+        // Slide 1 (Hook / Cover)
+        out = out.replace(/-00-/g, '00');
+      } else {
+        // Slide 2 is count 01, Slide 3 is count 02, etc.
+        const countStr = String(slideIndex).padStart(2, '0');
+        out = out.replace(/-00-/g, countStr);
+      }
+    }
+
+    out = escapeHtml(out);
+
+    // Apply global text modifiers / accents
+    (creatorState.modifiers || []).forEach(m => {
+      const sym = (m.symbol || '').trim();
+      if (!sym) return;
+      const escapedSym = sym.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const reg = new RegExp(`${escapedSym}([^${escapedSym}]+)${escapedSym}`, 'g');
+      out = out.replace(reg, (_, word) => {
+        return `<span style="color:${m.hex};display:inline;">${word}</span>`;
+      });
+    });
+
+    // Fallback: standard asterisk accent if no modifiers matched and * is present
+    if (!(creatorState.modifiers || []).some(m => m.symbol === '*')) {
+      const secondaryCol = creatorState.colors.find(c => c.id === 'col-secondary')?.hex || '#219652';
+      out = out.replace(/\*([^*]+)\*/g, (_, word) => {
+        return `<span style="color:${secondaryCol};display:inline;">${word}</span>`;
+      });
+    }
+
+    if (out.startsWith('| ')) {
+      const secondaryCol = creatorState.colors.find(c => c.id === 'col-secondary')?.hex || '#219652';
+      out = `<span style="color:${secondaryCol};font-weight:700;">|</span> ` + out.slice(2);
+    }
+    return out;
+  }
+
+  // Render Preset Creator 3-slide board and free-floating canvas elements
+  function renderPresetCreatorAll() {
+    renderCreatorColorsList();
+    renderCreatorModifiersList();
+    renderCreatorSlides();
+    renderCreatorGuidelines();
+    renderCreatorInspector();
+  }
+
+  function renderCreatorColorsList() {
+    if (!dom.creatorColorsList) return;
+    dom.creatorColorsList.innerHTML = creatorState.colors.map(col => {
+      const isDefaultCol = ['col-bg', 'col-primary', 'col-secondary'].includes(col.id);
+      return `
+        <div class="creator-color-item" data-col-id="${col.id}">
+          <div class="creator-color-item-row">
+            <input type="color" class="creator-color-swatch-box" data-col-id="${col.id}" value="${normalizeHex(col.hex)}" />
+            <input type="text" class="creator-color-name-input" data-col-id="${col.id}" value="${escapeHtml(col.name)}" />
+            <span class="creator-color-hex-val">${col.hex}</span>
+            ${!isDefaultCol ? `
+              <button class="btn-guide-action btn-delete-color" data-col-id="${col.id}" title="Delete Color">✕</button>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Bind color palette inputs
+    dom.creatorColorsList.querySelectorAll('input[type="color"]').forEach(inp => {
+      inp.oninput = (e) => {
+        const id = inp.getAttribute('data-col-id');
+        const c = creatorState.colors.find(x => x.id === id);
+        if (c) {
+          c.hex = e.target.value;
+          const hexSpan = inp.closest('.creator-color-item')?.querySelector('.creator-color-hex-val');
+          if (hexSpan) hexSpan.textContent = c.hex;
+          renderCreatorSlides();
+        }
+      };
+      inp.onchange = () => {
+        pushCreatorHistorySnapshot();
+        renderPresetCreatorAll();
+      };
+    });
+
+    dom.creatorColorsList.querySelectorAll('.creator-color-name-input').forEach(inp => {
+      inp.oninput = (e) => {
+        const id = inp.getAttribute('data-col-id');
+        const c = creatorState.colors.find(x => x.id === id);
+        if (c) {
+          c.name = e.target.value;
+          renderCreatorInspector();
+        }
+      };
+    });
+
+    dom.creatorColorsList.querySelectorAll('.btn-delete-color').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-col-id');
+        pushCreatorHistorySnapshot();
+        creatorState.colors = creatorState.colors.filter(x => x.id !== id);
+        renderPresetCreatorAll();
+      };
+    });
+  }
+
+  function renderCreatorModifiersList() {
+    if (!dom.creatorModifiersList) return;
+    if (!creatorState.modifiers || creatorState.modifiers.length === 0) {
+      dom.creatorModifiersList.innerHTML = `<span style="font-size:11px;color:var(--text-secondary);font-style:italic;">No text modifiers defined</span>`;
+      return;
+    }
+
+    dom.creatorModifiersList.innerHTML = creatorState.modifiers.map(mod => {
+      return `
+        <div class="creator-color-item" data-mod-id="${mod.id}">
+          <div class="creator-color-item-row">
+            <input type="text" class="creator-mod-symbol-input" data-mod-id="${mod.id}" value="${escapeHtml(mod.symbol || '*')}" style="width:28px;text-align:center;font-weight:700;font-family:monospace;" title="Modifier trigger symbol (e.g. *, _, ~)" />
+            <input type="color" class="creator-color-swatch-box" data-mod-id="${mod.id}" value="${normalizeHex(mod.hex)}" />
+            <input type="text" class="creator-color-name-input" data-mod-id="${mod.id}" value="${escapeHtml(mod.name)}" />
+            <button class="btn-guide-action btn-delete-modifier" data-mod-id="${mod.id}" title="Delete Modifier">✕</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    dom.creatorModifiersList.querySelectorAll('input[type="color"]').forEach(inp => {
+      inp.oninput = (e) => {
+        const id = inp.getAttribute('data-mod-id');
+        const m = (creatorState.modifiers || []).find(x => x.id === id);
+        if (m) {
+          m.hex = e.target.value;
+          renderCreatorSlides();
+        }
+      };
+      inp.onchange = () => {
+        pushCreatorHistorySnapshot();
+        renderCreatorSlides();
+      };
+    });
+
+    dom.creatorModifiersList.querySelectorAll('.creator-mod-symbol-input').forEach(inp => {
+      inp.oninput = (e) => {
+        const id = inp.getAttribute('data-mod-id');
+        const m = (creatorState.modifiers || []).find(x => x.id === id);
+        if (m) {
+          m.symbol = e.target.value;
+          renderCreatorSlides();
+        }
+      };
+    });
+
+    dom.creatorModifiersList.querySelectorAll('.creator-color-name-input').forEach(inp => {
+      inp.oninput = (e) => {
+        const id = inp.getAttribute('data-mod-id');
+        const m = (creatorState.modifiers || []).find(x => x.id === id);
+        if (m) m.name = e.target.value;
+      };
+    });
+
+    dom.creatorModifiersList.querySelectorAll('.btn-delete-modifier').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-mod-id');
+        pushCreatorHistorySnapshot();
+        creatorState.modifiers = (creatorState.modifiers || []).filter(x => x.id !== id);
+        renderCreatorModifiersList();
+        renderCreatorSlides();
+      };
+    });
+  }
+
+  function renderCreatorSlides() {
+    if (!dom.creatorSlidesContainer) return;
+    const numSlides = 3;
+    const gapPx = creatorState.showSeamGaps ? 28 : 0;
+    let slidesHtml = '';
+
+    dom.creatorSlidesContainer.classList.toggle('show-gaps', Boolean(creatorState.showSeamGaps));
+
+    const frameCol = creatorState.colors.find(c => c.id === 'col-frame')?.hex ||
+                     creatorState.colors.find(c => c.id === 'col-secondary')?.hex || '#ffffff';
+    const bgCol = creatorState.colors.find(c => c.id === 'col-bg')?.hex || '#ffffff';
+
+    for (let s = 0; s < numSlides; s++) {
+      const slideType = s === 0 ? 'Slide 1 (Hook / Cover)' : (s === 1 ? 'Slide 2 (Default Content)' : 'Slide 3 (End CTA)');
+      const marginRight = (s < numSlides - 1) ? gapPx : 0;
+
+      slidesHtml += `
+        <div class="carousel-slide creator-slide" data-slide-index="${s}" style="width:${SLIDE_W}px;height:${SLIDE_H}px;position:relative;background:${frameCol};margin-right:${marginRight}px;flex-shrink:0;">
+          <div style="position:absolute;top:-30px;left:0;font-size:12px;font-weight:700;color:var(--text-secondary);letter-spacing:0.04em;">
+            ${slideType}
+          </div>
+          <div style="position:absolute;top:66px;left:96px;width:${SLIDE_W - 192}px;height:${SLIDE_H - 132}px;background:${bgCol};border:2px solid rgba(0,0,0,0.12);border-radius:12px;"></div>
+        </div>
+      `;
+    }
+
+    dom.creatorSlidesContainer.innerHTML = slidesHtml;
+
+    // Render interactive elements layer (BOTH Master Elements and Slide Instances)
+    if (dom.creatorInteractionLayer) {
+      let elementsHtml = '';
+      const selectedEl = creatorState.masterElements.find(x => x.id === creatorState.selectedId) ||
+                         creatorState.elements.find(x => x.id === creatorState.selectedId);
+
+      // 1. Render Free-floating Master Elements
+      creatorState.masterElements.forEach(m => {
+        const isSel = creatorState.selectedId === m.id;
+        elementsHtml += renderCreatorSceneElementHTML(m, isSel);
+      });
+
+      // 2. Render Slide Instances
+      creatorState.elements.forEach(el => {
+        const isSel = creatorState.selectedId === el.id;
+        elementsHtml += renderCreatorSceneElementHTML(el, isSel);
+      });
+
+      // 3. Render Active Selection Box with all 8 resize handles + rotation handle
+      if (selectedEl) {
+        const isStaging = selectedEl.isMaster || selectedEl.y < CREATOR_SLIDES_TOP;
+        const slideIdx = isStaging ? 0 : Math.max(0, Math.min(2, Math.floor(selectedEl.x / SLIDE_W)));
+        const visualSelX = isStaging ? selectedEl.x : (selectedEl.x + slideIdx * gapPx);
+
+        elementsHtml += `
+          <div id="creatorActiveSelectionBox" class="selection-box creator-selection-box" style="
+            position:absolute;
+            left:${visualSelX}px;
+            top:${selectedEl.y}px;
+            width:${selectedEl.w}px;
+            height:${selectedEl.h}px;
+            transform: rotate(${selectedEl.rotation || 0}deg);
+            pointer-events:auto;
+            z-index:120;
+          ">
+            ${selectedEl.isMaster ? `
+              <span class="creator-master-badge-tag">${escapeHtml(selectedEl.name)}</span>
+              <button class="creator-master-plus-btn btn-spawn-instance" data-master-id="${selectedEl.id}" title="Add instance to slide">+</button>
+            ` : ''}
+            <div class="selection-handle handle-rot" data-creator-handle="rot" title="Rotate element"></div>
+            <div class="selection-handle handle-nw"  data-creator-handle="nw"></div>
+            <div class="selection-handle handle-n"   data-creator-handle="n"></div>
+            <div class="selection-handle handle-ne"  data-creator-handle="ne"></div>
+            <div class="selection-handle handle-e"   data-creator-handle="e"></div>
+            <div class="selection-handle handle-se"  data-creator-handle="se"></div>
+            <div class="selection-handle handle-s"   data-creator-handle="s"></div>
+            <div class="selection-handle handle-sw"  data-creator-handle="sw"></div>
+            <div class="selection-handle handle-w"   data-creator-handle="w"></div>
+          </div>
+        `;
+      }
+
+      dom.creatorInteractionLayer.innerHTML = elementsHtml;
+      bindCreatorElementsInteractions();
+    }
+  }
+
+  function renderCreatorSceneElementHTML(el, isSel) {
+    normalizeMasterElement(el);
+    const gapPx = creatorState.showSeamGaps ? 28 : 0;
+    const isStaging = el.isMaster || el.y < CREATOR_SLIDES_TOP;
+    const slideIdx = isStaging ? null : Math.max(0, Math.min(2, Math.floor(el.x / SLIDE_W)));
+    const visualX = isStaging ? el.x : (el.x + (slideIdx || 0) * gapPx);
+    const rot = el.rotation || 0;
+
+    // Border / Outline styling
+    const borderW = Number(el.borderWidth) || 0;
+    const borderStyle = borderW > 0
+      ? `${borderW}px solid ${resolveColorWithAlpha(resolveSlotColor(el.borderColorSlot, el.borderColor || '#000000'), el.borderOpacity !== undefined ? el.borderOpacity : 1)}`
+      : 'none';
+
+    // Render all layers in el.layers cleanly with 0 offsets
+    const innerContentHtml = (el.layers || []).map(layer => {
+      if (layer.type === 'shape') {
+        const shapeBg = resolveColorWithAlpha(resolveSlotColor(layer.colorSlot, layer.color || layer.bg || '#219652'), layer.opacity !== undefined ? layer.opacity : 1);
+        const shapeBorderW = Number(layer.borderWidth) || 0;
+        const shapeBorder = shapeBorderW > 0
+          ? `${shapeBorderW}px solid ${resolveColorWithAlpha(resolveSlotColor(layer.borderColorSlot, layer.borderColor || '#000000'), layer.borderOpacity !== undefined ? layer.borderOpacity : 1)}`
+          : 'none';
+        let rad = `${layer.radius || 0}px`;
+        if (layer.shapeType === 'circle') rad = '50%';
+        else if (layer.shapeType === 'pill') rad = '9999px';
+
+        return `<div style="position:absolute;left:${layer.x || 0}px;top:${layer.y || 0}px;width:${layer.w || 120}px;height:${layer.h || 36}px;max-width:${el.w}px;max-height:${el.h}px;background:${shapeBg};border:${shapeBorder};border-radius:${rad};pointer-events:none;z-index:2;box-sizing:border-box;"></div>`;
+      } else if (layer.type === 'image' && layer.src) {
+        return `<img src="${layer.src}" style="position:absolute;left:${layer.x || 0}px;top:${layer.y || 0}px;width:${layer.w || 100}px;height:${layer.h || 100}px;max-width:${el.w}px;max-height:${el.h}px;object-fit:contain;opacity:${layer.opacity !== undefined ? layer.opacity : 1};pointer-events:none;z-index:2;" />`;
+      } else if (layer.type === 'text') {
+        const lFont = `'${layer.fontFamily || 'Rubik'}', sans-serif`;
+        const lColor = resolveColorWithAlpha(resolveSlotColor(layer.colorSlot, layer.color || '#162D43'), layer.opacity !== undefined ? layer.opacity : 1);
+        const lShadow = resolveTextEffectShadow(layer.textEffect || 'none', resolveSlotColor(layer.effectColorSlot, layer.effectColor || '#ffffff'), layer.effectOpacity !== undefined ? layer.effectOpacity : 0.8);
+        const textAlign = layer.align || 'left';
+        let justify = 'flex-start';
+        if (textAlign === 'center') justify = 'center';
+        else if (textAlign === 'right') justify = 'flex-end';
+
+        return `<div style="position:absolute;left:${layer.x || 0}px;top:${layer.y || 0}px;width:${layer.w || 200}px;height:${layer.h || 40}px;max-width:${el.w}px;max-height:${el.h}px;overflow:hidden;font-family:${lFont};font-size:${layer.fontSize || 32}px;font-weight:${layer.isBold ? '700' : '400'};color:${lColor};opacity:${layer.opacity !== undefined ? layer.opacity : 1};text-shadow:${lShadow};text-transform:${layer.uppercase ? 'uppercase' : 'none'};text-align:${textAlign};line-height:1.15;pointer-events:none;z-index:4;display:flex;align-items:center;justify-content:${justify};box-sizing:border-box;"><div style="width:100%;white-space:pre-wrap;word-break:break-word;">${formatCreatorRichTextHtml(layer.text || '', (slideIdx !== null ? slideIdx + 1 : 1), layer.autoCount)}</div></div>`;
+      }
+      return '';
+    }).join('');
+
+    return `
+      <div class="scene-element creator-scene-element ${el.isMaster ? 'is-master-element' : ''} ${isSel ? 'selected' : ''}"
+        data-creator-el-id="${el.id}"
+        data-is-master="${Boolean(el.isMaster)}"
+        style="
+          position:absolute;
+          left:${visualX}px;
+          top:${el.y}px;
+          width:${el.w}px;
+          height:${el.h}px;
+          border:${borderStyle};
+          box-sizing:border-box;
+          transform: rotate(${rot}deg);
+          pointer-events:auto;
+          cursor:grab;
+          user-select:none;
+          z-index:${isSel ? 60 : (el.isMaster ? 35 : 20)};
+        "
+        title="${el.isMaster ? `Master Element: ${el.name} (Double-click to edit)` : `Slide Instance: ${el.name}`}"
+      >
+        ${el.isMaster && !isSel ? `
+          <span class="creator-master-badge-tag" style="opacity:0.75;">${escapeHtml(el.name)}</span>
+          <button class="creator-master-plus-btn btn-spawn-instance" data-master-id="${el.id}" title="Add instance to slide">+</button>
+        ` : ''}
+
+        ${el.hasBg ? `
+          <div style="position:absolute;inset:0;background:${resolveColorWithAlpha(resolveSlotColor(el.bgColorSlot, el.bgColor || '#ffffff'), el.bgOpacity !== undefined ? el.bgOpacity : 1)};border-radius:6px;pointer-events:none;z-index:1;"></div>
+        ` : ''}
+
+        ${innerContentHtml}
+      </div>
+    `;
+  }
+
+  // Preset Creator Dynamic Guideline Docking & Snapping Engine
+  function computeCreatorSnapping(activeEl, rawX, rawY) {
+    const snapDist = 12; // Snap threshold in px
+    let snappedX = rawX;
+    let snappedY = rawY;
+    const w = activeEl.w || 320;
+    const h = activeEl.h || 60;
+    const snapLines = [];
+    const gapPx = creatorState.showSeamGaps ? 28 : 0;
+    const totalW = 3 * SLIDE_W + 2 * gapPx;
+
+    // 1. Dock to Guidelines (Margins & Centers across slides)
+    // Canvas coordinate space: Staging zone = y:0..CREATOR_STAGING_H, Slides = y:CREATOR_SLIDES_TOP..CREATOR_CANVAS_H
+    (creatorState.guidelines || []).forEach(g => {
+      if (g.type === 'h') {
+        const guideY = CREATOR_SLIDES_TOP + g.coord;
+
+        // Top edge
+        if (Math.abs(rawY - guideY) <= snapDist) {
+          snappedY = guideY;
+          snapLines.push({ type: 'h', coord: guideY, start: 0, end: totalW, isCenter: g.isFixedCenter });
+        }
+        // Center
+        else if (Math.abs((rawY + h / 2) - guideY) <= snapDist) {
+          snappedY = guideY - h / 2;
+          snapLines.push({ type: 'h', coord: guideY, start: 0, end: totalW, isCenter: g.isFixedCenter });
+        }
+        // Bottom edge
+        else if (Math.abs((rawY + h) - guideY) <= snapDist) {
+          snappedY = guideY - h;
+          snapLines.push({ type: 'h', coord: guideY, start: 0, end: totalW, isCenter: g.isFixedCenter });
+        }
+      } else if (g.type === 'v') {
+        for (let s = 0; s < 3; s++) {
+          const guideX = s * (SLIDE_W + gapPx) + g.coord;
+
+          // Left edge
+          if (Math.abs(rawX - guideX) <= snapDist) {
+            snappedX = guideX;
+            snapLines.push({ type: 'v', coord: guideX, start: CREATOR_SLIDES_TOP, end: CREATOR_CANVAS_H, isCenter: g.isFixedCenter });
+            break;
+          }
+          // Center
+          else if (Math.abs((rawX + w / 2) - guideX) <= snapDist) {
+            snappedX = guideX - w / 2;
+            snapLines.push({ type: 'v', coord: guideX, start: CREATOR_SLIDES_TOP, end: CREATOR_CANVAS_H, isCenter: g.isFixedCenter });
+            break;
+          }
+          // Right edge
+          else if (Math.abs((rawX + w) - guideX) <= snapDist) {
+            snappedX = guideX - w;
+            snapLines.push({ type: 'v', coord: guideX, start: CREATOR_SLIDES_TOP, end: CREATOR_CANVAS_H, isCenter: g.isFixedCenter });
+            break;
+          }
+        }
+      }
+    });
+
+    // 2. Dock to Staging Area Vertical Center (if moving inside staging area y: 0..CREATOR_STAGING_H)
+    if (rawY < CREATOR_STAGING_H) {
+      const stagingCenterY = 160;
+      if (Math.abs((rawY + h / 2) - stagingCenterY) <= snapDist) {
+        snappedY = stagingCenterY - h / 2;
+        snapLines.push({ type: 'h', coord: stagingCenterY, start: 0, end: totalW, isCenter: true });
+      }
+    }
+
+    // 3. Dock to other elements (both master elements and slide instances)
+    const allEls = [...creatorState.masterElements, ...creatorState.elements];
+    const otherEls = allEls.filter(o => o.id !== activeEl.id);
+
+    for (const other of otherEls) {
+      const oLeft = other.x;
+      const oCenterX = other.x + (other.w || 320) / 2;
+      const oRight = other.x + (other.w || 320);
+
+      const oTop = other.y;
+      const oCenterY = other.y + (other.h || 60) / 2;
+      const oBottom = other.y + (other.h || 60);
+
+      if (Math.abs(oLeft - rawX) > SLIDE_W * 1.5 && Math.abs(oTop - rawY) > 800) continue;
+
+      // X: Left-to-Left
+      if (Math.abs(snappedX - oLeft) <= snapDist) {
+        snappedX = oLeft;
+        snapLines.push({ type: 'v', coord: oLeft, start: Math.min(snappedY, oTop), end: Math.max(snappedY + h, oBottom) });
+      }
+      // X: Center-to-Center
+      else if (Math.abs(snappedX + w / 2 - oCenterX) <= snapDist) {
+        snappedX = oCenterX - w / 2;
+        snapLines.push({ type: 'v', coord: oCenterX, start: Math.min(snappedY, oTop), end: Math.max(snappedY + h, oBottom), isCenter: true });
+      }
+      // X: Right-to-Right
+      else if (Math.abs(snappedX + w - oRight) <= snapDist) {
+        snappedX = oRight - w;
+        snapLines.push({ type: 'v', coord: oRight, start: Math.min(snappedY, oTop), end: Math.max(snappedY + h, oBottom) });
+      }
+
+      // Y: Top-to-Top
+      if (Math.abs(snappedY - oTop) <= snapDist) {
+        snappedY = oTop;
+        snapLines.push({ type: 'h', coord: oTop, start: Math.min(snappedX, oLeft), end: Math.max(snappedX + w, oRight) });
+      }
+      // Y: Center-to-Center
+      else if (Math.abs(snappedY + h / 2 - oCenterY) <= snapDist) {
+        snappedY = oCenterY - h / 2;
+        snapLines.push({ type: 'h', coord: oCenterY, start: Math.min(snappedX, oLeft), end: Math.max(snappedX + w, oRight), isCenter: true });
+      }
+      // Y: Bottom-to-Bottom
+      else if (Math.abs(snappedY + h - oBottom) <= snapDist) {
+        snappedY = oBottom - h;
+        snapLines.push({ type: 'h', coord: oBottom, start: Math.min(snappedX, oLeft), end: Math.max(snappedX + w, oRight) });
+      }
+    }
+
+    return {
+      snappedX: Math.round(snappedX),
+      snappedY: Math.round(snappedY),
+      snapLines
+    };
+  }
+
+  function computeCreatorResizeSnapping(targetEl, handle, rawX, rawY, rawW, rawH) {
+    const snapDist = 12;
+    let newX = rawX;
+    let newY = rawY;
+    let newW = rawW;
+    let newH = rawH;
+    const snapLines = [];
+    const gapPx = creatorState.showSeamGaps ? 28 : 0;
+    const totalW = 3 * SLIDE_W + 2 * gapPx;
+
+    (creatorState.guidelines || []).forEach(g => {
+      if (g.type === 'v') {
+        for (let s = 0; s < 3; s++) {
+          const guideX = s * (SLIDE_W + gapPx) + g.coord;
+          if (handle.includes('e')) {
+            if (Math.abs((newX + newW) - guideX) <= snapDist) {
+              newW = Math.max(40, guideX - newX);
+              snapLines.push({ type: 'v', coord: guideX, start: CREATOR_SLIDES_TOP, end: CREATOR_CANVAS_H, isCenter: g.isFixedCenter });
+            }
+          }
+          if (handle.includes('w')) {
+            if (Math.abs(newX - guideX) <= snapDist) {
+              const rightEdge = targetEl.x + (targetEl.w || 320);
+              newX = guideX;
+              newW = Math.max(40, rightEdge - guideX);
+              snapLines.push({ type: 'v', coord: guideX, start: CREATOR_SLIDES_TOP, end: CREATOR_CANVAS_H, isCenter: g.isFixedCenter });
+            }
+          }
+        }
+      } else if (g.type === 'h') {
+        const guideY = CREATOR_SLIDES_TOP + g.coord;
+        if (handle.includes('s')) {
+          if (Math.abs((newY + newH) - guideY) <= snapDist) {
+            newH = Math.max(20, guideY - newY);
+            snapLines.push({ type: 'h', coord: guideY, start: 0, end: totalW, isCenter: g.isFixedCenter });
+          }
+        }
+        if (handle.includes('n')) {
+          if (Math.abs(newY - guideY) <= snapDist) {
+            const bottomEdge = targetEl.y + (targetEl.h || 60);
+            newY = guideY;
+            newH = Math.max(20, bottomEdge - guideY);
+            snapLines.push({ type: 'h', coord: guideY, start: 0, end: totalW, isCenter: g.isFixedCenter });
+          }
+        }
+      }
+    });
+
+    return { newX, newY, newW, newH, snapLines };
+  }
+
+  function renderCreatorSnapGuidesOverlay(snapLines) {
+    if (!dom.creatorSnapGuidesLayer) return;
+    if (!snapLines || snapLines.length === 0) {
+      dom.creatorSnapGuidesLayer.innerHTML = '';
+      return;
+    }
+    let html = '';
+    snapLines.forEach(line => {
+      const cls = line.isCenter ? 'smart-guide-line-center-snap' : '';
+      if (line.type === 'v') {
+        html += `<div class="smart-guide-line-v ${cls}" style="left:${line.coord}px;top:${line.start}px;height:${line.end - line.start}px;"></div>`;
+      } else {
+        html += `<div class="smart-guide-line-h ${cls}" style="top:${line.coord}px;left:${line.start}px;width:${line.end - line.start}px;"></div>`;
+      }
+    });
+    dom.creatorSnapGuidesLayer.innerHTML = html;
+  }
+
+  function clearCreatorSnapGuidesOverlay() {
+    if (dom.creatorSnapGuidesLayer) {
+      dom.creatorSnapGuidesLayer.innerHTML = '';
+    }
+  }
+
+  function bindCreatorElementsInteractions() {
+    if (!dom.creatorInteractionLayer) return;
+
+    // Double-click rapid click tracker for rock-solid edit mode entry
+    let lastCreatorClickTime = 0;
+    let lastCreatorClickId = null;
+
+    // Helper: start drag/transform session
+    const startDragSession = (e, targetEl, handle) => {
+      if (handle) {
+        e.preventDefault();
+      }
+      e.stopPropagation();
+
+      let hasMoved = false;
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const origX = targetEl.x;
+      const origY = targetEl.y;
+      const origW = targetEl.w || 320;
+      const origH = targetEl.h || 60;
+      const origFontSize = targetEl.fontSize || 32;
+      const origTextX = targetEl.textX !== undefined ? targetEl.textX : 0;
+      const origTextY = targetEl.textY !== undefined ? targetEl.textY : 0;
+      const origTextW = targetEl.textW !== undefined ? targetEl.textW : origW;
+      const origTextH = targetEl.textH !== undefined ? targetEl.textH : origH;
+      const origExtraLayers = JSON.parse(JSON.stringify(targetEl.extraLayers || []));
+      const origLayers = Array.isArray(targetEl.layers) ? JSON.parse(JSON.stringify(targetEl.layers)) : null;
+      const origRight = origX + origW;
+      const origBottom = origY + origH;
+      const origRot = targetEl.rotation || 0;
+      const currentZoom = creatorState.zoom || 0.28;
+
+      // Element center for rotation
+      const rect = dom.creatorInteractionLayer.getBoundingClientRect();
+      const elCenterX = rect.left + (origX + origW / 2) * currentZoom;
+      const elCenterY = rect.top + (origY + origH / 2) * currentZoom;
+      const startAngle = Math.atan2(e.clientY - elCenterY, e.clientX - elCenterX) * (180 / Math.PI);
+
+      const onMouseMove = (moveEvt) => {
+        const dist = Math.hypot(moveEvt.clientX - startX, moveEvt.clientY - startY);
+        if (!hasMoved && dist > 3) {
+          hasMoved = true;
+          pushCreatorHistorySnapshot();
+        }
+        if (!hasMoved) return;
+
+        moveEvt.preventDefault();
+
+        const dx = (moveEvt.clientX - startX) / currentZoom;
+        const dy = (moveEvt.clientY - startY) / currentZoom;
+
+        if (handle === 'rot') {
+          const currentAngle = Math.atan2(moveEvt.clientY - elCenterY, moveEvt.clientX - elCenterX) * (180 / Math.PI);
+          targetEl.rotation = Math.round(origRot + (currentAngle - startAngle));
+          clearCreatorSnapGuidesOverlay();
+        } else if (handle) {
+          const isSide = handle === 'e' || handle === 'w' || handle === 's' || handle === 'n';
+          let newX = origX;
+          let newY = origY;
+          let newW = origW;
+          let newH = origH;
+
+          if (isSide) {
+            // Dragging an individual side handle ONLY moves that edge/point!
+            if (handle === 'e') {
+              newW = Math.max(40, Math.round(origW + dx));
+              newH = origH;
+              newX = origX;
+              newY = origY;
+            } else if (handle === 'w') {
+              newW = Math.max(40, Math.round(origW - dx));
+              newH = origH;
+              newX = origRight - newW;
+              newY = origY;
+            } else if (handle === 's') {
+              newW = origW;
+              newH = Math.max(20, Math.round(origH + dy));
+              newX = origX;
+              newY = origY;
+            } else if (handle === 'n') {
+              newW = origW;
+              newH = Math.max(20, Math.round(origH - dy));
+              newX = origX;
+              newY = origBottom - newH;
+            }
+          } else {
+            // Corner handles ('se', 'nw', 'ne', 'sw'): opposite corner is strictly pinned!
+            const rawW = handle.includes('w') ? Math.max(40, Math.round(origW - dx)) : Math.max(40, Math.round(origW + dx));
+            const rawH = handle.includes('n') ? Math.max(20, Math.round(origH - dy)) : Math.max(20, Math.round(origH + dy));
+            const scale = Math.max(0.1, Math.max(rawW / origW, rawH / origH));
+            newW = Math.max(40, Math.round(origW * scale));
+            newH = Math.max(20, Math.round(origH * scale));
+
+            if (handle === 'se') {
+              newX = origX;
+              newY = origY;
+            } else if (handle === 'nw') {
+              newX = origRight - newW;
+              newY = origBottom - newH;
+            } else if (handle === 'ne') {
+              newX = origX;
+              newY = origBottom - newH;
+            } else if (handle === 'sw') {
+              newX = origRight - newW;
+              newY = origY;
+            }
+          }
+
+          const resizeSnap = computeCreatorResizeSnapping(targetEl, handle, newX, newY, newW, newH);
+          targetEl.x = resizeSnap.newX;
+          targetEl.y = resizeSnap.newY;
+          targetEl.w = resizeSnap.newW;
+          targetEl.h = resizeSnap.newH;
+
+          // Scale font size, text box, and layers
+          const scaleX = targetEl.w / origW;
+          const scaleY = targetEl.h / origH;
+          const minScale = Math.min(scaleX, scaleY);
+
+          targetEl.fontSize = Math.max(10, Math.round(origFontSize * minScale));
+          targetEl.textX = Math.round(origTextX * scaleX);
+          targetEl.textY = Math.round(origTextY * scaleY);
+          targetEl.textW = Math.max(20, Math.round(origTextW * scaleX));
+          targetEl.textH = Math.max(10, Math.round(origTextH * scaleY));
+          if (Array.isArray(targetEl.layers) && Array.isArray(origLayers)) {
+            targetEl.layers.forEach((lay, idx) => {
+              const oLay = origLayers[idx];
+              if (oLay) {
+                lay.x = Math.round((oLay.x || 0) * scaleX);
+                lay.y = Math.round((oLay.y || 0) * scaleY);
+                lay.w = Math.max(6, Math.round((oLay.w || 20) * scaleX));
+                lay.h = Math.max(4, Math.round((oLay.h || 10) * scaleY));
+                if (oLay.fontSize !== undefined) {
+                  lay.fontSize = Math.max(8, Math.round(oLay.fontSize * minScale));
+                }
+              }
+            });
+            targetEl.extraLayers = targetEl.layers;
+          } else if (Array.isArray(targetEl.extraLayers) && Array.isArray(origExtraLayers)) {
+            targetEl.extraLayers.forEach((lay, idx) => {
+              const oLay = origExtraLayers[idx];
+              if (oLay) {
+                lay.x = Math.round((oLay.x || 0) * scaleX);
+                lay.y = Math.round((oLay.y || 0) * scaleY);
+                lay.w = Math.max(6, Math.round((oLay.w || 20) * scaleX));
+                lay.h = Math.max(4, Math.round((oLay.h || 10) * scaleY));
+                if (oLay.fontSize !== undefined) {
+                  lay.fontSize = Math.max(8, Math.round(oLay.fontSize * minScale));
+                }
+              }
+            });
+          }
+
+          renderCreatorSnapGuidesOverlay(resizeSnap.snapLines);
+        } else {
+          const rawX = Math.round(origX + dx);
+          const rawY = Math.round(origY + dy);
+          const snap = computeCreatorSnapping(targetEl, rawX, rawY);
+          targetEl.x = snap.snappedX;
+          targetEl.y = snap.snappedY;
+          renderCreatorSnapGuidesOverlay(snap.snapLines);
+        }
+
+        // Option A: If resizing a master element, update instances
+        if (targetEl.isMaster && handle && handle !== 'rot') {
+          syncMasterElementToInstances(targetEl);
+        }
+
+        // Requirement 2: If linked across slides, synchronize counterpart slides
+        if (targetEl.linkAcrossSlides) {
+          syncLinkedSlideElements(targetEl);
+        }
+
+        // Live visual update
+        const elDom = dom.creatorInteractionLayer.querySelector(`[data-creator-el-id="${targetEl.id}"]`);
+        const gapPx = creatorState.showSeamGaps ? 28 : 0;
+        const isStaging = targetEl.isMaster || targetEl.y < CREATOR_SLIDES_TOP;
+        const slideIdx = isStaging ? 0 : Math.max(0, Math.min(2, Math.floor(targetEl.x / SLIDE_W)));
+        const visualRenderX = isStaging ? targetEl.x : (targetEl.x + slideIdx * gapPx);
+
+        if (elDom) {
+          elDom.style.left = `${visualRenderX}px`;
+          elDom.style.top = `${targetEl.y}px`;
+          elDom.style.width = `${targetEl.w}px`;
+          elDom.style.height = `${targetEl.h}px`;
+          elDom.style.transform = `rotate(${targetEl.rotation || 0}deg)`;
+          const textEl = elDom.querySelector('.creator-element-text-content');
+          if (textEl) {
+            const textWrap = textEl.parentElement;
+            if (textWrap && textWrap !== elDom) {
+              textWrap.style.left = `${targetEl.textX !== undefined ? targetEl.textX : 0}px`;
+              textWrap.style.top = `${targetEl.textY !== undefined ? targetEl.textY : 0}px`;
+              textWrap.style.width = `${targetEl.textW !== undefined ? targetEl.textW : targetEl.w}px`;
+              textWrap.style.height = `${targetEl.textH !== undefined ? targetEl.textH : targetEl.h}px`;
+            }
+            textEl.style.fontSize = `${targetEl.fontSize || 32}px`;
+          }
+        }
+        const selBox = document.getElementById('creatorActiveSelectionBox');
+        if (selBox) {
+          selBox.style.left = `${visualRenderX}px`;
+          selBox.style.top = `${targetEl.y}px`;
+          selBox.style.width = `${targetEl.w}px`;
+          selBox.style.height = `${targetEl.h}px`;
+          selBox.style.transform = `rotate(${targetEl.rotation || 0}deg)`;
+        }
+      };
+
+      const onMouseUp = () => {
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+        clearCreatorSnapGuidesOverlay();
+        if (hasMoved) {
+          renderPresetCreatorAll();
+        }
+      };
+
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    };
+
+    // Click & Drag on Elements
+    dom.creatorInteractionLayer.querySelectorAll('.creator-scene-element').forEach(box => {
+      box.onmousedown = (e) => {
+        if (e.button !== 0) return;
+        if (e.target.closest('.creator-master-plus-btn')) return;
+
+        const id = box.getAttribute('data-creator-el-id');
+        const el = creatorState.masterElements.find(x => x.id === id) ||
+                   creatorState.elements.find(x => x.id === id);
+        if (!el) return;
+
+        // Double click detection fallback (enters modal or inspector text)
+        const now = Date.now();
+        if (lastCreatorClickId === id && (now - lastCreatorClickTime) < 420) {
+          lastCreatorClickTime = 0;
+          lastCreatorClickId = null;
+          if (el.isMaster) {
+            openMasterElementEditor(el.id);
+            return;
+          } else if (dom.creatorInspElText) {
+            dom.creatorInspElText.focus();
+            dom.creatorInspElText.select();
+            return;
+          }
+        }
+        lastCreatorClickTime = now;
+        lastCreatorClickId = id;
+
+        if (creatorState.selectedId !== id) {
+          creatorState.selectedId = id;
+          creatorState.selectedGuideId = null;
+          renderPresetCreatorAll();
+          const freshEl = creatorState.masterElements.find(x => x.id === id) ||
+                          creatorState.elements.find(x => x.id === id);
+          if (freshEl) startDragSession(e, freshEl, null);
+        } else {
+          startDragSession(e, el, null);
+        }
+      };
+
+      box.ondblclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = box.getAttribute('data-creator-el-id');
+        const isMaster = box.getAttribute('data-is-master') === 'true';
+        if (isMaster) {
+          openMasterElementEditor(id);
+        } else if (dom.creatorInspElText) {
+          dom.creatorInspElText.focus();
+          dom.creatorInspElText.select();
+        }
+      };
+    });
+
+    // Active Selection Box Drag & Rotate & Handles
+    const activeSelBox = document.getElementById('creatorActiveSelectionBox');
+    if (activeSelBox) {
+      activeSelBox.onmousedown = (e) => {
+        if (e.button !== 0) return;
+        if (e.target.closest('.creator-master-plus-btn')) return;
+
+        const selEl = creatorState.masterElements.find(x => x.id === creatorState.selectedId) ||
+                      creatorState.elements.find(x => x.id === creatorState.selectedId);
+        if (!selEl) return;
+
+        const handleEl = e.target.closest('[data-creator-handle]');
+        const handle = handleEl ? handleEl.getAttribute('data-creator-handle') : null;
+
+        if (!handle) {
+          const now = Date.now();
+          if (lastCreatorClickId === selEl.id && (now - lastCreatorClickTime) < 420) {
+            lastCreatorClickTime = 0;
+            lastCreatorClickId = null;
+            if (selEl.isMaster) {
+              openMasterElementEditor(selEl.id);
+              return;
+            } else if (dom.creatorInspElText) {
+              dom.creatorInspElText.focus();
+              dom.creatorInspElText.select();
+              return;
+            }
+          }
+          lastCreatorClickTime = now;
+          lastCreatorClickId = selEl.id;
+        }
+
+        startDragSession(e, selEl, handle);
+      };
+
+      activeSelBox.ondblclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const selEl = creatorState.masterElements.find(x => x.id === creatorState.selectedId) ||
+                      creatorState.elements.find(x => x.id === creatorState.selectedId);
+        if (selEl?.isMaster) {
+          openMasterElementEditor(selEl.id);
+        } else if (dom.creatorInspElText) {
+          dom.creatorInspElText.focus();
+          dom.creatorInspElText.select();
+        }
+      };
+    }
+
+    // Spawn instance '+' button
+    dom.creatorInteractionLayer.querySelectorAll('.btn-spawn-instance').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const masterId = btn.getAttribute('data-master-id');
+        const m = creatorState.masterElements.find(x => x.id === masterId);
+        if (!m) return;
+        pushCreatorHistorySnapshot();
+        const copy = JSON.parse(JSON.stringify(m));
+        copy.id = genId('c-el');
+        copy.isMaster = false;
+        copy.masterId = m.id;
+        if (m.role === 'handle') {
+          copy.x = 1080 + 120;
+          copy.y = CREATOR_SLIDES_TOP + 75;
+        } else if (m.role === 'headline') {
+          copy.x = 1080 + 120;
+          copy.y = CREATOR_SLIDES_TOP + 320;
+        } else if (m.role === 'subtitle') {
+          copy.x = 1080 + 120;
+          copy.y = CREATOR_SLIDES_TOP + 480;
+        } else if (m.role === 'counter') {
+          copy.x = 1080 + 450;
+          copy.y = CREATOR_SLIDES_TOP + 1200;
+        } else if (m.role === 'swipe') {
+          copy.x = 1080 + 720;
+          copy.y = CREATOR_SLIDES_TOP + 1200;
+        } else {
+          copy.x = 1080 + 120;
+          copy.y = CREATOR_SLIDES_TOP + 350;
+        }
+        copy.rotation = 0;
+        creatorState.elements.push(copy);
+        creatorState.selectedId = copy.id;
+        renderPresetCreatorAll();
+      };
+    });
+  }
+
+  function renderCreatorGuidelines() {
+    if (!dom.creatorGuidesList) return;
+    // Hide center guidelines (isFixedCenter or 675 / 540) from guidelines layers panel
+    const visibleGuides = creatorState.guidelines.filter(g => !g.isFixedCenter && !(g.type === 'h' && g.coord === 675) && !(g.type === 'v' && g.coord === 540));
+
+    dom.creatorGuidesList.innerHTML = visibleGuides.map(g => {
+      const isSel = creatorState.selectedGuideId === g.id;
+      return `
+        <div class="creator-guide-item ${isSel ? 'is-selected' : ''}" data-guide-id="${g.id}">
+          <div class="creator-guide-item-meta">
+            <span class="creator-guide-type-tag">${g.type.toUpperCase()}</span>
+            <span style="color:var(--text-primary);font-size:11px;">${escapeHtml(g.label || (g.type === 'h' ? 'Horizontal Guide' : 'Vertical Guide'))}</span>
+          </div>
+          <div class="creator-guide-actions">
+            <button class="btn-guide-action btn-mirror-guide" data-guide-id="${g.id}" title="Mirror guideline opposite side">⇆ Mirror</button>
+            <button class="btn-guide-action btn-delete-guide" data-guide-id="${g.id}" title="Delete Guideline">✕</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Bind guideline list actions
+    dom.creatorGuidesList.querySelectorAll('.creator-guide-item').forEach(item => {
+      item.onclick = (e) => {
+        if (e.target.closest('button')) return;
+        const id = item.getAttribute('data-guide-id');
+        creatorState.selectedGuideId = id;
+        renderCreatorGuidelines();
+      };
+    });
+
+    dom.creatorGuidesList.querySelectorAll('.btn-mirror-guide').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-guide-id');
+        const g = creatorState.guidelines.find(x => x.id === id);
+        if (!g) return;
+        pushCreatorHistorySnapshot();
+        // Mirror opposite side: for H (1350 - coord), for V (1080 - coord)
+        const mirroredCoord = g.type === 'h' ? (SLIDE_H - g.coord) : (SLIDE_W - g.coord);
+        const newGuide = {
+          id: 'g-' + Date.now(),
+          type: g.type,
+          coord: mirroredCoord,
+          label: `Mirrored ${g.type.toUpperCase()}=${mirroredCoord}`
+        };
+        creatorState.guidelines.push(newGuide);
+        creatorState.selectedGuideId = newGuide.id;
+        renderPresetCreatorAll();
+      };
+    });
+
+    dom.creatorGuidesList.querySelectorAll('.btn-delete-guide').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-guide-id');
+        pushCreatorHistorySnapshot();
+        creatorState.guidelines = creatorState.guidelines.filter(x => x.id !== id);
+        if (creatorState.selectedGuideId === id) creatorState.selectedGuideId = null;
+        renderPresetCreatorAll();
+      };
+    });
+
+    // Render interactive guideline overlays on slides (Draggable and selectable)
+    if (dom.creatorSmartGuidesLayer) {
+      if (!dom.creatorToggleGuides || !dom.creatorToggleGuides.checked) {
+        dom.creatorSmartGuidesLayer.innerHTML = '';
+        return;
+      }
+      let guidesHtml = '';
+      const gapPx = creatorState.showSeamGaps ? 28 : 0;
+      const totalW = 3 * SLIDE_W + 2 * gapPx;
+      creatorState.guidelines.forEach(g => {
+        const isCenter = g.isFixedCenter || (g.type === 'h' && g.coord === 675) || (g.type === 'v' && g.coord === 540);
+        const isSel = creatorState.selectedGuideId === g.id;
+
+        if (isCenter) {
+          if (g.type === 'h') {
+            guidesHtml += `
+              <div class="creator-fixed-guide-h creator-fixed-guide-center"
+                data-guide-id="${g.id}"
+                data-is-center="true"
+                style="top:${g.coord}px;width:${totalW}px;"
+                title="Horizontal Center (Y=${g.coord}px) - Fixed"
+              ></div>
+            `;
+          } else {
+            for (let s = 0; s < 3; s++) {
+              const x = s * (SLIDE_W + gapPx) + g.coord;
+              guidesHtml += `
+                <div class="creator-fixed-guide-v creator-fixed-guide-center"
+                  data-guide-id="${g.id}"
+                  data-is-center="true"
+                  style="left:${x}px;height:${SLIDE_H}px;"
+                  title="Vertical Center (X=${g.coord}px) - Fixed"
+                ></div>
+              `;
+            }
+          }
+        } else {
+          if (g.type === 'h') {
+            guidesHtml += `
+              <div class="creator-interactive-guide-h ${isSel ? 'is-selected' : ''}"
+                data-guide-id="${g.id}"
+                tabindex="0"
+                style="top:${g.coord}px;width:${totalW}px;"
+                title="Click & Drag horizontal guide at Y=${g.coord}px"
+              ></div>
+            `;
+          } else {
+            for (let s = 0; s < 3; s++) {
+              const x = s * (SLIDE_W + gapPx) + g.coord;
+              guidesHtml += `
+                <div class="creator-interactive-guide-v ${isSel ? 'is-selected' : ''}"
+                  data-guide-id="${g.id}"
+                  tabindex="0"
+                  style="left:${x}px;height:${SLIDE_H}px;"
+                  title="Click & Drag vertical guide at X=${g.coord}px"
+                ></div>
+              `;
+            }
+          }
+        }
+      });
+      dom.creatorSmartGuidesLayer.innerHTML = guidesHtml;
+      bindCreatorGuidelinesDragging();
+    }
+  }
+
+  // Interactive Dragging & Arrow Key Movement for Guidelines
+  function bindCreatorGuidelinesDragging() {
+    if (!dom.creatorSmartGuidesLayer) return;
+
+    dom.creatorSmartGuidesLayer.querySelectorAll('.creator-interactive-guide-h, .creator-interactive-guide-v').forEach(guideEl => {
+      const guideId = guideEl.getAttribute('data-guide-id');
+      const g = creatorState.guidelines.find(x => x.id === guideId);
+      if (!g) return;
+      if (g.isFixedCenter || (g.type === 'h' && g.coord === 675) || (g.type === 'v' && g.coord === 540)) return;
+
+      guideEl.onmousedown = (e) => {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        pushCreatorHistorySnapshot();
+        creatorState.selectedGuideId = g.id;
+        renderCreatorGuidelines();
+
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startCoord = g.coord;
+        const currentZoom = creatorState.zoom || 0.28;
+
+        const onMouseMove = (moveEvt) => {
+          if (g.type === 'h') {
+            const dy = (moveEvt.clientY - startY) / currentZoom;
+            g.coord = Math.max(0, Math.min(SLIDE_H, Math.round(startCoord + dy)));
+            g.label = `Custom Y=${g.coord}`;
+          } else {
+            const dx = (moveEvt.clientX - startX) / currentZoom;
+            g.coord = Math.max(0, Math.min(SLIDE_W, Math.round(startCoord + dx)));
+            g.label = `Custom X=${g.coord}`;
+          }
+          // Real-time update
+          renderCreatorGuidelines();
+        };
+
+        const onMouseUp = () => {
+          window.removeEventListener('mousemove', onMouseMove);
+          window.removeEventListener('mouseup', onMouseUp);
+          renderPresetCreatorAll();
+        };
+
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+      };
+
+      // Arrow keys movement
+      guideEl.onkeydown = (e) => {
+        let delta = 0;
+        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') delta = e.shiftKey ? -10 : -1;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') delta = e.shiftKey ? 10 : 1;
+
+        if (delta !== 0) {
+          e.preventDefault();
+          pushCreatorHistorySnapshot();
+          if (g.type === 'h') {
+            g.coord = Math.max(0, Math.min(SLIDE_H, g.coord + delta));
+            g.label = `Custom Y=${g.coord}`;
+          } else {
+            g.coord = Math.max(0, Math.min(SLIDE_W, g.coord + delta));
+            g.label = `Custom X=${g.coord}`;
+          }
+          renderPresetCreatorAll();
+        }
+      };
+    });
+  }
+
+  function renderCreatorInspector() {
+    const sel = creatorState.masterElements.find(x => x.id === creatorState.selectedId) ||
+                creatorState.elements.find(x => x.id === creatorState.selectedId);
+
+    if (!sel) {
+      if (dom.creatorInspectorEmptyState) dom.creatorInspectorEmptyState.classList.remove('hidden');
+      if (dom.creatorInspectorElementState) dom.creatorInspectorElementState.classList.add('hidden');
+      return;
+    }
+
+    if (dom.creatorInspectorEmptyState) dom.creatorInspectorEmptyState.classList.add('hidden');
+    if (dom.creatorInspectorElementState) dom.creatorInspectorElementState.classList.remove('hidden');
+
+    if (dom.creatorInspElTitle) dom.creatorInspElTitle.textContent = sel.name || 'ELEMENT INSPECTOR';
+    if (dom.creatorInspSlideBadge) dom.creatorInspSlideBadge.textContent = sel.isMaster ? 'Master Element' : `Slide ${Math.floor(sel.x / SLIDE_W) + 1}`;
+    if (dom.creatorInspElName) dom.creatorInspElName.value = sel.name || '';
+    if (dom.creatorInspElText) dom.creatorInspElText.value = sel.text || '';
+    if (dom.creatorInspElFont) dom.creatorInspElFont.value = sel.fontFamily || 'Rubik';
+    if (dom.creatorInspElFontSize) dom.creatorInspElFontSize.value = sel.fontSize || 40;
+
+    // Text Color Slot & Pickers
+    populateColorSlotDropdown(dom.creatorInspElColorSlot, sel.colorSlot);
+    const activeColor = resolveSlotColor(sel.colorSlot, sel.color, '#162D43');
+    if (dom.creatorInspElColor) dom.creatorInspElColor.value = normalizeHex(activeColor);
+    if (dom.creatorInspElColorHex) dom.creatorInspElColorHex.value = activeColor;
+    const textOp = sel.opacity !== undefined ? sel.opacity : 1;
+    if (dom.creatorInspElOpacity) dom.creatorInspElOpacity.value = Math.round(textOp * 100);
+    if (dom.creatorInspElOpacityVal) dom.creatorInspElOpacityVal.textContent = `${Math.round(textOp * 100)}%`;
+
+    // Base Shape / Background Color & Opacity
+    if (dom.creatorInspElHasBg) dom.creatorInspElHasBg.checked = Boolean(sel.hasBg);
+    populateColorSlotDropdown(dom.creatorInspElBgColorSlot, sel.bgColorSlot);
+    const activeBgColor = resolveSlotColor(sel.bgColorSlot, sel.bgColor, '#ffffff');
+    if (dom.creatorInspElBgColor) dom.creatorInspElBgColor.value = normalizeHex(activeBgColor);
+    const bgOp = sel.bgOpacity !== undefined ? sel.bgOpacity : 1;
+    if (dom.creatorInspElBgOpacity) dom.creatorInspElBgOpacity.value = Math.round(bgOp * 100);
+    if (dom.creatorInspElBgOpacityVal) dom.creatorInspElBgOpacityVal.textContent = `${Math.round(bgOp * 100)}%`;
+
+    // Outline / Border
+    if (dom.creatorInspElBorderWidth) dom.creatorInspElBorderWidth.value = sel.borderWidth || 0;
+    populateColorSlotDropdown(dom.creatorInspElBorderColorSlot, sel.borderColorSlot);
+    const activeBorderColor = resolveSlotColor(sel.borderColorSlot, sel.borderColor, '#000000');
+    if (dom.creatorInspElBorderColor) dom.creatorInspElBorderColor.value = normalizeHex(activeBorderColor);
+    const borderOp = sel.borderOpacity !== undefined ? sel.borderOpacity : 1;
+    if (dom.creatorInspElBorderOpacity) dom.creatorInspElBorderOpacity.value = Math.round(borderOp * 100);
+    if (dom.creatorInspElBorderOpacityVal) dom.creatorInspElBorderOpacityVal.textContent = `${Math.round(borderOp * 100)}%`;
+
+    // Text Effect (Glow / Emboss)
+    const eff = sel.textEffect || 'none';
+    if (dom.creatorInspElEffect) dom.creatorInspElEffect.value = eff;
+    if (dom.creatorInspEffectRow) {
+      if (eff === 'none') {
+        dom.creatorInspEffectRow.classList.add('hidden');
+      } else {
+        dom.creatorInspEffectRow.classList.remove('hidden');
+        populateColorSlotDropdown(dom.creatorInspElEffectColorSlot, sel.effectColorSlot);
+        const activeEffColor = resolveSlotColor(sel.effectColorSlot, sel.effectColor, eff === 'emboss' ? '#EBB26E' : '#ffffff');
+        if (dom.creatorInspElEffectColor) dom.creatorInspElEffectColor.value = normalizeHex(activeEffColor);
+        const effOp = sel.effectOpacity !== undefined ? sel.effectOpacity : 0.8;
+        if (dom.creatorInspElEffectOpacity) dom.creatorInspElEffectOpacity.value = Math.round(effOp * 100);
+        if (dom.creatorInspElEffectOpacityVal) dom.creatorInspElEffectOpacityVal.textContent = `${Math.round(effOp * 100)}%`;
+      }
+    }
+
+    if (dom.creatorInspElAccent) dom.creatorInspElAccent.value = normalizeHex(sel.accentColor || '#219652');
+    if (dom.creatorInspElAccentHex) dom.creatorInspElAccentHex.value = sel.accentColor || '#219652';
+    if (dom.creatorInspElIsMaster) dom.creatorInspElIsMaster.checked = Boolean(sel.isMaster);
+    if (dom.creatorInspElAutoCount) dom.creatorInspElAutoCount.checked = Boolean(sel.autoCount);
+    if (dom.creatorInspElAddToAllSlides) dom.creatorInspElAddToAllSlides.checked = Boolean(sel.addedToAllSlides);
+
+    // Link across slides visibility & state
+    if (dom.creatorInspLinkAcrossSlidesRow) {
+      if (!sel.isMaster && sel.addedToAllSlides) {
+        dom.creatorInspLinkAcrossSlidesRow.classList.remove('hidden');
+        if (dom.creatorInspElLinkAcrossSlides) {
+          dom.creatorInspElLinkAcrossSlides.checked = Boolean(sel.linkAcrossSlides);
+        }
+      } else {
+        dom.creatorInspLinkAcrossSlidesRow.classList.add('hidden');
+      }
+    }
+
+    // Anchor Point grid
+    if (dom.creatorInspAnchorGrid) {
+      const anchor = sel.anchor || 'nw';
+      dom.creatorInspAnchorGrid.querySelectorAll('.anchor-cell').forEach(cell => {
+        cell.classList.toggle('active', cell.getAttribute('data-anchor') === anchor);
+      });
+    }
+  }
+
+  // ==================== MASTER ELEMENT MINI-SLIDE MODAL EDITOR ====================
+  let activeMasterEditId = null;
+  let activeAccordionLayerIdx = null;
+  const modalSelectedLayerIds = new Set();
+  let modalZoom = 1.0;
+  const modalPan = { x: 0, y: 0 };
+  const modalHistory = [];
+  let modalHistoryIndex = -1;
+  const MAX_MODAL_HISTORY = 30;
+
+  function pushModalHistorySnapshot() {
+    const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+    if (!el) return;
+    if (modalHistoryIndex < modalHistory.length - 1) {
+      modalHistory.splice(modalHistoryIndex + 1);
+    }
+    const snap = JSON.stringify({
+      layers: el.layers,
+      w: el.w,
+      h: el.h,
+      anchor: el.anchor,
+      hasBg: el.hasBg,
+      bgColorSlot: el.bgColorSlot,
+      bgColor: el.bgColor,
+      bgOpacity: el.bgOpacity,
+      borderWidth: el.borderWidth,
+      borderColorSlot: el.borderColorSlot,
+      borderColor: el.borderColor,
+      borderOpacity: el.borderOpacity,
+      name: el.name
+    });
+    modalHistory.push(snap);
+    if (modalHistory.length > MAX_MODAL_HISTORY) {
+      modalHistory.shift();
+    } else {
+      modalHistoryIndex++;
+    }
+  }
+
+  function undoModal() {
+    if (modalHistoryIndex > 0) {
+      modalHistoryIndex--;
+      applyModalSnapshot(modalHistory[modalHistoryIndex]);
+    }
+  }
+
+  function redoModal() {
+    if (modalHistoryIndex < modalHistory.length - 1) {
+      modalHistoryIndex++;
+      applyModalSnapshot(modalHistory[modalHistoryIndex]);
+    }
+  }
+
+  function applyModalSnapshot(raw) {
+    const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+    if (!el || !raw) return;
+    const snap = JSON.parse(raw);
+    el.layers = snap.layers || [];
+    el.extraLayers = el.layers;
+    el.w = snap.w || 320;
+    el.h = snap.h || 60;
+    el.anchor = snap.anchor || 'nw';
+    el.hasBg = snap.hasBg;
+    el.bgColorSlot = snap.bgColorSlot;
+    el.bgColor = snap.bgColor;
+    el.bgOpacity = snap.bgOpacity;
+    el.borderWidth = snap.borderWidth;
+    el.borderColorSlot = snap.borderColorSlot;
+    el.borderColor = snap.borderColor;
+    el.borderOpacity = snap.borderOpacity;
+    if (snap.name) el.name = snap.name;
+
+    if (dom.masterModalBoxW) dom.masterModalBoxW.value = el.w;
+    if (dom.masterModalBoxH) dom.masterModalBoxH.value = el.h;
+    if (dom.masterModalNameInput) dom.masterModalNameInput.value = el.name || '';
+    if (dom.masterModalHasBg) dom.masterModalHasBg.checked = Boolean(el.hasBg);
+    if (dom.masterModalBorderWidth) dom.masterModalBorderWidth.value = el.borderWidth || 0;
+
+    syncMasterElementToInstances(el);
+    renderMasterModalPreview();
+    renderMasterExtraLayersList();
+  }
+
+  function fitModalViewport(el) {
+    if (!dom.masterModalCanvas || !el) return;
+    const cw = dom.masterModalCanvas.clientWidth || 540;
+    const ch = dom.masterModalCanvas.clientHeight || 420;
+    const fw = el.w || 320;
+    const fh = el.h || 60;
+    const fitZ = Math.min(2.0, Math.max(0.35, Math.min((cw - 100) / fw, (ch - 100) / fh)));
+    modalZoom = Number(fitZ.toFixed(2));
+    modalPan.x = Math.round((cw - fw * modalZoom) / 2);
+    modalPan.y = Math.round((ch - fh * modalZoom) / 2);
+    if (dom.masterModalZoomReadout) {
+      dom.masterModalZoomReadout.textContent = `${Math.round(modalZoom * 100)}%`;
+    }
+  }
+
+  function updateModalStageTransform() {
+    const stage = document.getElementById('masterModalStage');
+    if (stage) {
+      stage.style.transform = `translate(${modalPan.x}px, ${modalPan.y}px) scale(${modalZoom})`;
+    }
+  }
+
+  function openMasterElementEditor(masterId) {
+    const el = creatorState.masterElements.find(x => x.id === masterId);
+    if (!el || !dom.masterElementEditorModal) return;
+
+    normalizeMasterElement(el);
+    activeMasterEditId = masterId;
+    activeAccordionLayerIdx = null;
+    modalSelectedLayerIds.clear();
+    modalHistory.length = 0;
+    modalHistoryIndex = -1;
+
+    if (dom.masterModalTitle) dom.masterModalTitle.textContent = el.name || 'Master Element';
+    if (dom.masterModalNameInput) dom.masterModalNameInput.value = el.name || '';
+    if (dom.masterModalBoxW) dom.masterModalBoxW.value = el.w || 320;
+    if (dom.masterModalBoxH) dom.masterModalBoxH.value = el.h || 60;
+
+    // Anchor Grid Highlight
+    if (dom.masterModalAnchorGrid) {
+      const anchor = el.anchor || 'nw';
+      dom.masterModalAnchorGrid.querySelectorAll('.anchor-cell').forEach(cell => {
+        cell.classList.toggle('active', cell.getAttribute('data-anchor') === anchor);
+      });
+    }
+
+    // Container Background Fill
+    if (dom.masterModalHasBg) dom.masterModalHasBg.checked = Boolean(el.hasBg);
+    populateColorSlotDropdown(dom.masterModalBgColorSlot, el.bgColorSlot);
+    const activeBgCol = resolveSlotColor(el.bgColorSlot, el.bgColor, '#ffffff');
+    if (dom.masterModalBgColor) dom.masterModalBgColor.value = normalizeHex(activeBgCol);
+    if (dom.masterModalBgOpacity) dom.masterModalBgOpacity.value = Math.round((el.bgOpacity !== undefined ? el.bgOpacity : 1) * 100);
+    if (dom.masterModalBgOpacityVal) dom.masterModalBgOpacityVal.textContent = `${Math.round((el.bgOpacity !== undefined ? el.bgOpacity : 1) * 100)}%`;
+
+    // Container Outline / Border
+    if (dom.masterModalBorderWidth) dom.masterModalBorderWidth.value = el.borderWidth || 0;
+    populateColorSlotDropdown(dom.masterModalBorderColorSlot, el.borderColorSlot);
+    const activeBorderCol = resolveSlotColor(el.borderColorSlot, el.borderColor, '#000000');
+    if (dom.masterModalBorderColor) dom.masterModalBorderColor.value = normalizeHex(activeBorderCol);
+    if (dom.masterModalBorderOpacity) dom.masterModalBorderOpacity.value = Math.round((el.borderOpacity !== undefined ? el.borderOpacity : 1) * 100);
+    if (dom.masterModalBorderOpacityVal) dom.masterModalBorderOpacityVal.textContent = `${Math.round((el.borderOpacity !== undefined ? el.borderOpacity : 1) * 100)}%`;
+
+    dom.masterElementEditorModal.classList.remove('hidden');
+
+    fitModalViewport(el);
+    pushModalHistorySnapshot(); // Snapshot 0: Initial state on open
+
+    renderMasterModalPreview();
+    renderMasterExtraLayersList();
+  }
+
+  function closeMasterElementEditor() {
+    if (!dom.masterElementEditorModal) return;
+    dom.masterElementEditorModal.classList.add('hidden');
+    const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+    if (el) syncMasterElementToInstances(el);
+    activeMasterEditId = null;
+    activeAccordionLayerIdx = null;
+    modalSelectedLayerIds.clear();
+    renderPresetCreatorAll();
+  }
+
+  function renderMasterModalPreview() {
+    const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+    if (!el || !dom.masterModalPreviewBox) return;
+
+    normalizeMasterElement(el);
+
+    const bgOp = el.bgOpacity !== undefined ? el.bgOpacity : 1;
+    const bgFill = el.hasBg ? resolveColorWithAlpha(resolveSlotColor(el.bgColorSlot, el.bgColor || '#ffffff'), bgOp) : 'transparent';
+    const borderW = Number(el.borderWidth) || 0;
+    const borderCol = resolveColorWithAlpha(resolveSlotColor(el.borderColorSlot, el.borderColor || '#000000'), el.borderOpacity !== undefined ? el.borderOpacity : 1);
+    const modalBorder = borderW > 0 ? `${borderW}px solid ${borderCol}` : '1.5px dashed var(--accent-gold, #c19358)';
+
+    let layersHtml = '';
+    (el.layers || []).forEach(layer => {
+      const isSel = modalSelectedLayerIds.has(layer.id);
+      const isSingleSel = isSel && modalSelectedLayerIds.size === 1;
+
+      if (layer.type === 'shape') {
+        const shapeBg = resolveColorWithAlpha(resolveSlotColor(layer.colorSlot, layer.color || layer.bg || '#219652'), layer.opacity !== undefined ? layer.opacity : 1);
+        const sBorderW = Number(layer.borderWidth) || 0;
+        const sBorderCol = resolveColorWithAlpha(resolveSlotColor(layer.borderColorSlot, layer.borderColor || '#000000'), layer.borderOpacity !== undefined ? layer.borderOpacity : 1);
+        const shapeBorder = sBorderW > 0 ? `${sBorderW}px solid ${sBorderCol}` : 'none';
+        let rad = `${layer.radius || 0}px`;
+        if (layer.shapeType === 'circle') rad = '50%';
+        else if (layer.shapeType === 'pill') rad = '9999px';
+
+        layersHtml += `
+          <div class="master-modal-element-layer ${isSel ? 'is-selected' : ''}" data-layer-id="${layer.id}" style="
+            position:absolute;
+            left:${layer.x || 0}px;
+            top:${layer.y || 0}px;
+            width:${layer.w || 120}px;
+            height:${layer.h || 36}px;
+            background:${shapeBg};
+            border:${shapeBorder};
+            border-radius:${rad};
+            cursor:move;
+            box-sizing:border-box;
+            z-index:5;
+          ">
+            ${isSingleSel ? `<div class="modal-shape-handle" data-layer-handle="${layer.id}"></div>` : ''}
+          </div>
+        `;
+      } else if (layer.type === 'image' && layer.src) {
+        layersHtml += `
+          <div class="master-modal-element-layer ${isSel ? 'is-selected' : ''}" data-layer-id="${layer.id}" style="
+            position:absolute;
+            left:${layer.x || 0}px;
+            top:${layer.y || 0}px;
+            width:${layer.w || 100}px;
+            height:${layer.h || 100}px;
+            cursor:move;
+            z-index:5;
+          ">
+            <img src="${layer.src}" style="width:100%;height:100%;object-fit:contain;opacity:${layer.opacity !== undefined ? layer.opacity : 1};pointer-events:none;" />
+            ${isSingleSel ? `<div class="modal-shape-handle" data-layer-handle="${layer.id}"></div>` : ''}
+          </div>
+        `;
+      } else if (layer.type === 'text') {
+        const lFont = `'${layer.fontFamily || 'Rubik'}', sans-serif`;
+        const lColor = resolveColorWithAlpha(resolveSlotColor(layer.colorSlot, layer.color || '#162D43'), layer.opacity !== undefined ? layer.opacity : 1);
+        const lShadow = resolveTextEffectShadow(layer.textEffect || 'none', resolveSlotColor(layer.effectColorSlot, layer.effectColor || '#ffffff'), layer.effectOpacity !== undefined ? layer.effectOpacity : 0.8);
+        const textAlign = layer.align || 'left';
+        let justify = 'flex-start';
+        if (textAlign === 'center') justify = 'center';
+        else if (textAlign === 'right') justify = 'flex-end';
+
+        layersHtml += `<div class="master-modal-element-layer ${isSel ? 'is-selected' : ''}" data-layer-id="${layer.id}" style="position:absolute;left:${layer.x || 0}px;top:${layer.y || 0}px;width:${layer.w || 200}px;height:${layer.h || 40}px;max-width:${el.w}px;max-height:${el.h}px;overflow:hidden;font-family:${lFont};font-size:${layer.fontSize || 32}px;font-weight:${layer.isBold ? '700' : '400'};color:${lColor};opacity:${layer.opacity !== undefined ? layer.opacity : 1};text-shadow:${lShadow};text-transform:${layer.uppercase ? 'uppercase' : 'none'};text-align:${textAlign};line-height:1.15;cursor:move;box-sizing:border-box;z-index:6;display:flex;align-items:center;justify-content:${justify};"><div style="width:100%;pointer-events:none;white-space:pre-wrap;word-break:break-word;">${formatCreatorRichTextHtml(layer.text || 'Sample Text', 1, layer.autoCount)}</div>${isSingleSel ? `<div class="modal-shape-handle" data-layer-handle="${layer.id}"></div>` : ''}</div>`;
+      }
+    });
+
+    dom.masterModalPreviewBox.innerHTML = `
+      <div id="masterModalStage" style="
+        position:absolute;
+        left:0;
+        top:0;
+        width:0;
+        height:0;
+        transform:translate(${modalPan.x}px, ${modalPan.y}px) scale(${modalZoom});
+        transform-origin:0 0;
+        pointer-events:none;
+      ">
+        <div id="masterModalPreviewBoxWrapper" class="master-modal-base-box" style="
+          position:absolute;
+          left:0;
+          top:0;
+          width:${el.w}px;
+          height:${el.h}px;
+          box-shadow:0 8px 32px rgba(0,0,0,0.45);
+          border:${modalBorder};
+          border-radius:6px;
+          box-sizing:border-box;
+          padding:0;
+          overflow:visible !important;
+          user-select:none;
+          pointer-events:auto;
+        ">
+          ${el.hasBg ? `
+            <div class="master-preview-bg-fill" style="
+              position:absolute;
+              inset:0;
+              background:${bgFill};
+              border-radius:inherit;
+              pointer-events:none;
+              z-index:1;
+            "></div>
+          ` : ''}
+
+          <div id="modalSmartGuidesOverlay" style="position:absolute;inset:-2000px;pointer-events:none;z-index:100;overflow:visible;"></div>
+
+          ${layersHtml}
+
+          <!-- 8 Container Frame Boundary Handles -->
+          <div class="modal-bbox-handle handle-nw" data-modal-handle="nw" title="Drag to resize frame"></div>
+          <div class="modal-bbox-handle handle-n"  data-modal-handle="n"  title="Drag to resize frame"></div>
+          <div class="modal-bbox-handle handle-ne" data-modal-handle="ne" title="Drag to resize frame"></div>
+          <div class="modal-bbox-handle handle-e"  data-modal-handle="e"  title="Drag to resize frame"></div>
+          <div class="modal-bbox-handle handle-se" data-modal-handle="se" title="Drag to resize frame"></div>
+          <div class="modal-bbox-handle handle-s"  data-modal-handle="s"  title="Drag to resize frame"></div>
+          <div class="modal-bbox-handle handle-sw" data-modal-handle="sw" title="Drag to resize frame"></div>
+          <div class="modal-bbox-handle handle-w"  data-modal-handle="w"  title="Drag to resize frame"></div>
+        </div>
+      </div>
+    `;
+
+    bindMasterModalInteractions(el);
+  }
+
+  function bindMasterModalInteractions(el) {
+    if (!dom.masterModalPreviewBox || !dom.masterModalCanvas) return;
+
+    // 1. Mouse Wheel Zoom centered on cursor
+    dom.masterModalCanvas.onwheel = (e) => {
+      e.preventDefault();
+      const rect = dom.masterModalCanvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const factor = e.deltaY < 0 ? 1.12 : 0.89;
+      const newZoom = Math.max(0.25, Math.min(3.0, Number((modalZoom * factor).toFixed(3))));
+      if (Math.abs(newZoom - modalZoom) < 0.005) return;
+
+      modalPan.x = Math.round(mouseX - ((mouseX - modalPan.x) / modalZoom) * newZoom);
+      modalPan.y = Math.round(mouseY - ((mouseY - modalPan.y) / modalZoom) * newZoom);
+      modalZoom = newZoom;
+
+      if (dom.masterModalZoomReadout) {
+        dom.masterModalZoomReadout.textContent = `${Math.round(modalZoom * 100)}%`;
+      }
+      renderMasterModalPreview();
+    };
+
+    const wrapper = document.getElementById('masterModalPreviewBoxWrapper');
+
+    // 2a. Move whole container frame surface (click on wrapper background/border, not on handle or layer)
+    if (wrapper) {
+      wrapper.onmousedown = (e) => {
+        if (e.button !== 0) return;
+        if (e.target.closest('[data-modal-handle]') || e.target.closest('[data-layer-id]')) return;
+        if (isSpacePressed) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        let hasMovedBox = false;
+        const startClientX = e.clientX;
+        const startClientY = e.clientY;
+        const origLayersPos = (el.layers || []).map(l => ({ id: l.id, x: l.x || 0, y: l.y || 0 }));
+        let curBoxX = 0;
+        let curBoxY = 0;
+
+        const onBoxMove = (me) => {
+          hasMovedBox = true;
+          const dx = (me.clientX - startClientX) / modalZoom;
+          const dy = (me.clientY - startClientY) / modalZoom;
+          curBoxX = Math.round(dx);
+          curBoxY = Math.round(dy);
+
+          wrapper.style.left = `${curBoxX}px`;
+          wrapper.style.top = `${curBoxY}px`;
+
+          wrapper.querySelectorAll('.master-modal-element-layer').forEach(layerEl => {
+            const lId = layerEl.getAttribute('data-layer-id');
+            const origL = origLayersPos.find(l => l.id === lId);
+            if (origL) {
+              layerEl.style.left = `${origL.x - curBoxX}px`;
+              layerEl.style.top = `${origL.y - curBoxY}px`;
+            }
+          });
+        };
+
+        const onBoxUp = () => {
+          window.removeEventListener('mousemove', onBoxMove);
+          window.removeEventListener('mouseup', onBoxUp);
+          if (!hasMovedBox) return;
+
+          (el.layers || []).forEach(lay => {
+            const origL = origLayersPos.find(l => l.id === lay.id);
+            if (origL) {
+              lay.x = origL.x - curBoxX;
+              lay.y = origL.y - curBoxY;
+            }
+          });
+
+          el.x = (el.x || 0) + curBoxX;
+          el.y = (el.y || 0) + curBoxY;
+
+          const instances = creatorState.elements.filter(x => x.masterId === el.id);
+          instances.forEach(inst => {
+            inst.x = (inst.x || 0) + curBoxX;
+            inst.y = (inst.y || 0) + curBoxY;
+            inst.w = el.w;
+            inst.h = el.h;
+            inst.layers = JSON.parse(JSON.stringify(el.layers));
+          });
+
+          modalPan.x = Math.round(modalPan.x + curBoxX * modalZoom);
+          modalPan.y = Math.round(modalPan.y + curBoxY * modalZoom);
+
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+          renderPresetCreatorAll();
+        };
+
+        window.addEventListener('mousemove', onBoxMove);
+        window.addEventListener('mouseup', onBoxUp);
+      };
+    }
+
+    // 2b. Container Frame individual boundary points/handles resize
+    dom.masterModalPreviewBox.querySelectorAll('[data-modal-handle]').forEach(handleEl => {
+      handleEl.onmousedown = (e) => {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        let hasResized = false;
+        const handle = handleEl.getAttribute('data-modal-handle');
+        const startClientX = e.clientX;
+        const startClientY = e.clientY;
+        const origW = el.w || 320;
+        const origH = el.h || 60;
+        const origRight = origW;
+        const origBottom = origH;
+        const origLayersPos = (el.layers || []).map(l => ({ id: l.id, x: l.x || 0, y: l.y || 0 }));
+
+        let curBoxX = 0;
+        let curBoxY = 0;
+        let curW = origW;
+        let curH = origH;
+
+        // Bounding envelope of all layers to ensure frame cannot shrink smaller than contained content
+        let minLayerLeft = 0;
+        let minLayerTop = 0;
+        let maxLayerRight = 20;
+        let maxLayerBottom = 10;
+        (el.layers || []).forEach(l => {
+          const lx = l.x || 0;
+          const ly = l.y || 0;
+          const lw = l.w || 40;
+          const lh = l.h || 20;
+          minLayerLeft = Math.min(minLayerLeft, lx);
+          minLayerTop = Math.min(minLayerTop, ly);
+          maxLayerRight = Math.max(maxLayerRight, lx + lw);
+          maxLayerBottom = Math.max(maxLayerBottom, ly + lh);
+        });
+
+        const onHandleMove = (me) => {
+          hasResized = true;
+          const dx = (me.clientX - startClientX) / modalZoom;
+          const dy = (me.clientY - startClientY) / modalZoom;
+
+          let newLeft = 0;
+          let newTop = 0;
+          let newRight = origRight;
+          let newBottom = origBottom;
+
+          if (handle.includes('e')) {
+            newRight = Math.max(maxLayerRight, Math.round(origRight + dx));
+          } else if (handle.includes('w')) {
+            newLeft = Math.min(minLayerLeft, Math.round(dx));
+          }
+
+          if (handle.includes('s')) {
+            newBottom = Math.max(maxLayerBottom, Math.round(origBottom + dy));
+          } else if (handle.includes('n')) {
+            newTop = Math.min(minLayerTop, Math.round(dy));
+          }
+
+          curBoxX = newLeft;
+          curBoxY = newTop;
+          curW = Math.max(20, newRight - newLeft);
+          curH = Math.max(10, newBottom - newTop);
+
+          if (wrapper) {
+            wrapper.style.left = `${curBoxX}px`;
+            wrapper.style.top = `${curBoxY}px`;
+            wrapper.style.width = `${curW}px`;
+            wrapper.style.height = `${curH}px`;
+
+            wrapper.querySelectorAll('.master-modal-element-layer').forEach(layerEl => {
+              const lId = layerEl.getAttribute('data-layer-id');
+              const origL = origLayersPos.find(l => l.id === lId);
+              if (origL) {
+                layerEl.style.left = `${origL.x - curBoxX}px`;
+                layerEl.style.top = `${origL.y - curBoxY}px`;
+              }
+            });
+          }
+
+          if (dom.masterModalBoxW) dom.masterModalBoxW.value = curW;
+          if (dom.masterModalBoxH) dom.masterModalBoxH.value = curH;
+        };
+
+        const onHandleUp = () => {
+          window.removeEventListener('mousemove', onHandleMove);
+          window.removeEventListener('mouseup', onHandleUp);
+          if (!hasResized) return;
+
+          el.w = curW;
+          el.h = curH;
+
+          (el.layers || []).forEach(lay => {
+            const origL = origLayersPos.find(l => l.id === lay.id);
+            if (origL) {
+              lay.x = origL.x - curBoxX;
+              lay.y = origL.y - curBoxY;
+            }
+          });
+
+          el.x = (el.x || 0) + curBoxX;
+          el.y = (el.y || 0) + curBoxY;
+
+          const instances = creatorState.elements.filter(x => x.masterId === el.id);
+          instances.forEach(inst => {
+            inst.x = (inst.x || 0) + curBoxX;
+            inst.y = (inst.y || 0) + curBoxY;
+            inst.w = el.w;
+            inst.h = el.h;
+            inst.layers = JSON.parse(JSON.stringify(el.layers));
+          });
+
+          modalPan.x = Math.round(modalPan.x + curBoxX * modalZoom);
+          modalPan.y = Math.round(modalPan.y + curBoxY * modalZoom);
+
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+          renderPresetCreatorAll();
+        };
+
+        window.addEventListener('mousemove', onHandleMove);
+        window.addEventListener('mouseup', onHandleUp);
+      };
+    });
+
+    // 3. Layer Moving, Snapping, and Corner Resizing
+    dom.masterModalPreviewBox.querySelectorAll('[data-layer-id]').forEach(layerEl => {
+      layerEl.onmousedown = (e) => {
+        if (e.button !== 0) return;
+        if (isSpacePressed) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        const layerId = layerEl.getAttribute('data-layer-id');
+        const isHandle = Boolean(e.target.closest('[data-layer-handle]'));
+
+        if (e.shiftKey) {
+          if (modalSelectedLayerIds.has(layerId)) {
+            modalSelectedLayerIds.delete(layerId);
+          } else {
+            modalSelectedLayerIds.add(layerId);
+          }
+          renderMasterExtraLayersList();
+          renderMasterModalPreview();
+          return;
+        }
+
+        if (!modalSelectedLayerIds.has(layerId)) {
+          modalSelectedLayerIds.clear();
+          modalSelectedLayerIds.add(layerId);
+          const lIdx = el.layers.findIndex(l => l.id === layerId);
+          if (lIdx !== -1) activeAccordionLayerIdx = lIdx;
+          renderMasterExtraLayersList();
+          renderMasterModalPreview();
+        }
+
+        let hasMoved = false;
+        const startClientX = e.clientX;
+        const startClientY = e.clientY;
+
+        const origPositions = {};
+        modalSelectedLayerIds.forEach(id => {
+          const lay = el.layers.find(l => l.id === id);
+          if (lay) {
+            origPositions[id] = { x: lay.x || 0, y: lay.y || 0, w: lay.w || 40, h: lay.h || 20, fontSize: lay.fontSize };
+          }
+        });
+
+        const onLayerMove = (moveEvt) => {
+          hasMoved = true;
+          const rawDx = (moveEvt.clientX - startClientX) / modalZoom;
+          const rawDy = (moveEvt.clientY - startClientY) / modalZoom;
+
+          if (isHandle && modalSelectedLayerIds.size === 1) {
+            const lay = el.layers.find(l => l.id === layerId);
+            const orig = origPositions[layerId];
+            if (lay && orig) {
+              const maxW = Math.max(10, el.w - (lay.x || 0));
+              const maxH = Math.max(6, el.h - (lay.y || 0));
+              lay.w = Math.max(10, Math.min(maxW, Math.round(orig.w + rawDx)));
+              lay.h = Math.max(6, Math.min(maxH, Math.round(orig.h + rawDy)));
+              if (lay.type === 'text') {
+                const scale = Math.max(0.2, lay.w / orig.w);
+                lay.fontSize = Math.max(10, Math.round((orig.fontSize || 32) * scale));
+              }
+              renderMasterModalPreview();
+            }
+            return;
+          }
+
+          // Smart Snapping for layer(s) drag
+          let selMinX = Infinity, selMaxX = -Infinity, selMinY = Infinity, selMaxY = -Infinity;
+          modalSelectedLayerIds.forEach(id => {
+            const o = origPositions[id];
+            if (o) {
+              const curX = o.x + rawDx;
+              const curY = o.y + rawDy;
+              selMinX = Math.min(selMinX, curX);
+              selMaxX = Math.max(selMaxX, curX + o.w);
+              selMinY = Math.min(selMinY, curY);
+              selMaxY = Math.max(selMaxY, curY + o.h);
+            }
+          });
+          const selW = selMaxX - selMinX;
+          const selH = selMaxY - selMinY;
+          const selCenterX = selMinX + selW / 2;
+          const selCenterY = selMinY + selH / 2;
+
+          // Target coordinates to snap to
+          const candX = [0, el.w / 2, el.w];
+          const candY = [0, el.h / 2, el.h];
+          (el.layers || []).forEach(other => {
+            if (!modalSelectedLayerIds.has(other.id)) {
+              const ox = other.x || 0;
+              const oy = other.y || 0;
+              const ow = other.w || 40;
+              const oh = other.h || 20;
+              candX.push(ox, ox + ow / 2, ox + ow);
+              candY.push(oy, oy + oh / 2, oy + oh);
+            }
+          });
+
+          const snapThresh = 8;
+          let snapDx = 0;
+          let snapDy = 0;
+          let snappedLineX = null;
+          let snappedLineY = null;
+
+          let bestDistX = snapThresh + 1;
+          candX.forEach(cx => {
+            let d = Math.abs(selMinX - cx);
+            if (d < bestDistX) { bestDistX = d; snapDx = cx - selMinX; snappedLineX = cx; }
+            d = Math.abs(selCenterX - cx);
+            if (d < bestDistX) { bestDistX = d; snapDx = cx - selCenterX; snappedLineX = cx; }
+            d = Math.abs(selMaxX - cx);
+            if (d < bestDistX) { bestDistX = d; snapDx = cx - selMaxX; snappedLineX = cx; }
+          });
+
+          let bestDistY = snapThresh + 1;
+          candY.forEach(cy => {
+            let d = Math.abs(selMinY - cy);
+            if (d < bestDistY) { bestDistY = d; snapDy = cy - selMinY; snappedLineY = cy; }
+            d = Math.abs(selCenterY - cy);
+            if (d < bestDistY) { bestDistY = d; snapDy = cy - selCenterY; snappedLineY = cy; }
+            d = Math.abs(selMaxY - cy);
+            if (d < bestDistY) { bestDistY = d; snapDy = cy - selMaxY; snappedLineY = cy; }
+          });
+
+          const finalDx = Math.round(rawDx + snapDx);
+          const finalDy = Math.round(rawDy + snapDy);
+
+          // Calculate collective bounding box for selected layers to strictly clamp within frame
+          let groupMinX = Infinity, groupMaxX = -Infinity, groupMinY = Infinity, groupMaxY = -Infinity;
+          modalSelectedLayerIds.forEach(id => {
+            const o = origPositions[id];
+            if (o) {
+              groupMinX = Math.min(groupMinX, o.x + finalDx);
+              groupMaxX = Math.max(groupMaxX, o.x + finalDx + o.w);
+              groupMinY = Math.min(groupMinY, o.y + finalDy);
+              groupMaxY = Math.max(groupMaxY, o.y + finalDy + o.h);
+            }
+          });
+
+          let adjDx = finalDx;
+          let adjDy = finalDy;
+          if (groupMinX < 0) adjDx -= groupMinX;
+          if (groupMaxX > el.w) adjDx -= (groupMaxX - el.w);
+          if (groupMinY < 0) adjDy -= groupMinY;
+          if (groupMaxY > el.h) adjDy -= (groupMaxY - el.h);
+
+          modalSelectedLayerIds.forEach(id => {
+            const lay = el.layers.find(l => l.id === id);
+            const orig = origPositions[id];
+            if (lay && orig) {
+              const w = lay.w || orig.w || 40;
+              const h = lay.h || orig.h || 20;
+              const maxAllowedX = Math.max(0, el.w - w);
+              const maxAllowedY = Math.max(0, el.h - h);
+              lay.x = Math.max(0, Math.min(maxAllowedX, Math.round(orig.x + adjDx)));
+              lay.y = Math.max(0, Math.min(maxAllowedY, Math.round(orig.y + adjDy)));
+            }
+          });
+
+          // Live DOM positioning for smooth drag
+          dom.masterModalPreviewBox.querySelectorAll('.master-modal-element-layer').forEach(lDom => {
+            const id = lDom.getAttribute('data-layer-id');
+            const lay = el.layers.find(l => l.id === id);
+            if (lay) {
+              lDom.style.left = `${lay.x}px`;
+              lDom.style.top = `${lay.y}px`;
+            }
+          });
+
+          // Render snap guide lines
+          const overlay = document.getElementById('modalSmartGuidesOverlay');
+          if (overlay) {
+            let lines = '';
+            if (snappedLineX !== null) {
+              lines += `<div class="modal-smart-guide-line modal-guide-v" style="position:absolute;left:${snappedLineX}px;top:-400px;height:${el.h + 800}px;"></div>`;
+            }
+            if (snappedLineY !== null) {
+              lines += `<div class="modal-smart-guide-line modal-guide-h" style="position:absolute;top:${snappedLineY}px;left:-400px;width:${el.w + 800}px;"></div>`;
+            }
+            overlay.innerHTML = lines;
+          }
+        };
+
+        const onLayerUp = () => {
+          window.removeEventListener('mousemove', onLayerMove);
+          window.removeEventListener('mouseup', onLayerUp);
+          const overlay = document.getElementById('modalSmartGuidesOverlay');
+          if (overlay) overlay.innerHTML = '';
+          if (hasMoved) pushModalHistorySnapshot();
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        };
+
+        window.addEventListener('mousemove', onLayerMove);
+        window.addEventListener('mouseup', onLayerUp);
+      };
+    });
+
+    // 4. Blank Canvas: Pan (Space/Middle Click) OR Marquee Drag Selection
+    dom.masterModalCanvas.onmousedown = (e) => {
+      if (e.target.closest('[data-modal-handle]') || e.target.closest('[data-layer-id]')) return;
+
+      // Pan viewport: Space + Left Click OR Middle Click
+      if (e.button === 1 || (e.button === 0 && (isSpacePressed || e.altKey))) {
+        e.preventDefault();
+        e.stopPropagation();
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const origPanX = modalPan.x;
+        const origPanY = modalPan.y;
+        dom.masterModalCanvas.style.cursor = 'grabbing';
+
+        const onPanMove = (me) => {
+          modalPan.x = origPanX + (me.clientX - startX);
+          modalPan.y = origPanY + (me.clientY - startY);
+          updateModalStageTransform();
+        };
+        const onPanUp = () => {
+          window.removeEventListener('mousemove', onPanMove);
+          window.removeEventListener('mouseup', onPanUp);
+          dom.masterModalCanvas.style.cursor = isSpacePressed ? 'grab' : 'default';
+        };
+        window.addEventListener('mousemove', onPanMove);
+        window.addEventListener('mouseup', onPanUp);
+        return;
+      }
+
+      // Marquee selection box on empty canvas
+      if (e.button === 0) {
+        const rect = dom.masterModalCanvas.getBoundingClientRect();
+        const startCanvasX = e.clientX - rect.left;
+        const startCanvasY = e.clientY - rect.top;
+        let marqueeEl = null;
+
+        const onMarqueeMove = (me) => {
+          const curCanvasX = me.clientX - rect.left;
+          const curCanvasY = me.clientY - rect.top;
+          const minX = Math.min(startCanvasX, curCanvasX);
+          const maxX = Math.max(startCanvasX, curCanvasX);
+          const minY = Math.min(startCanvasY, curCanvasY);
+          const maxY = Math.max(startCanvasY, curCanvasY);
+
+          if (Math.hypot(curCanvasX - startCanvasX, curCanvasY - startCanvasY) > 5) {
+            if (!marqueeEl) {
+              marqueeEl = document.createElement('div');
+              marqueeEl.className = 'master-modal-marquee';
+              dom.masterModalCanvas.appendChild(marqueeEl);
+            }
+            marqueeEl.style.left = `${minX}px`;
+            marqueeEl.style.top = `${minY}px`;
+            marqueeEl.style.width = `${maxX - minX}px`;
+            marqueeEl.style.height = `${maxY - minY}px`;
+
+            const stageMinX = (minX - modalPan.x) / modalZoom;
+            const stageMaxX = (maxX - modalPan.x) / modalZoom;
+            const stageMinY = (minY - modalPan.y) / modalZoom;
+            const stageMaxY = (maxY - modalPan.y) / modalZoom;
+
+            modalSelectedLayerIds.clear();
+            (el.layers || []).forEach(lay => {
+              const lx1 = lay.x || 0;
+              const ly1 = lay.y || 0;
+              const lx2 = lx1 + (lay.w || 40);
+              const ly2 = ly1 + (lay.h || 20);
+              const intersects = (lx1 <= stageMaxX && lx2 >= stageMinX && ly1 <= stageMaxY && ly2 >= stageMinY);
+              if (intersects) {
+                modalSelectedLayerIds.add(lay.id);
+              }
+            });
+
+            dom.masterModalPreviewBox.querySelectorAll('.master-modal-element-layer').forEach(layerDom => {
+              const id = layerDom.getAttribute('data-layer-id');
+              layerDom.classList.toggle('is-selected', modalSelectedLayerIds.has(id));
+            });
+          }
+        };
+
+        const onMarqueeUp = () => {
+          window.removeEventListener('mousemove', onMarqueeMove);
+          window.removeEventListener('mouseup', onMarqueeUp);
+          if (marqueeEl) {
+            marqueeEl.remove();
+            renderMasterExtraLayersList();
+            renderMasterModalPreview();
+          } else {
+            modalSelectedLayerIds.clear();
+            activeAccordionLayerIdx = null;
+            renderMasterExtraLayersList();
+            renderMasterModalPreview();
+          }
+        };
+
+        window.addEventListener('mousemove', onMarqueeMove);
+        window.addEventListener('mouseup', onMarqueeUp);
+      }
+    };
+  }
+
+  function renderMasterExtraLayersList() {
+    const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+    if (!el || !dom.masterModalExtraLayersList) return;
+
+    if (!el.layers || el.layers.length === 0) {
+      dom.masterModalExtraLayersList.innerHTML = `<span style="font-size:11px;color:var(--text-secondary);font-style:italic;">No layers added yet. Use buttons above to add text or shapes.</span>`;
+      return;
+    }
+
+    dom.masterModalExtraLayersList.innerHTML = el.layers.map((lay, idx) => {
+      const isOpen = activeAccordionLayerIdx === idx;
+      const isSel = modalSelectedLayerIds.has(lay.id);
+      const isShape = lay.type === 'shape';
+      const isText = lay.type === 'text';
+      const isImage = lay.type === 'image';
+      const layerBg = resolveSlotColor(lay.colorSlot, lay.color || lay.bg || '#219652');
+      const layerOp = lay.opacity !== undefined ? lay.opacity : 1;
+      const borderW = lay.borderWidth || 0;
+      const borderCol = resolveSlotColor(lay.borderColorSlot, lay.borderColor || '#000000');
+      const textCol = resolveSlotColor(lay.colorSlot, lay.color || '#162D43');
+
+      const icon = isText ? '📝' : (isShape ? '🔷' : '🖼');
+      const defaultName = isText ? `Text #${idx + 1}` : (isShape ? `Shape #${idx + 1}` : `Image #${idx + 1}`);
+
+      return `
+        <div class="master-layer-accordion-item ${isOpen ? 'is-open' : ''} ${isSel ? 'is-selected' : ''}" data-layer-idx="${idx}" data-layer-id="${lay.id}">
+          <div class="master-layer-accordion-header" data-layer-idx="${idx}">
+            <span class="master-layer-accordion-title">
+              ${icon} ${escapeHtml(lay.name || defaultName)}
+            </span>
+            <div style="display:flex;align-items:center;gap:4px;">
+              ${idx > 0 ? `<button class="btn-guide-action btn-move-layer-up" data-layer-idx="${idx}" title="Move Layer Up">▲</button>` : ''}
+              ${idx < el.layers.length - 1 ? `<button class="btn-guide-action btn-move-layer-down" data-layer-idx="${idx}" title="Move Layer Down">▼</button>` : ''}
+              <button class="btn-guide-action btn-del-extra-layer" data-layer-idx="${idx}" title="Remove Layer">✕</button>
+            </div>
+          </div>
+          ${isOpen ? `
+            <div class="master-layer-accordion-body">
+              <div class="creator-prop-row">
+                <label>Layer Name</label>
+                <input type="text" class="creator-input layer-prop-name" data-layer-idx="${idx}" value="${escapeHtml(lay.name || '')}" placeholder="Layer name" />
+              </div>
+
+              ${isText ? `
+                <div class="creator-prop-row">
+                  <label>Text Content</label>
+                  <textarea rows="2" class="creator-input layer-prop-text" data-layer-idx="${idx}">${escapeHtml(lay.text || '')}</textarea>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Font Family</label>
+                  <select class="creator-select layer-prop-fontfamily" data-layer-idx="${idx}">
+                    <option value="Rubik" ${(lay.fontFamily || 'Rubik') === 'Rubik' ? 'selected' : ''}>Rubik</option>
+                    <option value="JetBrains Mono" ${lay.fontFamily === 'JetBrains Mono' ? 'selected' : ''}>JetBrains Mono</option>
+                    <option value="Caudex" ${lay.fontFamily === 'Caudex' ? 'selected' : ''}>Caudex</option>
+                    <option value="Playfair Display SC" ${lay.fontFamily === 'Playfair Display SC' ? 'selected' : ''}>Playfair Display SC</option>
+                    <option value="Montserrat" ${lay.fontFamily === 'Montserrat' ? 'selected' : ''}>Montserrat</option>
+                  </select>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Font Size (px)</label>
+                  <input type="number" class="creator-input layer-prop-fontsize" data-layer-idx="${idx}" min="10" max="250" value="${lay.fontSize || 32}" />
+                </div>
+
+                <div class="creator-prop-row" style="display:flex;gap:12px;">
+                  <label class="checkbox-label" style="font-size:11px;">
+                    <input type="checkbox" class="layer-prop-bold" data-layer-idx="${idx}" ${lay.isBold ? 'checked' : ''} />
+                    <span>Bold</span>
+                  </label>
+                  <label class="checkbox-label" style="font-size:11px;">
+                    <input type="checkbox" class="layer-prop-uppercase" data-layer-idx="${idx}" ${lay.uppercase ? 'checked' : ''} />
+                    <span>UPPERCASE</span>
+                  </label>
+                  <label class="checkbox-label" style="font-size:11px;">
+                    <input type="checkbox" class="layer-prop-autocount" data-layer-idx="${idx}" ${lay.autoCount ? 'checked' : ''} />
+                    <span>Auto Counter (-00-)</span>
+                  </label>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Text Color</label>
+                  <div class="creator-color-prop-row">
+                    <select class="creator-select layer-prop-colorslot" data-layer-idx="${idx}" style="flex:1;">
+                      <option value="">-- Custom Color --</option>
+                      ${(creatorState.colors || []).map(c => `
+                        <option value="${c.id}" ${lay.colorSlot === c.id ? 'selected' : ''}>${escapeHtml(c.name)} (${c.hex})</option>
+                      `).join('')}
+                    </select>
+                    <input type="color" class="color-picker-input layer-prop-color" data-layer-idx="${idx}" value="${normalizeHex(textCol)}" />
+                  </div>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Text Opacity</label>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <input type="range" class="creator-range-slider layer-prop-opacity" data-layer-idx="${idx}" min="0" max="100" value="${Math.round(layerOp * 100)}" />
+                    <span class="range-val" style="min-width:36px;font-size:11px;">${Math.round(layerOp * 100)}%</span>
+                  </div>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Text Effect</label>
+                  <select class="creator-select layer-prop-effect" data-layer-idx="${idx}">
+                    <option value="none" ${(lay.textEffect || 'none') === 'none' ? 'selected' : ''}>None</option>
+                    <option value="emboss" ${lay.textEffect === 'emboss' ? 'selected' : ''}>Embossing</option>
+                    <option value="glow" ${lay.textEffect === 'glow' ? 'selected' : ''}>Glow Aura</option>
+                  </select>
+                </div>
+
+                ${(lay.textEffect && lay.textEffect !== 'none') ? `
+                  <div class="creator-prop-row">
+                    <label>Effect Color</label>
+                    <div class="creator-color-prop-row">
+                      <select class="creator-select layer-prop-effectcolorslot" data-layer-idx="${idx}" style="flex:1;">
+                        <option value="">-- Custom Color --</option>
+                        ${(creatorState.colors || []).map(c => `
+                          <option value="${c.id}" ${lay.effectColorSlot === c.id ? 'selected' : ''}>${escapeHtml(c.name)} (${c.hex})</option>
+                        `).join('')}
+                      </select>
+                      <input type="color" class="color-picker-input layer-prop-effectcolor" data-layer-idx="${idx}" value="${normalizeHex(resolveSlotColor(lay.effectColorSlot, lay.effectColor || '#ffffff'))}" />
+                    </div>
+                  </div>
+                ` : ''}
+
+                <div class="creator-prop-row">
+                  <label>Text Align</label>
+                  <select class="creator-select layer-prop-align" data-layer-idx="${idx}">
+                    <option value="left" ${(lay.align || 'left') === 'left' ? 'selected' : ''}>Left</option>
+                    <option value="center" ${lay.align === 'center' ? 'selected' : ''}>Center</option>
+                    <option value="right" ${lay.align === 'right' ? 'selected' : ''}>Right</option>
+                  </select>
+                </div>
+              ` : ''}
+
+              ${isShape ? `
+                <div class="creator-prop-row">
+                  <label>Shape Archetype</label>
+                  <select class="creator-select layer-prop-shapetype" data-layer-idx="${idx}">
+                    <option value="rectangle" ${(lay.shapeType || 'rectangle') === 'rectangle' ? 'selected' : ''}>Rectangle</option>
+                    <option value="circle" ${lay.shapeType === 'circle' ? 'selected' : ''}>Circle / Ellipse</option>
+                    <option value="pill" ${lay.shapeType === 'pill' ? 'selected' : ''}>Pill / Capsule</option>
+                    <option value="divider" ${lay.shapeType === 'divider' ? 'selected' : ''}>Line / Divider</option>
+                  </select>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Fill Color</label>
+                  <div class="creator-color-prop-row">
+                    <select class="creator-select layer-prop-colorslot" data-layer-idx="${idx}" style="flex:1;">
+                      <option value="">-- Custom Color --</option>
+                      ${(creatorState.colors || []).map(c => `
+                        <option value="${c.id}" ${lay.colorSlot === c.id ? 'selected' : ''}>${escapeHtml(c.name)} (${c.hex})</option>
+                      `).join('')}
+                    </select>
+                    <input type="color" class="color-picker-input layer-prop-bg" data-layer-idx="${idx}" value="${normalizeHex(layerBg)}" />
+                  </div>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Fill Opacity</label>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <input type="range" class="creator-range-slider layer-prop-opacity" data-layer-idx="${idx}" min="0" max="100" value="${Math.round(layerOp * 100)}" />
+                    <span class="range-val" style="min-width:36px;font-size:11px;">${Math.round(layerOp * 100)}%</span>
+                  </div>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Border Width</label>
+                  <input type="number" class="creator-input layer-prop-borderwidth" data-layer-idx="${idx}" min="0" max="20" value="${borderW}" />
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Border Color</label>
+                  <div class="creator-color-prop-row">
+                    <select class="creator-select layer-prop-bordercolorslot" data-layer-idx="${idx}" style="flex:1;">
+                      <option value="">-- Custom Color --</option>
+                      ${(creatorState.colors || []).map(c => `
+                        <option value="${c.id}" ${lay.borderColorSlot === c.id ? 'selected' : ''}>${escapeHtml(c.name)} (${c.hex})</option>
+                      `).join('')}
+                    </select>
+                    <input type="color" class="color-picker-input layer-prop-bordercolor" data-layer-idx="${idx}" value="${normalizeHex(borderCol)}" />
+                  </div>
+                </div>
+
+                <div class="creator-prop-row">
+                  <label>Corner Radius</label>
+                  <input type="number" class="creator-input layer-prop-radius" data-layer-idx="${idx}" min="0" max="50" value="${lay.radius || 0}" />
+                </div>
+              ` : ''}
+
+              ${isImage ? `
+                <div class="creator-prop-row">
+                  <label>Opacity</label>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <input type="range" class="creator-range-slider layer-prop-opacity" data-layer-idx="${idx}" min="0" max="100" value="${Math.round(layerOp * 100)}" />
+                    <span class="range-val" style="min-width:36px;font-size:11px;">${Math.round(layerOp * 100)}%</span>
+                  </div>
+                </div>
+              ` : ''}
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">
+                <div>
+                  <label style="font-size:10px;color:var(--text-secondary);">Width (px)</label>
+                  <input type="number" class="creator-input layer-prop-w" data-layer-idx="${idx}" min="4" value="${lay.w || 40}" />
+                </div>
+                <div>
+                  <label style="font-size:10px;color:var(--text-secondary);">Height (px)</label>
+                  <input type="number" class="creator-input layer-prop-h" data-layer-idx="${idx}" min="4" value="${lay.h || 40}" />
+                </div>
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+
+    // Bind Accordion Header Toggle, Reorder, and Delete
+    dom.masterModalExtraLayersList.querySelectorAll('.master-layer-accordion-header').forEach(header => {
+      header.onclick = (e) => {
+        if (e.target.closest('button')) return;
+        const idx = Number(header.getAttribute('data-layer-idx'));
+        activeAccordionLayerIdx = (activeAccordionLayerIdx === idx) ? null : idx;
+        if (activeAccordionLayerIdx !== null && el.layers[activeAccordionLayerIdx]) {
+          modalSelectedLayerIds.clear();
+          modalSelectedLayerIds.add(el.layers[activeAccordionLayerIdx].id);
+        }
+        renderMasterExtraLayersList();
+        renderMasterModalPreview();
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.btn-move-layer-up').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const idx = Number(btn.getAttribute('data-layer-idx'));
+        if (idx > 0) {
+          const temp = el.layers[idx];
+          el.layers[idx] = el.layers[idx - 1];
+          el.layers[idx - 1] = temp;
+          activeAccordionLayerIdx = idx - 1;
+          pushModalHistorySnapshot();
+          syncMasterElementToInstances(el);
+          renderMasterExtraLayersList();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.btn-move-layer-down').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const idx = Number(btn.getAttribute('data-layer-idx'));
+        if (idx < el.layers.length - 1) {
+          const temp = el.layers[idx];
+          el.layers[idx] = el.layers[idx + 1];
+          el.layers[idx + 1] = temp;
+          activeAccordionLayerIdx = idx + 1;
+          pushModalHistorySnapshot();
+          syncMasterElementToInstances(el);
+          renderMasterExtraLayersList();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.btn-del-extra-layer').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const idx = Number(btn.getAttribute('data-layer-idx'));
+        const removed = el.layers.splice(idx, 1)[0];
+        if (removed) modalSelectedLayerIds.delete(removed.id);
+        if (activeAccordionLayerIdx === idx) activeAccordionLayerIdx = null;
+        pushModalHistorySnapshot();
+        syncMasterElementToInstances(el);
+        renderMasterExtraLayersList();
+        renderMasterModalPreview();
+      };
+    });
+
+    // Layer Inputs
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-name').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].name = e.target.value;
+          const isText = el.layers[idx].type === 'text';
+          const isShape = el.layers[idx].type === 'shape';
+          const icon = isText ? '📝' : (isShape ? '🔷' : '🖼');
+          const titleEl = inp.closest('.master-layer-accordion-item')?.querySelector('.master-layer-accordion-title');
+          if (titleEl) titleEl.textContent = `${icon} ${e.target.value}`;
+        }
+      };
+      inp.onchange = () => {
+        syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-text').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].text = e.target.value;
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => pushModalHistorySnapshot();
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-fontfamily').forEach(sel => {
+      sel.onchange = (e) => {
+        const idx = Number(sel.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].fontFamily = e.target.value;
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-fontsize').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].fontSize = Math.max(8, Number(e.target.value) || 32);
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => pushModalHistorySnapshot();
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-bold').forEach(chk => {
+      chk.onchange = (e) => {
+        const idx = Number(chk.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].isBold = e.target.checked;
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-uppercase').forEach(chk => {
+      chk.onchange = (e) => {
+        const idx = Number(chk.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].uppercase = e.target.checked;
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-autocount').forEach(chk => {
+      chk.onchange = (e) => {
+        const idx = Number(chk.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].autoCount = e.target.checked;
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-shapetype').forEach(sel => {
+      sel.onchange = (e) => {
+        const idx = Number(sel.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].shapeType = e.target.value;
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-colorslot').forEach(sel => {
+      sel.onchange = (e) => {
+        const idx = Number(sel.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].colorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.layers[idx].color = chosen.hex;
+            el.layers[idx].bg = chosen.hex;
+            const pick = sel.parentElement.querySelector('.layer-prop-color') || sel.parentElement.querySelector('.layer-prop-bg');
+            if (pick) pick.value = normalizeHex(chosen.hex);
+          }
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    // Non-destructive live preview color pickers
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-color').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].color = e.target.value;
+          el.layers[idx].colorSlot = '';
+          const slotSel = inp.parentElement.querySelector('.layer-prop-colorslot');
+          if (slotSel) slotSel.value = '';
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => {
+        syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-bg').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].bg = e.target.value;
+          el.layers[idx].color = e.target.value;
+          el.layers[idx].colorSlot = '';
+          const slotSel = inp.parentElement.querySelector('.layer-prop-colorslot');
+          if (slotSel) slotSel.value = '';
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => {
+        syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-opacity').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].opacity = Number(e.target.value) / 100;
+          const readout = inp.parentElement.querySelector('.range-val');
+          if (readout) readout.textContent = `${e.target.value}%`;
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => {
+        syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-effect').forEach(sel => {
+      sel.onchange = (e) => {
+        const idx = Number(sel.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].textEffect = e.target.value;
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterExtraLayersList();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-effectcolorslot').forEach(sel => {
+      sel.onchange = (e) => {
+        const idx = Number(sel.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].effectColorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.layers[idx].effectColor = chosen.hex;
+            const pick = sel.parentElement.querySelector('.layer-prop-effectcolor');
+            if (pick) pick.value = normalizeHex(chosen.hex);
+          }
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-effectcolor').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].effectColor = e.target.value;
+          el.layers[idx].effectColorSlot = '';
+          const slotSel = inp.parentElement.querySelector('.layer-prop-effectcolorslot');
+          if (slotSel) slotSel.value = '';
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => {
+        syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-align').forEach(sel => {
+      sel.onchange = (e) => {
+        const idx = Number(sel.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].align = e.target.value;
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-borderwidth').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].borderWidth = Number(e.target.value) || 0;
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => pushModalHistorySnapshot();
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-bordercolorslot').forEach(sel => {
+      sel.onchange = (e) => {
+        const idx = Number(sel.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].borderColorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.layers[idx].borderColor = chosen.hex;
+            const pick = sel.parentElement.querySelector('.layer-prop-bordercolor');
+            if (pick) pick.value = normalizeHex(chosen.hex);
+          }
+          syncMasterElementToInstances(el);
+          pushModalHistorySnapshot();
+          renderMasterModalPreview();
+        }
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-bordercolor').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].borderColor = e.target.value;
+          el.layers[idx].borderColorSlot = '';
+          const slotSel = inp.parentElement.querySelector('.layer-prop-bordercolorslot');
+          if (slotSel) slotSel.value = '';
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => {
+        syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-radius').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          el.layers[idx].radius = Number(e.target.value) || 0;
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => pushModalHistorySnapshot();
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-w').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          const maxW = Math.max(4, el.w - (el.layers[idx].x || 0));
+          el.layers[idx].w = Math.max(4, Math.min(maxW, Number(e.target.value) || 40));
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => pushModalHistorySnapshot();
+    });
+
+    dom.masterModalExtraLayersList.querySelectorAll('.layer-prop-h').forEach(inp => {
+      inp.oninput = (e) => {
+        const idx = Number(inp.getAttribute('data-layer-idx'));
+        if (el.layers?.[idx]) {
+          const maxH = Math.max(4, el.h - (el.layers[idx].y || 0));
+          el.layers[idx].h = Math.max(4, Math.min(maxH, Number(e.target.value) || 40));
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+      inp.onchange = () => pushModalHistorySnapshot();
+    });
+  }
+
+  function fitCreatorZoom() {
+    if (!dom.creatorScrollContainer) return;
+    const contW = dom.creatorScrollContainer.clientWidth - 120;
+    const stageW = 3 * SLIDE_W + 100;
+    const z = Math.max(0.18, Math.min(0.5, contW / stageW));
+    setCreatorZoom(z);
+  }
+
+  function setCreatorZoom(z, focalPoint) {
+    const oldZoom = creatorState.zoom;
+    const clamped = Math.max(0.12, Math.min(1.5, Number(z.toFixed(3))));
+    if (Math.abs(clamped - oldZoom) < 0.001) return;
+
+    let offsetX = 0, offsetY = 0;
+    if (focalPoint && dom.creatorStageWrapper) {
+      const stageRect = dom.creatorStageWrapper.getBoundingClientRect();
+      offsetX = focalPoint.clientX - stageRect.left;
+      offsetY = focalPoint.clientY - stageRect.top;
+    }
+
+    creatorState.zoom = clamped;
+
+    if (dom.creatorStageWrapper) {
+      dom.creatorStageWrapper.style.transform = `scale(${creatorState.zoom})`;
+      dom.creatorStageWrapper.style.transformOrigin = '0 0';
+    }
+    if (dom.creatorZoomReadout) {
+      dom.creatorZoomReadout.textContent = `${Math.round(creatorState.zoom * 100)}%`;
+    }
+
+    if (focalPoint && dom.creatorScrollContainer) {
+      const scaleRatio = clamped / oldZoom;
+      const newOffsetX = offsetX * scaleRatio;
+      const newOffsetY = offsetY * scaleRatio;
+      dom.creatorScrollContainer.scrollLeft += Math.round(newOffsetX - offsetX);
+      dom.creatorScrollContainer.scrollTop += Math.round(newOffsetY - offsetY);
+    }
+  }
+
+  function initCreatorListeners() {
+    // Canvas Panning for Preset Creator (Space + Left Click OR Alt + Middle Click OR Middle Click)
+    const handleCreatorPanStart = (e) => {
+      if ((isSpacePressed && e.button === 0) || (e.altKey && e.button === 1) || e.button === 1) {
+        e.preventDefault();
+        panSession = {
+          container: dom.creatorScrollContainer,
+          startX: e.clientX,
+          startY: e.clientY,
+          scrollLeft: dom.creatorScrollContainer.scrollLeft,
+          scrollTop: dom.creatorScrollContainer.scrollTop
+        };
+        dom.creatorScrollContainer.classList.add('is-panning');
+      }
+    };
+
+    if (dom.creatorScrollContainer) {
+      dom.creatorScrollContainer.addEventListener('mousedown', handleCreatorPanStart);
+
+      // Mouse Wheel Zoom for Preset Creator
+      dom.creatorScrollContainer.addEventListener('wheel', (e) => {
+        // Prevent default scrolling and zoom smoothly centered on cursor
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.08 : 0.92;
+        setCreatorZoom(creatorState.zoom * factor, { clientX: e.clientX, clientY: e.clientY });
+      }, { passive: false });
+
+      // Blank space click deselects active element or guideline and resets to Preset Board Inspector
+      dom.creatorScrollContainer.addEventListener('click', (e) => {
+        if (
+          e.target.closest('.creator-scene-element') ||
+          e.target.closest('.scene-element') ||
+          e.target.closest('.selection-box') ||
+          e.target.closest('.creator-master-card') ||
+          e.target.closest('.creator-interactive-guide-h') ||
+          e.target.closest('.creator-interactive-guide-v') ||
+          e.target.closest('button') ||
+          e.target.closest('input') ||
+          e.target.closest('select') ||
+          e.target.closest('textarea')
+        ) {
+          return;
+        }
+        if (creatorState.selectedId !== null || creatorState.selectedGuideId !== null) {
+          creatorState.selectedId = null;
+          creatorState.selectedGuideId = null;
+          renderPresetCreatorAll();
+        }
+      });
+    }
+
+    if (dom.creatorStageWrapper) {
+      dom.creatorStageWrapper.addEventListener('mousedown', handleCreatorPanStart);
+
+      // Dedicated double-click handler on the stage wrapper (works for both unselected and selected elements)
+      dom.creatorStageWrapper.addEventListener('dblclick', (e) => {
+        if (e.target.closest('.creator-master-plus-btn')) return;
+
+        const selBox = e.target.closest('#creatorActiveSelectionBox');
+        const sceneEl = e.target.closest('.creator-scene-element');
+        let targetEl = null;
+
+        if (selBox && creatorState.selectedId) {
+          targetEl = creatorState.masterElements.find(x => x.id === creatorState.selectedId) ||
+                     creatorState.elements.find(x => x.id === creatorState.selectedId);
+        } else if (sceneEl) {
+          const id = sceneEl.getAttribute('data-creator-el-id');
+          targetEl = creatorState.masterElements.find(x => x.id === id) ||
+                     creatorState.elements.find(x => x.id === id);
+        }
+
+        if (targetEl) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (targetEl.isMaster) {
+            openMasterElementEditor(targetEl.id);
+          } else if (dom.creatorInspElText) {
+            dom.creatorInspElText.focus();
+            dom.creatorInspElText.select();
+          }
+        }
+      });
+    }
+
+    // Mode Switch Buttons
+    if (dom.btnSwitchStudio) dom.btnSwitchStudio.onclick = () => setAppWorkspaceMode('studio');
+    if (dom.btnSwitchPresetCreator) dom.btnSwitchPresetCreator.onclick = () => setAppWorkspaceMode('creator');
+    if (dom.btnNewPreset) dom.btnNewPreset.onclick = () => createNewPreset();
+    if (dom.btnModifyPreset) dom.btnModifyPreset.onclick = () => openPresetInCreator(state.themeId);
+
+    // Save, Export, Import Preset (Sidebar & Topbar)
+    if (dom.btnCreatorSavePreset) dom.btnCreatorSavePreset.onclick = saveCurrentCreatorPreset;
+    if (dom.btnCreatorExportJson) dom.btnCreatorExportJson.onclick = exportCreatorPresetJson;
+    if (dom.btnTopSaveToStudio) dom.btnTopSaveToStudio.onclick = saveCurrentCreatorPreset;
+    if (dom.btnTopDownloadPreset) dom.btnTopDownloadPreset.onclick = exportCreatorPresetJson;
+
+    if (dom.creatorImportJsonInput) {
+      dom.creatorImportJsonInput.onchange = (e) => {
+        const file = e.target.files?.[0];
+        if (file) importCreatorPresetJson(file);
+        e.target.value = '';
+      };
+    }
+    if (dom.topUploadPresetInput) {
+      dom.topUploadPresetInput.onchange = (e) => {
+        const file = e.target.files?.[0];
+        if (file) importCreatorPresetJson(file);
+        e.target.value = '';
+      };
+    }
+
+    // Zoom Buttons
+    if (dom.btnCreatorZoomIn) dom.btnCreatorZoomIn.onclick = () => {
+      const r = dom.creatorScrollContainer ? dom.creatorScrollContainer.getBoundingClientRect() : null;
+      const focal = r ? { clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 } : null;
+      setCreatorZoom(creatorState.zoom + 0.05, focal);
+    };
+    if (dom.btnCreatorZoomOut) dom.btnCreatorZoomOut.onclick = () => {
+      const r = dom.creatorScrollContainer ? dom.creatorScrollContainer.getBoundingClientRect() : null;
+      const focal = r ? { clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 } : null;
+      setCreatorZoom(creatorState.zoom - 0.05, focal);
+    };
+    if (dom.btnCreatorZoomFit) dom.btnCreatorZoomFit.onclick = fitCreatorZoom;
+    if (dom.creatorToggleGuides) dom.creatorToggleGuides.onchange = renderCreatorGuidelines;
+
+    // Show Cut Gaps Toggle
+    if (dom.creatorToggleGaps) {
+      dom.creatorToggleGaps.onchange = (e) => {
+        pushCreatorHistorySnapshot();
+        creatorState.showSeamGaps = e.target.checked;
+        renderPresetCreatorAll();
+      };
+    }
+
+    // Clean Up Canvas Button (Resets master elements into staging zone)
+    if (dom.btnCreatorCleanUpCanvas) {
+      dom.btnCreatorCleanUpCanvas.onclick = () => {
+        pushCreatorHistorySnapshot();
+        let curX = 100;
+        creatorState.masterElements.forEach(el => {
+          el.y = Math.round((CREATOR_STAGING_H - (el.h || 60)) / 2);
+          el.x = curX;
+          curX += (el.w || 320) + 40;
+        });
+        renderPresetCreatorAll();
+      };
+    }
+
+    // Add New Text Modifier / Accent Symbol
+    if (dom.btnCreatorAddModifier) {
+      dom.btnCreatorAddModifier.onclick = () => {
+        const sym = prompt('Trigger symbol for new modifier (e.g. ~, ^, #, _):', '~');
+        if (!sym) return;
+        const name = prompt('Name for this modifier:', 'Custom Accent');
+        if (!name) return;
+        pushCreatorHistorySnapshot();
+        creatorState.modifiers.push({
+          id: 'mod-' + Date.now(),
+          symbol: sym.trim(),
+          name: name.trim(),
+          hex: '#C19358'
+        });
+        renderPresetCreatorAll();
+      };
+    }
+
+    // Palette & Details Listeners
+    if (dom.creatorPresetNameInput) {
+      dom.creatorPresetNameInput.oninput = (e) => {
+        creatorState.name = e.target.value;
+      };
+    }
+    if (dom.creatorPresetArchetype) {
+      dom.creatorPresetArchetype.onchange = (e) => {
+        creatorState.archetype = e.target.value;
+        if (dom.creatorPresetDomainBadge) {
+          dom.creatorPresetDomainBadge.textContent = e.target.value === 'magic' ? 'Magic' : 'GameDev';
+        }
+      };
+    }
+    if (dom.creatorPatternSelect) {
+      dom.creatorPatternSelect.onchange = (e) => {
+        creatorState.patternType = e.target.value;
+      };
+    }
+
+    // Add New Custom Color to Palette
+    if (dom.btnCreatorAddColor) {
+      dom.btnCreatorAddColor.onclick = () => {
+        const name = prompt('Name for new Palette Color (e.g. Subtitle Color):', 'Subtitle Color');
+        if (!name) return;
+        const newColor = {
+          id: 'col-' + Date.now(),
+          name: name,
+          hex: '#C19358',
+          trigger: ''
+        };
+        creatorState.colors.push(newColor);
+        renderPresetCreatorAll();
+      };
+    }
+
+    // Custom Font Upload (.ttf, .otf, .woff, .woff2)
+    if (dom.creatorFontUploadInput) {
+      dom.creatorFontUploadInput.onchange = (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const fontName = file.name.replace(/\.[^/.]+$/, '').replace(/[^a-zA-Z0-9_\s-]/g, '').trim() || 'CustomFont';
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const fontFace = new FontFace(fontName, reader.result);
+            fontFace.load().then(loadedFace => {
+              document.fonts.add(loadedFace);
+              creatorState.customFonts.push({ name: fontName });
+
+              // Add to all font dropdowns
+              document.querySelectorAll('.font-family-select').forEach(sel => {
+                const opt = document.createElement('option');
+                opt.value = fontName;
+                opt.textContent = `${fontName} (Uploaded)`;
+                sel.appendChild(opt);
+              });
+
+              alert(`Font "${fontName}" uploaded and registered successfully!`);
+              renderPresetCreatorAll();
+            }).catch(err => {
+              alert('Could not parse font file. Ensure it is a valid TTF/OTF/WOFF font.');
+            });
+          } catch (err) {
+            alert('Failed to load font file.');
+          }
+        };
+        reader.readAsArrayBuffer(file);
+        e.target.value = '';
+      };
+    }
+
+    // Guidelines Add
+    if (dom.btnCreatorAddGuideH) {
+      dom.btnCreatorAddGuideH.onclick = () => {
+        const newGuide = { id: 'g-' + Date.now(), type: 'h', coord: 300, label: 'Custom Y=300' };
+        creatorState.guidelines.push(newGuide);
+        creatorState.selectedGuideId = newGuide.id;
+        renderPresetCreatorAll();
+      };
+    }
+    if (dom.btnCreatorAddGuideV) {
+      dom.btnCreatorAddGuideV.onclick = () => {
+        const newGuide = { id: 'g-' + Date.now(), type: 'v', coord: 540, label: 'Custom X=540' };
+        creatorState.guidelines.push(newGuide);
+        creatorState.selectedGuideId = newGuide.id;
+        renderPresetCreatorAll();
+      };
+    }
+    if (dom.btnCreatorResetGuides) {
+      dom.btnCreatorResetGuides.onclick = () => {
+        creatorState.guidelines = [
+          { id: 'g1', type: 'h', coord: 66, label: 'Top Margin (66px)' },
+          { id: 'g2', type: 'h', coord: 675, label: 'Vertical Center (675px)', isFixedCenter: true },
+          { id: 'g3', type: 'h', coord: 1286, label: 'Bottom Margin (1286px)' },
+          { id: 'g4', type: 'v', coord: 96, label: 'Left Margin (96px)' },
+          { id: 'g5', type: 'v', coord: 540, label: 'Horizontal Center (540px)', isFixedCenter: true },
+          { id: 'g6', type: 'v', coord: 984, label: 'Right Margin (984px)' }
+        ];
+        creatorState.selectedGuideId = null;
+        renderPresetCreatorAll();
+      };
+    }
+
+    // Add New Default Element
+    if (dom.btnCreatorAddNewDefaultEl) {
+      dom.btnCreatorAddNewDefaultEl.onclick = () => {
+        const name = prompt('Name for the new Master Element:', 'Badge Pill');
+        if (!name) return;
+        pushCreatorHistorySnapshot();
+        const count = creatorState.masterElements.length + 1;
+        const newEl = {
+          id: 'master-' + Date.now(),
+          isMaster: true,
+          type: 'compound',
+          layerGroup: 'foreground',
+          role: 'custom-master',
+          name: name,
+          icon: '★',
+          text: `[ ${name.toUpperCase()} ]`,
+          fontFamily: creatorState.bodyFont || 'Rubik',
+          fontSize: 32,
+          isBold: true,
+          colorSlot: 'col-primary',
+          color: creatorState.colors.find(c => c.id === 'col-primary')?.hex || '#162D43',
+          accentColor: creatorState.colors.find(c => c.id === 'col-secondary')?.hex || '#219652',
+          anchor: 'nw',
+          x: Math.min(2700, 100 + (count - 1) * 340),
+          y: Math.round((CREATOR_STAGING_H - 60) / 2),
+          w: 320,
+          h: 60,
+          rotation: 0,
+          layers: [
+            {
+              id: 'layer-text-' + Date.now(),
+              type: 'text',
+              name: 'Text',
+              x: 0,
+              y: 0,
+              w: 320,
+              h: 60,
+              text: `[ ${name.toUpperCase()} ]`,
+              fontFamily: creatorState.bodyFont || 'Rubik',
+              fontSize: 32,
+              isBold: true,
+              colorSlot: 'col-primary',
+              color: creatorState.colors.find(c => c.id === 'col-primary')?.hex || '#162D43',
+              accentColor: creatorState.colors.find(c => c.id === 'col-secondary')?.hex || '#219652',
+              align: 'center',
+              autoCount: false
+            }
+          ]
+        };
+        creatorState.masterElements.push(newEl);
+        creatorState.selectedId = newEl.id;
+        renderPresetCreatorAll();
+      };
+    }
+
+    // Inspector element edit bindings
+    const getActiveCreatorSel = () => {
+      return creatorState.masterElements.find(x => x.id === creatorState.selectedId) ||
+             creatorState.elements.find(x => x.id === creatorState.selectedId);
+    };
+
+    if (dom.creatorInspElName) {
+      dom.creatorInspElName.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) { el.name = e.target.value; renderPresetCreatorAll(); }
+      };
+    }
+    if (dom.creatorInspElText) {
+      dom.creatorInspElText.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.text = e.target.value;
+          if (Array.isArray(el.layers)) {
+            const prim = el.layers.find(l => l.type === 'text');
+            if (prim) prim.text = e.target.value;
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElFont) {
+      dom.creatorInspElFont.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.fontFamily = e.target.value;
+          if (Array.isArray(el.layers)) {
+            const prim = el.layers.find(l => l.type === 'text');
+            if (prim) prim.fontFamily = e.target.value;
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElFontSize) {
+      dom.creatorInspElFontSize.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.fontSize = Number(e.target.value);
+          if (Array.isArray(el.layers)) {
+            const prim = el.layers.find(l => l.type === 'text');
+            if (prim) prim.fontSize = Number(e.target.value);
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElColorSlot) {
+      dom.creatorInspElColorSlot.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.colorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.color = chosen.hex;
+            if (dom.creatorInspElColor) dom.creatorInspElColor.value = normalizeHex(chosen.hex);
+            if (dom.creatorInspElColorHex) dom.creatorInspElColorHex.value = chosen.hex;
+          }
+          if (Array.isArray(el.layers)) {
+            const prim = el.layers.find(l => l.type === 'text');
+            if (prim) {
+              prim.colorSlot = e.target.value;
+              if (chosen) prim.color = chosen.hex;
+            }
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElColor) {
+      dom.creatorInspElColor.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.color = e.target.value;
+          el.colorSlot = ''; // Switched to custom color
+          if (dom.creatorInspElColorSlot) dom.creatorInspElColorSlot.value = '';
+          if (dom.creatorInspElColorHex) dom.creatorInspElColorHex.value = e.target.value;
+          if (Array.isArray(el.layers)) {
+            const prim = el.layers.find(l => l.type === 'text');
+            if (prim) {
+              prim.color = e.target.value;
+              prim.colorSlot = '';
+            }
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElOpacity) {
+      dom.creatorInspElOpacity.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.opacity = Number(e.target.value) / 100;
+          if (dom.creatorInspElOpacityVal) dom.creatorInspElOpacityVal.textContent = `${e.target.value}%`;
+          if (Array.isArray(el.layers)) {
+            const prim = el.layers.find(l => l.type === 'text');
+            if (prim) prim.opacity = el.opacity;
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+
+    // Inspector Base Shape / Background Fill
+    if (dom.creatorInspElHasBg) {
+      dom.creatorInspElHasBg.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.hasBg = e.target.checked;
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElBgColorSlot) {
+      dom.creatorInspElBgColorSlot.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.bgColorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.bgColor = chosen.hex;
+            if (dom.creatorInspElBgColor) dom.creatorInspElBgColor.value = normalizeHex(chosen.hex);
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElBgColor) {
+      dom.creatorInspElBgColor.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.bgColor = e.target.value;
+          el.bgColorSlot = '';
+          if (dom.creatorInspElBgColorSlot) dom.creatorInspElBgColorSlot.value = '';
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElBgOpacity) {
+      dom.creatorInspElBgOpacity.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.bgOpacity = Number(e.target.value) / 100;
+          if (dom.creatorInspElBgOpacityVal) dom.creatorInspElBgOpacityVal.textContent = `${e.target.value}%`;
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+
+    // Inspector Border / Outline
+    if (dom.creatorInspElBorderWidth) {
+      dom.creatorInspElBorderWidth.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.borderWidth = Number(e.target.value) || 0;
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElBorderColorSlot) {
+      dom.creatorInspElBorderColorSlot.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.borderColorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.borderColor = chosen.hex;
+            if (dom.creatorInspElBorderColor) dom.creatorInspElBorderColor.value = normalizeHex(chosen.hex);
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElBorderColor) {
+      dom.creatorInspElBorderColor.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.borderColor = e.target.value;
+          el.borderColorSlot = '';
+          if (dom.creatorInspElBorderColorSlot) dom.creatorInspElBorderColorSlot.value = '';
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElBorderOpacity) {
+      dom.creatorInspElBorderOpacity.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.borderOpacity = Number(e.target.value) / 100;
+          if (dom.creatorInspElBorderOpacityVal) dom.creatorInspElBorderOpacityVal.textContent = `${e.target.value}%`;
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+
+    // Inspector Text Effect (Glow / Emboss)
+    if (dom.creatorInspElEffect) {
+      dom.creatorInspElEffect.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.textEffect = e.target.value;
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderCreatorInspector();
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElEffectColorSlot) {
+      dom.creatorInspElEffectColorSlot.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.effectColorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.effectColor = chosen.hex;
+            if (dom.creatorInspElEffectColor) dom.creatorInspElEffectColor.value = normalizeHex(chosen.hex);
+          }
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElEffectColor) {
+      dom.creatorInspElEffectColor.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.effectColor = e.target.value;
+          el.effectColorSlot = '';
+          if (dom.creatorInspElEffectColorSlot) dom.creatorInspElEffectColorSlot.value = '';
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElEffectOpacity) {
+      dom.creatorInspElEffectOpacity.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.effectOpacity = Number(e.target.value) / 100;
+          if (dom.creatorInspElEffectOpacityVal) dom.creatorInspElEffectOpacityVal.textContent = `${e.target.value}%`;
+          if (el.isMaster) syncMasterElementToInstances(el);
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElAccent) {
+      dom.creatorInspElAccent.oninput = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.accentColor = e.target.value;
+          if (dom.creatorInspElAccentHex) dom.creatorInspElAccentHex.value = e.target.value;
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElAutoCount) {
+      dom.creatorInspElAutoCount.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (el) {
+          el.autoCount = e.target.checked;
+          renderPresetCreatorAll();
+        }
+      };
+    }
+    if (dom.creatorInspElAddToAllSlides) {
+      dom.creatorInspElAddToAllSlides.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (!el || el.isMaster) return;
+        pushCreatorHistorySnapshot();
+        if (e.target.checked) {
+          el.addedToAllSlides = true;
+          if (!el.linkGroupId) el.linkGroupId = el.id;
+          const currentSlide = Math.floor(el.x / SLIDE_W);
+          const localX = el.x - currentSlide * SLIDE_W;
+          for (let s = 0; s < 3; s++) {
+            if (s === currentSlide) continue;
+            const targetX = s * SLIDE_W + localX;
+            const exists = creatorState.elements.some(x => Math.floor(x.x / SLIDE_W) === s && (x.linkGroupId === el.linkGroupId || x.role === el.role));
+            if (!exists) {
+              const copy = JSON.parse(JSON.stringify(el));
+              copy.id = genId('c-el');
+              copy.x = targetX;
+              copy.addedToAllSlides = true;
+              copy.linkAcrossSlides = el.linkAcrossSlides;
+              copy.linkGroupId = el.linkGroupId;
+              creatorState.elements.push(copy);
+            }
+          }
+        } else {
+          el.addedToAllSlides = false;
+          el.linkAcrossSlides = false;
+        }
+        renderPresetCreatorAll();
+      };
+    }
+
+    if (dom.creatorInspElLinkAcrossSlides) {
+      dom.creatorInspElLinkAcrossSlides.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (!el || el.isMaster) return;
+        pushCreatorHistorySnapshot();
+        el.linkAcrossSlides = e.target.checked;
+        if (el.linkAcrossSlides) {
+          if (!el.linkGroupId) el.linkGroupId = el.id;
+          syncLinkedSlideElements(el);
+        }
+        renderPresetCreatorAll();
+      };
+    }
+
+    if (dom.creatorInspAnchorGrid) {
+      dom.creatorInspAnchorGrid.onclick = (e) => {
+        const cell = e.target.closest('[data-anchor]');
+        if (!cell) return;
+        const el = getActiveCreatorSel();
+        if (!el) return;
+        pushCreatorHistorySnapshot();
+        el.anchor = cell.getAttribute('data-anchor');
+        if (el.isMaster) syncMasterElementToInstances(el);
+        renderPresetCreatorAll();
+      };
+    }
+    if (dom.creatorInspElIsMaster) {
+      dom.creatorInspElIsMaster.onchange = (e) => {
+        const el = getActiveCreatorSel();
+        if (!el) return;
+        if (e.target.checked && !el.isMaster) {
+          // Move from elements to masterElements
+          creatorState.elements = creatorState.elements.filter(x => x.id !== el.id);
+          el.isMaster = true;
+          creatorState.masterElements.push(el);
+        } else if (!e.target.checked && el.isMaster) {
+          creatorState.masterElements = creatorState.masterElements.filter(x => x.id !== el.id);
+          el.isMaster = false;
+          el.x = 1080 + 120;
+          el.y = 540;
+          creatorState.elements.push(el);
+        }
+        renderPresetCreatorAll();
+      };
+    }
+    if (dom.btnCreatorDuplicateEl) {
+      dom.btnCreatorDuplicateEl.onclick = () => {
+        const el = getActiveCreatorSel();
+        if (!el) return;
+        const copy = JSON.parse(JSON.stringify(el));
+        copy.id = genId('c-el');
+        if (el.isMaster) {
+          copy.name = `${el.name} (Copy)`;
+          creatorState.masterElements.push(copy);
+        } else {
+          copy.x += 40;
+          copy.y += 40;
+          creatorState.elements.push(copy);
+        }
+        creatorState.selectedId = copy.id;
+        renderPresetCreatorAll();
+      };
+    }
+    if (dom.btnCreatorDeleteEl) {
+      dom.btnCreatorDeleteEl.onclick = () => {
+        const el = getActiveCreatorSel();
+        if (!el) return;
+        if (el.isMaster) {
+          creatorState.masterElements = creatorState.masterElements.filter(x => x.id !== el.id);
+        } else {
+          creatorState.elements = creatorState.elements.filter(x => x.id !== el.id);
+        }
+        creatorState.selectedId = null;
+        renderPresetCreatorAll();
+      };
+    }
+
+    // Modal Editor Listeners
+    if (dom.btnMasterModalClose) dom.btnMasterModalClose.onclick = closeMasterElementEditor;
+    if (dom.btnMasterModalDone) dom.btnMasterModalDone.onclick = closeMasterElementEditor;
+    if (dom.btnMasterModalZoomReset) {
+      dom.btnMasterModalZoomReset.onclick = () => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          fitModalViewport(el);
+          renderMasterModalPreview();
+        }
+      };
+    }
+
+    if (dom.masterModalNameInput) {
+      dom.masterModalNameInput.oninput = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.name = e.target.value;
+          if (dom.masterModalTitle) dom.masterModalTitle.textContent = el.name;
+          syncMasterElementToInstances(el);
+        }
+      };
+      dom.masterModalNameInput.onchange = () => pushModalHistorySnapshot();
+    }
+
+    if (dom.masterModalBoxW) {
+      dom.masterModalBoxW.oninput = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.w = Math.max(20, Number(e.target.value) || 320);
+          (el.layers || []).forEach(lay => {
+            if (lay.w > el.w) lay.w = el.w;
+            if (((lay.x || 0) + (lay.w || 0)) > el.w) {
+              lay.x = Math.max(0, el.w - (lay.w || 0));
+            }
+          });
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+          renderMasterExtraLayersList();
+        }
+      };
+      dom.masterModalBoxW.onchange = () => pushModalHistorySnapshot();
+    }
+
+    if (dom.masterModalBoxH) {
+      dom.masterModalBoxH.oninput = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.h = Math.max(10, Number(e.target.value) || 60);
+          (el.layers || []).forEach(lay => {
+            if (lay.h > el.h) lay.h = el.h;
+            if (((lay.y || 0) + (lay.h || 0)) > el.h) {
+              lay.y = Math.max(0, el.h - (lay.h || 0));
+            }
+          });
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+          renderMasterExtraLayersList();
+        }
+      };
+      dom.masterModalBoxH.onchange = () => pushModalHistorySnapshot();
+    }
+
+    if (dom.masterModalAnchorGrid) {
+      dom.masterModalAnchorGrid.onclick = (e) => {
+        const cell = e.target.closest('[data-anchor]');
+        if (!cell) return;
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (!el) return;
+        el.anchor = cell.getAttribute('data-anchor');
+        dom.masterModalAnchorGrid.querySelectorAll('.anchor-cell').forEach(c => {
+          c.classList.toggle('active', c === cell);
+        });
+        pushModalHistorySnapshot();
+        syncMasterElementToInstances(el);
+        renderMasterModalPreview();
+      };
+    }
+
+    // Modal Background Fill
+    if (dom.masterModalHasBg) {
+      dom.masterModalHasBg.onchange = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.hasBg = e.target.checked;
+          pushModalHistorySnapshot();
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+    }
+    if (dom.masterModalBgColorSlot) {
+      dom.masterModalBgColorSlot.onchange = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.bgColorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.bgColor = chosen.hex;
+            if (dom.masterModalBgColor) dom.masterModalBgColor.value = normalizeHex(chosen.hex);
+          }
+          pushModalHistorySnapshot();
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+    }
+    if (dom.masterModalBgColor) {
+      dom.masterModalBgColor.oninput = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.bgColor = e.target.value;
+          el.bgColorSlot = '';
+          if (dom.masterModalBgColorSlot) dom.masterModalBgColorSlot.value = '';
+          renderMasterModalPreview();
+        }
+      };
+      dom.masterModalBgColor.onchange = () => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    }
+    if (dom.masterModalBgOpacity) {
+      dom.masterModalBgOpacity.oninput = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.bgOpacity = Number(e.target.value) / 100;
+          if (dom.masterModalBgOpacityVal) dom.masterModalBgOpacityVal.textContent = `${e.target.value}%`;
+          renderMasterModalPreview();
+        }
+      };
+      dom.masterModalBgOpacity.onchange = () => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    }
+
+    // Modal Border / Outline
+    if (dom.masterModalBorderWidth) {
+      dom.masterModalBorderWidth.oninput = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.borderWidth = Number(e.target.value) || 0;
+          renderMasterModalPreview();
+        }
+      };
+      dom.masterModalBorderWidth.onchange = () => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    }
+    if (dom.masterModalBorderColorSlot) {
+      dom.masterModalBorderColorSlot.onchange = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.borderColorSlot = e.target.value;
+          const chosen = creatorState.colors.find(c => c.id === e.target.value);
+          if (chosen) {
+            el.borderColor = chosen.hex;
+            if (dom.masterModalBorderColor) dom.masterModalBorderColor.value = normalizeHex(chosen.hex);
+          }
+          pushModalHistorySnapshot();
+          syncMasterElementToInstances(el);
+          renderMasterModalPreview();
+        }
+      };
+    }
+    if (dom.masterModalBorderColor) {
+      dom.masterModalBorderColor.oninput = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.borderColor = e.target.value;
+          el.borderColorSlot = '';
+          if (dom.masterModalBorderColorSlot) dom.masterModalBorderColorSlot.value = '';
+          renderMasterModalPreview();
+        }
+      };
+      dom.masterModalBorderColor.onchange = () => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    }
+    if (dom.masterModalBorderOpacity) {
+      dom.masterModalBorderOpacity.oninput = (e) => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          el.borderOpacity = Number(e.target.value) / 100;
+          if (dom.masterModalBorderOpacityVal) dom.masterModalBorderOpacityVal.textContent = `${e.target.value}%`;
+          renderMasterModalPreview();
+        }
+      };
+      dom.masterModalBorderOpacity.onchange = () => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) syncMasterElementToInstances(el);
+        pushModalHistorySnapshot();
+      };
+    }
+
+    // Modal Unified Layer Adding
+    if (dom.btnMasterAddText) {
+      dom.btnMasterAddText.onclick = () => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          if (!el.layers) el.layers = [];
+          const newW = Math.min(200, Math.max(20, el.w - 20));
+          const newH = Math.min(40, Math.max(10, el.h - 10));
+          const newX = Math.max(0, Math.min(el.w - newW, 10));
+          const newY = Math.max(0, Math.min(el.h - newH, 10));
+          const newLay = {
+            id: 'layer-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+            type: 'text',
+            name: `Text #${el.layers.length + 1}`,
+            text: 'New Text',
+            fontFamily: el.fontFamily || 'Rubik',
+            fontSize: Math.min(32, Math.max(12, Math.round(newH * 0.75))),
+            isBold: false,
+            uppercase: false,
+            colorSlot: el.colorSlot || 'col-primary',
+            color: el.color || '#162D43',
+            opacity: 1,
+            textEffect: 'none',
+            effectColorSlot: '',
+            effectColor: '#ffffff',
+            effectOpacity: 0.8,
+            align: 'left',
+            autoCount: false,
+            x: newX,
+            y: newY,
+            w: newW,
+            h: newH
+          };
+          el.layers.push(newLay);
+          el.extraLayers = el.layers;
+          modalSelectedLayerIds.clear();
+          modalSelectedLayerIds.add(newLay.id);
+          activeAccordionLayerIdx = el.layers.length - 1;
+          pushModalHistorySnapshot();
+          syncMasterElementToInstances(el);
+          renderMasterExtraLayersList();
+          renderMasterModalPreview();
+        }
+      };
+    }
+
+    if (dom.btnMasterAddShape) {
+      dom.btnMasterAddShape.onclick = () => {
+        const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+        if (el) {
+          if (!el.layers) el.layers = [];
+          const newW = Math.min(160, Math.max(20, el.w - 20));
+          const newH = Math.min(40, Math.max(10, el.h - 10));
+          const newX = Math.max(0, Math.min(el.w - newW, 10));
+          const newY = Math.max(0, Math.min(el.h - newH, 10));
+          const newLay = {
+            id: 'layer-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+            type: 'shape',
+            shapeType: 'rectangle',
+            name: `Shape #${el.layers.length + 1}`,
+            bg: '#219652',
+            colorSlot: 'col-secondary',
+            color: '#219652',
+            radius: 6,
+            w: newW,
+            h: newH,
+            x: newX,
+            y: newY,
+            opacity: 0.9,
+            borderWidth: 0,
+            borderColorSlot: '',
+            borderColor: '#000000',
+            borderOpacity: 1
+          };
+          el.layers.push(newLay);
+          el.extraLayers = el.layers;
+          modalSelectedLayerIds.clear();
+          modalSelectedLayerIds.add(newLay.id);
+          activeAccordionLayerIdx = el.layers.length - 1;
+          pushModalHistorySnapshot();
+          syncMasterElementToInstances(el);
+          renderMasterExtraLayersList();
+          renderMasterModalPreview();
+        }
+      };
+    }
+
+    if (dom.masterModalImageUpload) {
+      dom.masterModalImageUpload.onchange = (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+          if (el) {
+            if (!el.layers) el.layers = [];
+            const newW = Math.min(120, Math.max(20, el.w - 20));
+            const newH = Math.min(120, Math.max(10, el.h - 10));
+            const newX = Math.max(0, Math.min(el.w - newW, 10));
+            const newY = Math.max(0, Math.min(el.h - newH, 10));
+            const newLay = {
+              id: 'layer-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+              type: 'image',
+              name: file.name,
+              src: reader.result,
+              w: newW,
+              h: newH,
+              x: newX,
+              y: newY,
+              opacity: 1
+            };
+            el.layers.push(newLay);
+            el.extraLayers = el.layers;
+            modalSelectedLayerIds.clear();
+            modalSelectedLayerIds.add(newLay.id);
+            activeAccordionLayerIdx = el.layers.length - 1;
+            pushModalHistorySnapshot();
+            syncMasterElementToInstances(el);
+            renderMasterExtraLayersList();
+            renderMasterModalPreview();
+          }
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+      };
+    }
+
+    // Modal Global Keyboard Listener for Delete, Undo/Redo, and Arrow Nudging
+    window.addEventListener('keydown', (e) => {
+      if (!dom.masterElementEditorModal || dom.masterElementEditorModal.classList.contains('hidden')) return;
+
+      const tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+      const isInput = (tag === 'input' || tag === 'textarea' || tag === 'select');
+
+      // Delete / Backspace / Entf
+      if ((e.key === 'Delete' || e.key === 'Backspace') && !isInput) {
+        if (modalSelectedLayerIds.size > 0) {
+          e.preventDefault();
+          const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+          if (el && Array.isArray(el.layers)) {
+            el.layers = el.layers.filter(l => !modalSelectedLayerIds.has(l.id));
+            el.extraLayers = el.layers;
+            modalSelectedLayerIds.clear();
+            activeAccordionLayerIdx = null;
+            pushModalHistorySnapshot();
+            syncMasterElementToInstances(el);
+            renderMasterExtraLayersList();
+            renderMasterModalPreview();
+          }
+        }
+        return;
+      }
+
+      // Undo (Ctrl+Z) & Redo (Ctrl+Y / Ctrl+Shift+Z)
+      if ((e.ctrlKey || e.metaKey) && !isInput) {
+        if (e.key.toLowerCase() === 'z' && !e.shiftKey) {
+          e.preventDefault();
+          undoModal();
+          return;
+        } else if (e.key.toLowerCase() === 'y' || (e.key.toLowerCase() === 'z' && e.shiftKey)) {
+          e.preventDefault();
+          redoModal();
+          return;
+        }
+      }
+
+      // Arrow keys nudging
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key) && !isInput) {
+        if (modalSelectedLayerIds.size > 0) {
+          e.preventDefault();
+          const step = e.shiftKey ? 10 : 1;
+          const el = creatorState.masterElements.find(x => x.id === activeMasterEditId);
+          if (el && Array.isArray(el.layers)) {
+            modalSelectedLayerIds.forEach(id => {
+              const lay = el.layers.find(l => l.id === id);
+              if (lay) {
+                if (e.key === 'ArrowLeft') lay.x -= step;
+                if (e.key === 'ArrowRight') lay.x += step;
+                if (e.key === 'ArrowUp') lay.y -= step;
+                if (e.key === 'ArrowDown') lay.y += step;
+              }
+            });
+            pushModalHistorySnapshot();
+            syncMasterElementToInstances(el);
+            renderMasterModalPreview();
+          }
+        }
+      }
+    });
+  }
+
+
   // ==================== INITIALIZE STUDIO ====================
   function init() {
+    loadCustomPresetsFromStorage();
+    initCreatorElements();
+    initCreatorListeners();
     state.elements = createDefaultElementsForTheme(state.themeId, state.numSlides);
     initEventListeners();
     setupStripInteractions();
@@ -4718,6 +10255,17 @@
     setupDragAndDrop();
     renderAll();
     setTimeout(fitZoomToViewport, 60);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('mode') === 'creator') {
+      setTimeout(() => setAppWorkspaceMode('creator'), 100);
+    }
+
+    // Expose for debugging and test automation
+    window.__creatorState = creatorState;
+    window.__state = state;
+    window.__renderPresetCreatorAll = renderPresetCreatorAll;
+    window.__formatCreatorRichTextHtml = formatCreatorRichTextHtml;
   }
 
   init();

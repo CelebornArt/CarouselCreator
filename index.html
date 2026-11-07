@@ -15,35 +15,39 @@
     <!-- ==================== TOP HEADER BAR ==================== -->
     <header class="topbar">
       <div class="topbar-left">
-        <div class="brand-badge">
-          <span class="brand-icon">✦</span>
-          <div class="brand-titles">
-            <span class="brand-name">CarouselCreator</span>
-            <span class="brand-sub">1080×1350 Panoramic Studio</span>
-          </div>
+        <div class="app-mode-switch" role="tablist" aria-label="Workspace Mode">
+          <button id="btnSwitchStudio" class="app-mode-btn active" title="Carousel Studio Mode">Studio</button>
+          <button id="btnSwitchPresetCreator" class="app-mode-btn" title="Preset Creator Mode">Preset Creator</button>
         </div>
+        <button id="btnNewPreset" class="btn-icon btn-new-preset" title="Create New Preset">+</button>
 
         <div class="topbar-divider"></div>
 
         <!-- Preset Theme Selector -->
-        <div class="control-group">
+        <div class="control-group topbar-studio-only">
           <label for="themeSelect" class="control-label">Preset Theme</label>
-          <select id="themeSelect" class="select-input">
-            <optgroup label="🎮 Games Channel (gameDev)">
-              <option value="games-love">Games (Love)</option>
-              <option value="games-hate">Games (Hate)</option>
-              <option value="games-idea">Games (Idea)</option>
-            </optgroup>
-            <optgroup label="🪄 Magic Channel (@CELEBORNMAGIC)">
-              <option value="magic-theory">Magic Type A (Application)</option>
-              <option value="magic-application">Magic Type B (Theory)</option>
-              <option value="magic-idea">Magic Type C (Trick Ideas)</option>
-            </optgroup>
-          </select>
+          <div class="theme-select-wrap">
+            <select id="themeSelect" class="select-input">
+              <optgroup id="optgroupCustomPresets" label="✨ Custom Presets" class="hidden"></optgroup>
+              <optgroup label="🎮 Games Channel (gameDev)">
+                <option value="games-love">Games (Love)</option>
+                <option value="games-hate">Games (Hate)</option>
+                <option value="games-idea">Games (Idea)</option>
+              </optgroup>
+              <optgroup label="🪄 Magic Channel (@CELEBORNMAGIC)">
+                <option value="magic-theory">Magic Type A (Application)</option>
+                <option value="magic-application">Magic Type B (Theory)</option>
+                <option value="magic-idea">Magic Type C (Trick Ideas)</option>
+              </optgroup>
+            </select>
+            <button id="btnModifyPreset" class="btn-icon btn-modify-preset" title="Modify selected preset in Preset Creator">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+          </div>
         </div>
 
         <!-- Slide Count Selector -->
-        <div class="control-group">
+        <div class="control-group topbar-studio-only">
           <label for="slideCountInput" class="control-label">Slides</label>
           <div class="stepper-control">
             <button id="btnRemoveSlide" class="btn-icon" title="Remove content slide before End CTA slide">−</button>
@@ -52,14 +56,14 @@
           </div>
         </div>
 
-        <button id="btnResetTemplate" class="btn-reset-danger btn-sm" title="Reset all slides to preset default layout">
+        <button id="btnResetTemplate" class="btn-reset-danger btn-sm topbar-studio-only" title="Reset all slides to preset default layout">
           ↺ Reset Layout
         </button>
       </div>
 
       <!-- Center: Viewport Preview Mode Switcher & Page Numbers Toggle -->
       <div class="topbar-center">
-        <div class="mode-switcher" role="tablist" aria-label="Viewport Preview Mode">
+        <div class="mode-switcher topbar-studio-only" role="tablist" aria-label="Viewport Preview Mode">
           <button id="modeStripBtn" class="mode-btn active" data-mode="strip">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="6" height="16" rx="1"/><rect x="9" y="4" width="6" height="16" rx="1"/><rect x="16" y="4" width="6" height="16" rx="1"/></svg>
             Side-by-Side Strip
@@ -70,7 +74,7 @@
           </button>
         </div>
 
-        <button id="btnTogglePageNumbers" class="topbar-toggle-btn" title="Toggle Slide Page Numbers (Default: OFF)">
+        <button id="btnTogglePageNumbers" class="topbar-toggle-btn topbar-studio-only" title="Toggle Slide Page Numbers (Default: OFF)">
           <span class="toggle-btn-badge">#</span>
           <span>Page Numbers</span>
         </button>
@@ -78,23 +82,46 @@
 
       <!-- Right: Export & Project Actions -->
       <div class="topbar-right">
-        <button id="btnSaveProject" class="btn-secondary btn-sm" title="Save Carousel Project (.json)">Save JSON</button>
-        <label class="btn-secondary btn-sm file-label" title="Load Carousel Project (.json)">
+        <!-- Studio Project & Export Actions -->
+        <button id="btnSaveProject" class="btn-secondary btn-sm topbar-studio-only" title="Save Carousel Project (.json)">Save JSON</button>
+        <label class="btn-secondary btn-sm file-label topbar-studio-only" title="Load Carousel Project (.json)">
           Load JSON
           <input id="loadProjectInput" type="file" accept=".json" hidden />
         </label>
-        <div class="topbar-divider"></div>
-        <button id="btnExportCurrent" class="btn-secondary btn-sm" title="Export active slide as 1080×1350 PNG">
-          Export Slide
-        </button>
-        <button id="btnExportAll" class="btn-primary btn-sm" title="Export all slides cut at 1080×1350 PNG">
-          ⬇ Export All PNGs
-        </button>
+        <div class="topbar-divider topbar-studio-only"></div>
+        <div class="export-group-wrap topbar-studio-only">
+          <input id="exportBaseNameInput" type="text" class="text-input text-xs export-name-input" value="carousel" placeholder="Export name..." title="Base filename for exported PNGs and ZIP (e.g. carousel_01.png)" />
+          <button id="btnExportCurrent" class="btn-secondary btn-sm" title="Export active slide as 1080×1350 PNG">
+            Export Slide
+          </button>
+          <button id="btnExportAll" class="btn-primary btn-sm" title="Export all slides as a ZIP archive (_01.png, _02.png, ...)">
+            ⬇ Export All (ZIP)
+          </button>
+        </div>
+
+        <!-- Preset Creator Actions (shown ONLY when in Preset Creator mode) -->
+        <div id="topbarCreatorActions" class="topbar-creator-actions topbar-creator-only">
+          <label class="checkbox-label" title="Toggle 28px cut gaps between slides">
+            <input type="checkbox" id="creatorToggleGaps" />
+            <span>Show Cut Gaps</span>
+          </label>
+          <div class="topbar-divider"></div>
+          <button id="btnTopDownloadPreset" class="btn-secondary btn-sm" title="Download preset as portable .json file">
+            ⬇ Download Preset
+          </button>
+          <label class="btn-secondary btn-sm file-label" title="Upload a preset .json file">
+            ⬆ Upload Preset
+            <input id="topUploadPresetInput" type="file" accept=".json" hidden />
+          </label>
+          <button id="btnTopSaveToStudio" class="btn-primary btn-sm" title="Save / Update preset into Carousel Studio">
+            💾 Save to Studio Presets
+          </button>
+        </div>
       </div>
     </header>
 
-    <!-- ==================== MAIN WORKSPACE ==================== -->
-    <div class="workspace">
+    <!-- ==================== STUDIO WORKSPACE ==================== -->
+    <div id="workspaceStudio" class="workspace">
       <!-- LEFT SIDEBAR: Preset Elements, Constrained BG Image Upload & Layers -->
       <aside class="sidebar-left">
         <!-- Preset-Specific Elements -->
@@ -109,67 +136,44 @@
           </div>
         </div>
 
-        <!-- Image Uploads: Constrained Background Image vs Foreground Image -->
-        <div class="panel-section">
-          <h3 class="panel-title">Image Uploads</h3>
-          <p class="panel-hint">
-            <strong>Background Image</strong> sits in front of the default canvas background but stays constrained behind all text &amp; design elements.
-          </p>
-          <div class="btn-col-stack">
-            <label class="btn-primary btn-sm file-label btn-block text-center">
-              🖼 Upload Background Image
-              <input id="bgElementInput" type="file" accept="image/*" multiple hidden />
-            </label>
-            <label class="btn-secondary btn-sm file-label btn-block text-center">
-              ＋ Upload Foreground Image Layer
-              <input id="freeImageInput" type="file" accept="image/*" multiple hidden />
-            </label>
+        <!-- Photopea / Photoshop Style Layers Panel -->
+        <div class="panel-section flex-grow-section ps-layers-panel">
+          <div class="section-header-row ps-layers-header">
+            <div class="ps-layers-header-title">
+              <span class="ps-layers-icon">≡</span>
+              <h3 class="panel-title">Layers</h3>
+              <span id="psLayersActiveSlideTag" class="ps-layers-active-tag">Slide 1</span>
+            </div>
+            <div class="ps-layers-header-actions">
+              <!-- Filter Mode Pill: Active Slide vs All Slides -->
+              <button id="btnLayersFilterSlide" class="ps-filter-pill active" title="Show layers on active slide only">Active</button>
+              <button id="btnLayersFilterAll" class="ps-filter-pill" title="Show all layers across entire carousel">All</button>
+              <span id="layerCountBadge" class="badge-pill">0</span>
+            </div>
           </div>
-        </div>
 
-        <!-- Default Background Tuning (Brightness / Saturation / Opacity) -->
-        <div class="panel-section">
-          <div class="section-header-row">
-            <h3 class="panel-title">Default Background</h3>
-            <button id="btnResetBgTuning" class="btn-secondary btn-xs" title="Reset background sliders to preset default">Reset</button>
-          </div>
-          <div class="prop-row">
-            <label>Base Color</label>
-            <div class="color-picker-wrap">
-              <input id="bgBaseColorInput" type="color" class="color-input" />
-              <input id="bgBaseColorHex" type="text" class="text-input text-xs" />
-            </div>
-          </div>
-          <div class="slider-row">
-            <div class="slider-label-row">
-              <span>Brightness</span>
-              <span id="bgBrightnessVal" class="mono-val">100%</span>
-            </div>
-            <input id="bgBrightnessSlider" type="range" min="40" max="160" value="100" class="range-slider" />
-          </div>
-          <div class="slider-row">
-            <div class="slider-label-row">
-              <span>Saturation</span>
-              <span id="bgSaturationVal" class="mono-val">100%</span>
-            </div>
-            <input id="bgSaturationSlider" type="range" min="0" max="200" value="100" class="range-slider" />
-          </div>
-          <div class="slider-row">
-            <div class="slider-label-row">
-              <span>BG Texture Opacity</span>
-              <span id="bgOpacityVal" class="mono-val">100%</span>
-            </div>
-            <input id="bgOpacitySlider" type="range" min="0" max="100" value="100" class="range-slider" />
-          </div>
-        </div>
+          <!-- Layers Scroll List with Drag Reordering -->
+          <div id="layersList" class="layers-list ps-layers-stack"></div>
 
-        <!-- Elements / Layer List (Filtered to Active Slide) -->
-        <div class="panel-section flex-grow-section">
-          <div class="section-header-row">
-            <h3 class="panel-title">Layers on Active Slide</h3>
-            <span id="layerCountBadge" class="badge-pill">0</span>
+          <!-- Photoshop / Photopea Bottom Action Bar -->
+          <div class="ps-layers-footer">
+            <button id="psBtnBringForward" class="ps-footer-btn" title="Bring Layer Forward (Up in Stack)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            </button>
+            <button id="psBtnSendBackward" class="ps-footer-btn" title="Send Layer Backward (Down in Stack)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="ps-footer-divider"></div>
+            <button id="psBtnToggleLock" class="ps-footer-btn" title="Lock/Unlock Selected Layer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </button>
+            <button id="psBtnDuplicate" class="ps-footer-btn" title="Duplicate Layer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+            <button id="psBtnDelete" class="ps-footer-btn ps-footer-btn-danger" title="Delete Layer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
           </div>
-          <div id="layersList" class="layers-list"></div>
         </div>
       </aside>
 
@@ -339,11 +343,6 @@
             <p class="panel-hint">Every element on the slides is directly selectable and moveable on the canvas.</p>
 
             <div class="prop-group">
-              <label class="prop-label">Active Preset Summary</label>
-              <div id="themeSummaryCard" class="theme-summary-card"></div>
-            </div>
-
-            <div class="prop-group">
               <label class="prop-label">Global Channel Handle</label>
               <input id="frameHandleInput" type="text" class="text-input" value="@CELEBORNMAGIC" />
             </div>
@@ -352,6 +351,74 @@
               <label class="prop-label">Series / Top Opening Topic</label>
               <input id="frameSeriesInput" type="text" class="text-input" value="ART SERIES" />
             </div>
+
+        <!-- Default Background & Image Uploads (Integrated Section) -->
+        <div class="panel-section">
+          <div class="section-header-row">
+            <h3 class="panel-title">Background &amp; Uploads</h3>
+            <button id="btnResetBgTuning" class="btn-secondary btn-xs" title="Reset background sliders to preset default">Reset</button>
+          </div>
+
+          <!-- Integrated Image Upload Buttons (Without verbose info text) -->
+          <div class="btn-col-stack mb-12">
+            <label class="btn-primary btn-sm file-label btn-block text-center" title="Upload an image locked to the background plane behind all text and foreground elements">
+              🖼 Upload Background Image
+              <input id="bgElementInput" type="file" accept="image/*" multiple hidden />
+            </label>
+            <label class="btn-secondary btn-sm file-label btn-block text-center" title="Upload a foreground image layer that can be freely moved and layered">
+              ＋ Upload Foreground Image Layer
+              <input id="freeImageInput" type="file" accept="image/*" multiple hidden />
+            </label>
+          </div>
+
+          <!-- Color Tuning -->
+          <div class="prop-row">
+            <label>Base Color</label>
+            <div class="color-picker-wrap">
+              <input id="bgBaseColorInput" type="color" class="color-input" />
+              <input id="bgBaseColorHex" type="text" class="text-input text-xs" />
+            </div>
+          </div>
+
+          <!-- Brightness Slider with Reset Dot -->
+          <div class="slider-row">
+            <div class="slider-label-row">
+              <span>Brightness</span>
+              <span id="bgBrightnessVal" class="mono-val">100%</span>
+            </div>
+            <input id="bgBrightnessSlider" type="range" min="40" max="160" value="100" class="range-slider" />
+            <div class="slider-dot-track">
+              <!-- Default 100 in range [40..160] = (100-40)/(160-40) = 50% -->
+              <span id="dotResetBrightness" class="slider-reset-dot" style="left:50%;" title="Click to reset Brightness to 100%"></span>
+            </div>
+          </div>
+
+          <!-- Saturation Slider with Reset Dot -->
+          <div class="slider-row">
+            <div class="slider-label-row">
+              <span>Saturation</span>
+              <span id="bgSaturationVal" class="mono-val">100%</span>
+            </div>
+            <input id="bgSaturationSlider" type="range" min="0" max="200" value="100" class="range-slider" />
+            <div class="slider-dot-track">
+              <!-- Default 100 in range [0..200] = (100-0)/(200-0) = 50% -->
+              <span id="dotResetSaturation" class="slider-reset-dot" style="left:50%;" title="Click to reset Saturation to 100%"></span>
+            </div>
+          </div>
+
+          <!-- BG Texture Opacity Slider with Reset Dot -->
+          <div class="slider-row">
+            <div class="slider-label-row">
+              <span>BG Texture Opacity</span>
+              <span id="bgOpacityVal" class="mono-val">100%</span>
+            </div>
+            <input id="bgOpacitySlider" type="range" min="0" max="100" value="100" class="range-slider" />
+            <div class="slider-dot-track">
+              <!-- Default 100 in range [0..100] = 100% -->
+              <span id="dotResetOpacity" class="slider-reset-dot" style="left:100%;" title="Click to reset Opacity to 100%"></span>
+            </div>
+          </div>
+        </div>
 
             <!-- SLIDE 1 DESIGN OPTIONS (When no element is selected on Slide 1) -->
             <div id="inspSlideSectionEmpty" class="panel-section hidden mt-8" style="padding-top:12px;border-top:1px solid var(--border-color, #27272A);">
@@ -567,19 +634,31 @@
           <!-- SHAPE / NOTCH / ICON SPECIFIC INSPECTOR -->
           <div id="inspShapeSection" class="panel-section hidden">
             <h3 class="panel-title">Shape &amp; Vector Styling</h3>
-            <div class="prop-row">
-              <label>Fill / Primary Color</label>
-              <div class="color-picker-wrap">
-                <input id="inspShapeFill" type="color" class="color-input" />
-                <label class="checkbox-label"><input id="inspShapeNoFill" type="checkbox" /> None</label>
+            <div id="shapeVectorControls">
+              <div class="prop-row">
+                <label>Fill / Primary Color</label>
+                <div class="color-picker-wrap">
+                  <input id="inspShapeFill" type="color" class="color-input" />
+                  <label class="checkbox-label"><input id="inspShapeNoFill" type="checkbox" /> None</label>
+                </div>
+              </div>
+              <div class="prop-row">
+                <label>Stroke / Outline</label>
+                <div class="color-picker-wrap">
+                  <input id="inspShapeStroke" type="color" class="color-input" />
+                  <input id="inspShapeStrokeWidth" type="number" min="0" max="30" step="0.5" class="number-input" style="width:58px" />
+                </div>
               </div>
             </div>
-            <div class="prop-row">
-              <label>Stroke / Outline</label>
-              <div class="color-picker-wrap">
-                <input id="inspShapeStroke" type="color" class="color-input" />
-                <input id="inspShapeStrokeWidth" type="number" min="0" max="30" step="0.5" class="number-input" style="width:58px" />
-              </div>
+            <!-- Custom Image / Alpha Graphic Replace for Shapes (e.g. Triangle Placeholder) -->
+            <div id="shapeImageCustomBox" class="mt-8">
+              <label class="btn-secondary btn-sm file-label btn-block text-center">
+                📁 Upload / Replace with Custom Graphic
+                <input id="uploadCustomShapeImageInput" type="file" accept="image/*" hidden />
+              </label>
+              <button id="btnResetShapeDefault" class="btn-secondary btn-sm btn-block text-center mt-4 hidden">
+                ↺ Reset to Vector Shape
+              </button>
             </div>
           </div>
 
@@ -635,6 +714,427 @@
         </div>
       </aside>
     </div>
+
+    <!-- ==================== PRESET CREATOR WORKSPACE ==================== -->
+    <div id="workspacePresetCreator" class="workspace hidden">
+      <!-- LEFT SIDEBAR: Preset Setup, Theme Details & Guidelines Manager -->
+      <aside class="sidebar-left">
+        <!-- Preset Metadata -->
+        <div class="panel-section">
+          <div class="section-header-row">
+            <h3 class="panel-title">Preset Configuration</h3>
+            <span id="creatorPresetDomainBadge" class="badge-pill">Custom</span>
+          </div>
+          <div class="prop-group">
+            <label class="prop-label">Preset Name</label>
+            <input id="creatorPresetNameInput" type="text" class="text-input" value="My Custom Preset" placeholder="e.g. Minimalist Tech" />
+          </div>
+          <div class="prop-group">
+            <label class="prop-label">Base Style Archetype</label>
+            <select id="creatorPresetArchetype" class="select-input select-sm">
+              <option value="games">GameDev / Modern Framed</option>
+              <option value="magic">Magic / Editorial Classic</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Guidelines Manager -->
+        <div class="panel-section">
+          <div class="section-header-row">
+            <h3 class="panel-title">Guidelines</h3>
+            <button id="btnCreatorResetGuides" class="btn-secondary btn-xs" title="Reset to standard default guides">Defaults</button>
+          </div>
+          <p class="panel-hint">Drag guidelines directly on canvas or use arrow keys. Click ⇆ to mirror on opposite side.</p>
+          <div class="btn-row mb-8">
+            <button id="btnCreatorAddGuideH" class="btn-secondary btn-xs flex-1">+ Add Horiz. Guide</button>
+            <button id="btnCreatorAddGuideV" class="btn-secondary btn-xs flex-1">+ Add Vert. Guide</button>
+          </div>
+          <div id="creatorGuidesList" class="creator-guides-list">
+            <!-- Rendered list of active guides with delete (x) and mirror (⇆) buttons -->
+          </div>
+        </div>
+
+        <!-- Preset Import & Export -->
+        <div class="panel-section">
+          <h3 class="panel-title">Preset Storage &amp; Files</h3>
+          <div class="btn-col-stack">
+            <button id="btnCreatorSavePreset" class="btn-primary btn-sm btn-block text-center" title="Save / Update preset into Carousel Studio">
+              💾 Save to Studio Presets
+            </button>
+            <button id="btnCreatorExportJson" class="btn-secondary btn-sm btn-block text-center" title="Download preset as a portable .json file">
+              ⬇ Download Preset (.json)
+            </button>
+            <label class="btn-secondary btn-sm file-label btn-block text-center" title="Upload a preset .json file">
+              ⬆ Upload Preset (.json)
+              <input id="creatorImportJsonInput" type="file" accept=".json" hidden />
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER VIEWPORT: 3-Slide Board with Top/Bottom Off-Canvas Staging for Master Elements -->
+      <main class="viewport-area creator-viewport-area">
+        <div class="viewport-toolbar">
+          <div class="viewport-toolbar-left">
+            <span class="active-slide-indicator">
+              Preset Viewport: <strong>Slide 1 (Hook) • Slide 2 (Content) • Slide 3 (End CTA)</strong>
+            </span>
+            <div class="inline-controls">
+              <label class="checkbox-label" title="Show visual reference guidelines">
+                <input type="checkbox" id="creatorToggleGuides" checked />
+                <span>Show Guidelines</span>
+              </label>
+            </div>
+          </div>
+          <div class="viewport-toolbar-right">
+            <button id="btnCreatorZoomOut" class="btn-icon btn-xs" title="Zoom Out">−</button>
+            <span id="creatorZoomReadout" class="zoom-readout">28%</span>
+            <button id="btnCreatorZoomIn" class="btn-icon btn-xs" title="Zoom In">+</button>
+            <button id="btnCreatorZoomFit" class="btn-secondary btn-xs" title="Fit to Viewport">Fit</button>
+          </div>
+        </div>
+
+        <div id="creatorStripViewport" class="strip-viewport">
+          <div id="creatorScrollContainer" class="strip-scroll-container">
+            <div id="creatorStageWrapper" class="creator-stage-wrapper">
+
+              <!-- 3-SLIDE & MASTER ELEMENTS VIEWPORT CONTAINER -->
+              <div class="creator-board-wrap">
+                <div class="creator-master-staging-zone">
+                  <div class="creator-staging-header">
+                    <button id="btnCreatorCleanUpCanvas" class="btn-clean-up-canvas" title="Move all master elements back onto the master elements canvas">🧹 Clean Up Canvas</button>
+                    <span class="creator-staging-title">✦ Master Elements</span>
+                    <span class="creator-staging-hint">Free-floating on canvas • Drag anywhere on board or slides to test size • Double-click to edit master • Click "+" to place instance</span>
+                    <button id="btnCreatorAddNewDefaultEl" class="btn-primary btn-xs">+ Add New Master Element</button>
+                  </div>
+                </div>
+                <div id="creatorSlidesContainer" class="strip-slides-container creator-slides-container"></div>
+                <div id="creatorSmartGuidesLayer" class="strip-smart-guides-layer"></div>
+                <div id="creatorSnapGuidesLayer" class="creator-snap-guides-layer"></div>
+                <div id="creatorInteractionLayer" class="strip-interaction-layer"></div>
+              </div>
+
+              <!-- BOTTOM OFF-CANVAS STAGING AREA: Additional Presets & Guidelines helper -->
+              <div class="creator-staging-area creator-staging-bottom">
+                <div class="creator-staging-header">
+                  <span class="creator-staging-title">Canvas Guidelines &amp; Margin Snapping</span>
+                  <span class="creator-staging-hint">Click &amp; drag any element across Slide 1, Slide 2, and Slide 3 to set default positions</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Preset Element Inspector -->
+      <aside class="sidebar-right">
+        <!-- Empty Selection in Preset Creator -->
+        <div id="creatorInspectorEmptyState" class="inspector-panel">
+          <div class="panel-section">
+            <h3 class="panel-title">Preset Board Inspector</h3>
+            <p class="panel-hint">Select any element on Slide 1, Slide 2, Slide 3, or the Master Elements above to customize its appearance and typography.</p>
+            <div class="prop-group mt-12">
+              <label class="prop-label">Default Title Font</label>
+              <select id="creatorTitleFontSelect" class="select-input select-sm font-family-select">
+                <option value="JetBrains Mono">JetBrains Mono (Modern Bold)</option>
+                <option value="Rubik">Rubik (Clean Sans)</option>
+                <option value="Caudex">Caudex (Art Deco Serif)</option>
+                <option value="Playfair Display SC">Playfair Display SC (Classical)</option>
+                <option value="Montserrat">Montserrat (Clean Geometric)</option>
+              </select>
+            </div>
+            <div class="prop-group">
+              <label class="prop-label">Default Body / Subtitle Font</label>
+              <select id="creatorBodyFontSelect" class="select-input select-sm font-family-select">
+                <option value="Rubik">Rubik</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="JetBrains Mono">JetBrains Mono</option>
+                <option value="Caudex">Caudex</option>
+              </select>
+            </div>
+            <div class="prop-group mt-12">
+              <label class="btn-secondary btn-sm file-label btn-block text-center" title="Upload custom font (.ttf, .otf, .woff, .woff2)">
+                ⬆ Upload Custom Font
+                <input id="creatorFontUploadInput" type="file" accept=".ttf,.otf,.woff,.woff2" hidden />
+              </label>
+            </div>
+          </div>
+
+          <!-- Color Palette in Preset Inspector -->
+          <div class="panel-section">
+            <div class="section-header-row">
+              <h3 class="panel-title">Preset Colors</h3>
+              <button id="btnCreatorAddColor" class="btn-primary btn-xs" title="Add a new global color to palette">+ Add Color</button>
+            </div>
+            <p class="panel-hint">Global preset colors (Primary, Secondary, Background) that elements plug into.</p>
+            <div id="creatorColorsList" class="creator-colors-list">
+              <!-- Rendered list of preset colors -->
+            </div>
+          </div>
+
+          <!-- Modifiers & Accents separate from preset colors -->
+          <div class="panel-section">
+            <div class="section-header-row">
+              <h3 class="panel-title">Text Modifiers / Accents</h3>
+              <button id="btnCreatorAddModifier" class="btn-secondary btn-xs" title="Add trigger symbol modifier">+ Add Modifier</button>
+            </div>
+            <p class="panel-hint">Global syntax modifiers (e.g. enclose words in *accent* or _gold_) applied automatically across all text.</p>
+            <div id="creatorModifiersList" class="creator-colors-list">
+              <!-- Rendered list of text modifiers -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Element Selection in Preset Creator -->
+        <div id="creatorInspectorElementState" class="inspector-panel hidden">
+          <div class="panel-section">
+            <div class="section-header-row">
+              <h3 id="creatorInspElTitle" class="panel-title">Element Inspector</h3>
+              <span id="creatorInspSlideBadge" class="badge-pill">Slide 1</span>
+            </div>
+            <div class="prop-group mt-8">
+              <label class="prop-label">Element Name / Role</label>
+              <input id="creatorInspElName" type="text" class="text-input" />
+            </div>
+            <div class="prop-group">
+              <label class="prop-label">Text Content</label>
+              <textarea id="creatorInspElText" rows="3" class="textarea-input"></textarea>
+            </div>
+            <div class="prop-row mt-6">
+              <label class="checkbox-label" title="Enable automatic slide numbering replacement for this element (e.g. -00- becomes 01 on Slide 2, 02 on Slide 3)">
+                <input id="creatorInspElAutoCount" type="checkbox" />
+                <span>Auto-number count (-00-) per slide</span>
+              </label>
+            </div>
+            <div class="prop-row mt-4">
+              <label class="checkbox-label" title="Add or duplicate this element to all 3 slides at the exact same position">
+                <input id="creatorInspElAddToAllSlides" type="checkbox" />
+                <span>Add to all slides</span>
+              </label>
+            </div>
+            <div id="creatorInspLinkAcrossSlidesRow" class="prop-row mt-2 hidden">
+              <label class="checkbox-label" title="Synchronize position, size, and rotation across all slides in real time (replaces values without accumulating deltas)">
+                <input id="creatorInspElLinkAcrossSlides" type="checkbox" />
+                <span>Link across slides</span>
+              </label>
+            </div>
+            <div class="prop-row mt-4">
+              <label>Anchor Point</label>
+              <div id="creatorInspAnchorGrid" class="anchor-grid-selector" title="Select alignment anchor point">
+                <button type="button" class="anchor-cell active" data-anchor="nw" title="Top-Left (NW)"></button>
+                <button type="button" class="anchor-cell" data-anchor="n" title="Top-Center (N)"></button>
+                <button type="button" class="anchor-cell" data-anchor="ne" title="Top-Right (NE)"></button>
+                <button type="button" class="anchor-cell" data-anchor="w" title="Middle-Left (W)"></button>
+                <button type="button" class="anchor-cell" data-anchor="c" title="Center (C)"></button>
+                <button type="button" class="anchor-cell" data-anchor="e" title="Middle-Right (E)"></button>
+                <button type="button" class="anchor-cell" data-anchor="sw" title="Bottom-Left (SW)"></button>
+                <button type="button" class="anchor-cell" data-anchor="s" title="Bottom-Center (S)"></button>
+                <button type="button" class="anchor-cell" data-anchor="se" title="Bottom-Right (SE)"></button>
+              </div>
+            </div>
+            <div class="prop-row">
+              <label>Font Family</label>
+              <select id="creatorInspElFont" class="select-input select-sm font-family-select">
+                <option value="JetBrains Mono">JetBrains Mono</option>
+                <option value="Rubik">Rubik</option>
+                <option value="Caudex">Caudex</option>
+                <option value="Playfair Display SC">Playfair Display SC</option>
+                <option value="Montserrat">Montserrat</option>
+              </select>
+            </div>
+            <div class="prop-row">
+              <label>Font Size (px)</label>
+              <input id="creatorInspElFontSize" type="number" min="10" max="250" class="number-input" style="width:68px;" />
+            </div>
+
+            <!-- Text Color (Slot dropdown + picker + alpha) -->
+            <div class="prop-row mt-6">
+              <label>Text Color</label>
+              <div class="creator-color-prop-row">
+                <select id="creatorInspElColorSlot" class="select-input select-sm color-slot-select"></select>
+                <input id="creatorInspElColor" type="color" class="color-input" />
+                <input id="creatorInspElOpacity" type="range" min="0" max="100" class="slider-input color-alpha-slider" title="Text opacity" />
+                <span id="creatorInspElOpacityVal" class="color-alpha-label">100%</span>
+              </div>
+            </div>
+
+            <!-- Base Shape / Background (Fill toggle + Slot select + picker + alpha) -->
+            <div class="prop-row mt-6">
+              <label>Base Shape BG</label>
+              <div class="creator-color-prop-row">
+                <input id="creatorInspElHasBg" type="checkbox" title="Enable background surface fill" />
+                <select id="creatorInspElBgColorSlot" class="select-input select-sm color-slot-select"></select>
+                <input id="creatorInspElBgColor" type="color" class="color-input" />
+                <input id="creatorInspElBgOpacity" type="range" min="0" max="100" class="slider-input color-alpha-slider" title="Background opacity" />
+                <span id="creatorInspElBgOpacityVal" class="color-alpha-label">100%</span>
+              </div>
+            </div>
+
+            <!-- Outline / Border (Width + Slot select + picker + alpha) -->
+            <div class="prop-row mt-6">
+              <label>Outline / Border</label>
+              <div class="creator-color-prop-row">
+                <input id="creatorInspElBorderWidth" type="number" min="0" max="20" class="number-input" style="width:42px;" placeholder="0px" title="Border width in px (0 for none)" />
+                <select id="creatorInspElBorderColorSlot" class="select-input select-sm color-slot-select"></select>
+                <input id="creatorInspElBorderColor" type="color" class="color-input" />
+                <input id="creatorInspElBorderOpacity" type="range" min="0" max="100" class="slider-input color-alpha-slider" title="Border opacity" />
+                <span id="creatorInspElBorderOpacityVal" class="color-alpha-label">100%</span>
+              </div>
+            </div>
+
+            <!-- Text Effect (Glow / Embossing per user request) -->
+            <div class="prop-row mt-6">
+              <label>Text Effect</label>
+              <select id="creatorInspElEffect" class="select-input select-sm">
+                <option value="none">None</option>
+                <option value="emboss">Embossing (Bottom highlight)</option>
+                <option value="glow">Glow Aura</option>
+              </select>
+            </div>
+            <div id="creatorInspEffectRow" class="prop-row mt-2 hidden">
+              <label>Effect Color</label>
+              <div class="creator-color-prop-row">
+                <select id="creatorInspElEffectColorSlot" class="select-input select-sm color-slot-select"></select>
+                <input id="creatorInspElEffectColor" type="color" class="color-input" />
+                <input id="creatorInspElEffectOpacity" type="range" min="0" max="100" class="slider-input color-alpha-slider" title="Effect opacity" />
+                <span id="creatorInspElEffectOpacityVal" class="color-alpha-label">100%</span>
+              </div>
+            </div>
+
+            <div class="prop-row mt-8">
+              <label>Make Master Default</label>
+              <input id="creatorInspElIsMaster" type="checkbox" />
+            </div>
+            <div class="btn-row mt-12">
+              <button id="btnCreatorDuplicateEl" class="btn-secondary btn-sm flex-1">⧉ Duplicate</button>
+              <button id="btnCreatorDeleteEl" class="btn-danger btn-sm flex-1">🗑 Delete</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- MASTER DEFAULT ELEMENT MODAL EDITOR (Mini Slide Zoom Editor) -->
+    <div id="masterElementEditorModal" class="master-modal-overlay hidden">
+      <div class="master-modal-dialog">
+        <div class="master-modal-header">
+          <div class="master-modal-title-row">
+            <span class="master-modal-badge">Master Element Editor</span>
+            <h2 id="masterModalTitle" class="master-modal-title">Channel Handle</h2>
+          </div>
+          <button id="btnMasterModalClose" class="master-modal-close-btn" title="Close editor">✕</button>
+        </div>
+
+        <div class="master-modal-body">
+          <!-- Canvas mini preview stage -->
+          <div class="master-modal-viewport">
+            <div id="masterModalCanvas" class="master-modal-canvas">
+              <div id="masterModalPreviewBox" class="master-modal-preview-box"></div>
+            </div>
+            <div class="master-modal-hint-bar" style="display:flex;align-items:center;gap:8px;">
+              <span>Zoom: <strong id="masterModalZoomReadout">100%</strong></span>
+              <button id="btnMasterModalZoomReset" type="button" class="btn-secondary btn-xs" style="padding:1px 6px;font-size:10px;">Fit</button>
+              <span class="ml-auto" style="opacity:0.75;font-size:11px;">Wheel zoom • Space+Drag pan • Marquee multi-select • Smart Snapping</span>
+            </div>
+          </div>
+
+          <!-- Controls sidebar -->
+          <div class="master-modal-sidebar">
+            <!-- Container Frame Properties -->
+            <div class="master-modal-section">
+              <label class="prop-label">Master Element Frame</label>
+              
+              <div class="creator-prop-row">
+                <label>Element Name</label>
+                <input id="masterModalNameInput" type="text" class="creator-input" placeholder="Element Name" />
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+                <div class="creator-prop-row" style="margin-bottom:0;">
+                  <label>Frame Width</label>
+                  <input id="masterModalBoxW" type="number" min="20" class="creator-input" placeholder="320" />
+                </div>
+                <div class="creator-prop-row" style="margin-bottom:0;">
+                  <label>Frame Height</label>
+                  <input id="masterModalBoxH" type="number" min="10" class="creator-input" placeholder="60" />
+                </div>
+              </div>
+
+              <!-- Anchor Point -->
+              <div class="master-modal-prop-group" style="display:flex;align-items:center;justify-content:space-between;padding:4px 0 10px 0;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:12px;">
+                <div>
+                  <label style="font-size:11px;font-weight:600;color:var(--text-secondary);display:block;">Anchor Point</label>
+                  <span style="font-size:10px;color:var(--text-muted);display:block;margin-top:2px;">Docking &amp; transform pivot</span>
+                </div>
+                <div id="masterModalAnchorGrid" class="anchor-grid-selector" title="Select base anchor point for docking and scaling">
+                  <button type="button" class="anchor-cell active" data-anchor="nw" title="Top-Left (NW)"></button>
+                  <button type="button" class="anchor-cell" data-anchor="n" title="Top-Center (N)"></button>
+                  <button type="button" class="anchor-cell" data-anchor="ne" title="Top-Right (NE)"></button>
+                  <button type="button" class="anchor-cell" data-anchor="w" title="Middle-Left (W)"></button>
+                  <button type="button" class="anchor-cell" data-anchor="c" title="Center (C)"></button>
+                  <button type="button" class="anchor-cell" data-anchor="e" title="Middle-Right (E)"></button>
+                  <button type="button" class="anchor-cell" data-anchor="sw" title="Bottom-Left (SW)"></button>
+                  <button type="button" class="anchor-cell" data-anchor="s" title="Bottom-Center (S)"></button>
+                  <button type="button" class="anchor-cell" data-anchor="se" title="Bottom-Right (SE)"></button>
+                </div>
+              </div>
+
+              <!-- Optional Container Background & Border -->
+              <div class="master-modal-prop-group" style="margin-bottom:12px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                  <label class="checkbox-label" style="font-size:11px;font-weight:600;color:var(--text-secondary);cursor:pointer;">
+                    <input id="masterModalHasBg" type="checkbox" title="Enable container background fill" />
+                    <span>Background Fill</span>
+                  </label>
+                </div>
+                <div class="creator-color-prop-row">
+                  <select id="masterModalBgColorSlot" class="creator-select color-slot-select"></select>
+                  <input id="masterModalBgColor" type="color" class="color-picker-input" value="#ffffff" />
+                  <input id="masterModalBgOpacity" type="range" min="0" max="100" class="creator-range-slider color-alpha-slider" />
+                  <span id="masterModalBgOpacityVal" class="color-alpha-label">100%</span>
+                </div>
+              </div>
+
+              <div class="master-modal-prop-group" style="margin-bottom:4px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                  <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">Border / Outline</span>
+                  <div style="display:flex;align-items:center;gap:4px;">
+                    <span style="font-size:10px;color:var(--text-muted);">Width:</span>
+                    <input id="masterModalBorderWidth" type="number" min="0" max="20" class="creator-input" style="width:48px;padding:3px 6px;text-align:center;font-size:11px;" placeholder="0px" />
+                  </div>
+                </div>
+                <div class="creator-color-prop-row">
+                  <select id="masterModalBorderColorSlot" class="creator-select color-slot-select"></select>
+                  <input id="masterModalBorderColor" type="color" class="color-picker-input" value="#000000" />
+                  <input id="masterModalBorderOpacity" type="range" min="0" max="100" class="creator-range-slider color-alpha-slider" />
+                  <span id="masterModalBorderOpacityVal" class="color-alpha-label">100%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Unified Layer Stack -->
+            <div class="master-modal-section">
+              <label class="prop-label">Layers Stack</label>
+              <div class="btn-row mb-6" style="display:flex;gap:6px;">
+                <button id="btnMasterAddText" class="btn-secondary btn-xs flex-1">+ Add Text</button>
+                <button id="btnMasterAddShape" class="btn-secondary btn-xs flex-1">+ Add Shape</button>
+              </div>
+              <label class="btn-secondary btn-xs file-label btn-block text-center mb-6">
+                Upload Image Layer
+                <input id="masterModalImageUpload" type="file" accept="image/*" hidden />
+              </label>
+              <div id="masterModalExtraLayersList" class="master-extra-layers-list"></div>
+            </div>
+
+            <div class="master-modal-footer">
+              <button id="btnMasterModalDone" class="btn-primary btn-sm btn-block text-center">Save &amp; Return to Viewport</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Pre-bundled base64 project assets -->
